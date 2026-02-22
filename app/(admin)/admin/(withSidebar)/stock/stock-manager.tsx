@@ -177,7 +177,7 @@ export function StockManager({ branches }: { branches: Branch[] }) {
             <div className="relative">
               <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                placeholder="Product or variant…”
+                placeholder="Product or variant..."
                 className="w-[200px] pl-8"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

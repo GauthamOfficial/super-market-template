@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getAllBranches } from "@/lib/dal";
 import { isOk } from "@/lib/dal";
 import { Button } from "@/components/ui/button";
-import { BranchForm } from "../branch-form";
+import { BranchForm } from "../../branch-form";
 
 export default async function AdminEditBranchPage({
   params,

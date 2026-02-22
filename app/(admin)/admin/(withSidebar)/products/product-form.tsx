@@ -78,7 +78,8 @@ export function ProductForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<ProductFormValues>({
-    resolver: zodResolver(productFormSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- zodResolver inference with zod@4
+    resolver: zodResolver(productFormSchema) as any,
     defaultValues: toFormValues(initialProduct, initialVariants),
   });
 

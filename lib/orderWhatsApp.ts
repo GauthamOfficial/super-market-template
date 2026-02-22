@@ -53,10 +53,10 @@ export function getShopWhatsAppNumber(branch: { whatsapp_phone?: string | null; 
   if (fromBranch) {
     return fromBranch.replace(/\D/g, "");
   }
-  const env = typeof process !== "undefined" && process.env?.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  if (env?.trim()) {
-    return env.trim().replace(/\D/g, "");
-  }
+  const env =
+    typeof process !== "undefined" ? process.env?.NEXT_PUBLIC_WHATSAPP_NUMBER : undefined;
+  const str = typeof env === "string" ? env.trim() : "";
+  if (str) return str.replace(/\D/g, "");
   return null;
 }
 

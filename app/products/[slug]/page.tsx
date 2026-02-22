@@ -34,7 +34,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       </div>
       <div className="space-y-4">
         <h1 className="text-3xl font-bold">{product.name}</h1>
-        <p className="text-2xl font-semibold">{formatPrice(product.price)}</p>
+        <p className="text-2xl font-semibold">{formatPrice(product.base_price)}</p>
         {product.description && (
           <p className="text-muted-foreground">{product.description}</p>
         )}

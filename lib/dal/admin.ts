@@ -25,9 +25,14 @@ export interface OrderFilters {
   offset?: number;
 }
 
+/** Variant payload for upsert; product_id is set by the server. */
+export type UpsertProductVariantPayload = Pick<ProductVariantInsert, "name" | "sku" | "price"> & {
+  id?: string;
+};
+
 export interface UpsertProductInput {
   product: ProductInsert & { id?: string };
-  variants: (ProductVariantInsert & { id?: string })[];
+  variants: UpsertProductVariantPayload[];
 }
 
 /** Fetch all products for admin list (no inventory). */

@@ -583,12 +583,6 @@ async function getVariantIdsForProducts(
   return (data ?? []).map((r: { id: string }) => r.id);
 }
 
-/** Normalize phone for comparison (trim, collapse spaces). */
-export function normalizePhone(phone: string | null | undefined): string {
-  if (phone == null) return "";
-  return String(phone).trim().replace(/\s+/g, "");
-}
-
 /**
  * Fetch order by order_number (e.g. ORD-xxx). Use for tracking with phone verification.
  */

@@ -12,7 +12,7 @@ export function AdminSidebar({
   userEmail,
   children,
 }: {
-  navItems: NavItem[];
+  navItems: readonly NavItem[];
   userEmail?: string;
   children?: React.ReactNode;
 }) {

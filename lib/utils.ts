@@ -12,3 +12,9 @@ export function formatPrice(price: number, currency?: string): string {
     currency: currency ?? siteConfig.currency,
   }).format(price);
 }
+
+/** Normalize phone for comparison (trim, collapse spaces). */
+export function normalizePhone(phone: string | null | undefined): string {
+  if (phone == null) return "";
+  return String(phone).trim().replace(/\s+/g, "");
+}

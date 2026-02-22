@@ -41,7 +41,8 @@ export function DeliveryAreaForm({
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<DeliveryAreaFormValues>({
-    resolver: zodResolver(deliveryAreaFormSchema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- zodResolver inference with zod@4
+    resolver: zodResolver(deliveryAreaFormSchema) as any,
     defaultValues: {
       name: "",
       fee: 0,

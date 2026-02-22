@@ -1,6 +1,7 @@
 "use server";
 
-import { getOrderByOrderNumber, normalizePhone } from "@/lib/dal";
+import { getOrderByOrderNumber } from "@/lib/dal";
+import { normalizePhone } from "@/lib/utils";
 import type { OrderStatus } from "@/types/db";
 
 export type TrackOrderResult =

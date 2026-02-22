@@ -26,7 +26,6 @@ export {
   getProductsByCategoryWithDetails,
   getSearchProductsWithDetails,
   getOrderByOrderNumber,
-  normalizePhone,
   type GetDeliveryAreasOptions,
   type ProductWithPriceAndStock,
   type ProductWithPriceStockAndVariant,

@@ -96,7 +96,10 @@ export const useCartStore = create<CartState>()(
           const raw = typeof window === "undefined" ? null : window.localStorage.getItem(name);
           if (!raw) return null;
           try {
-            const parsed = JSON.parse(raw) as { state?: { items?: unknown[] } };
+            const parsed = JSON.parse(raw) as {
+              state?: { items?: unknown[] };
+              version?: number;
+            };
             const items = Array.isArray(parsed?.state?.items)
               ? parsed.state.items
                   .map((entry) => parseCartItem(entry))
