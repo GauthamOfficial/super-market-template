@@ -127,6 +127,20 @@
   animation: hero-gradient-shift 8s ease-in-out infinite;
 }
 
+/* Subtle floating motion for leadership images */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
 /* Hero reference style: overlay, search bar glass, store cards */
 .hero-overlay {
   @apply absolute inset-0 bg-black/35;

@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { Quote } from "lucide-react";
+import Image from "next/image";
 import { AboutSlider } from "./AboutSlider";
 import { AboutHero } from "./AboutHero";
 
@@ -28,11 +29,16 @@ export default function AboutPage() {
           {/* Chairman */}
           <div className="mb-16 sm:mb-20">
             <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-              <div
-                className="shrink-0 w-full md:w-56 aspect-[3/4] rounded-2xl bg-neutral-200 border-2 border-dashed border-neutral-400 flex items-center justify-center text-neutral-500 text-sm"
-                aria-hidden
-              >
-                Chairman photo
+              <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
+                <div className="absolute inset-0 rounded-2xl overflow-hidden bg-neutral-200">
+                  <Image
+                    src="/chairman.jpg"
+                    alt="Mr. Fazmin Mohomed, Chairman, FN Group (Pvt) Ltd."
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 224px"
+                  />
+                </div>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 text-primary mb-2">
@@ -67,11 +73,16 @@ export default function AboutPage() {
           {/* Director — image on right */}
           <div>
             <div className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-start">
-              <div
-                className="shrink-0 w-full md:w-56 aspect-[3/4] rounded-2xl bg-neutral-200 border-2 border-dashed border-neutral-400 flex items-center justify-center text-neutral-500 text-sm"
-                aria-hidden
-              >
-                Director photo
+              <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
+                <div className="absolute inset-0 rounded-2xl overflow-hidden bg-neutral-200">
+                  <Image
+                    src="/director.jpg"
+                    alt="Mrs. Fathima Nuzha, Director, FN Group (Pvt) Ltd."
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 224px"
+                  />
+                </div>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 text-primary mb-2">
