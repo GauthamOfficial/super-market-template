@@ -50,7 +50,7 @@ export function Footer() {
   const description = footerDescription ?? siteConfig.tagline;
 
   return (
-    <footer className="mt-auto bg-neutral-900 text-white">
+    <footer className="mt-auto -mt-8 bg-neutral-900 text-white">
       <Container className="py-12">
         {/* Four columns — centered as a block, content in each column left-aligned */}
         <div className="mx-auto w-full max-w-7xl">
