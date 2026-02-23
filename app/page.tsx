@@ -4,6 +4,7 @@ import { getProducts } from "@/features/products/actions";
 import { getBranches } from "@/lib/dal";
 import { ProductCard } from "@/features/products/product-card";
 import { HeroBranchCarousel } from "@/features/home/HeroBranchCarousel";
+import { EnjoyFreshestSection } from "@/features/home/EnjoyFreshestSection";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
@@ -98,25 +99,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Get the app / Explore — wireframes */}
-      <section className="full-bleed bg-muted/40 py-16">
-        <Container>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1 text-center md:text-left">
-              <h2 className="text-2xl sm:text-3xl font-bold text-black">Get the app</h2>
-              <p className="mt-2 text-muted-foreground">Explore products, order online, and get slotted delivery at your convenience.</p>
-              <Button asChild className="mt-4 bg-primary hover:bg-primary/90">
-                <Link href="/select-branch">Explore</Link>
-              </Button>
-            </div>
-            <div className="order-1 md:order-2 flex justify-center items-center gap-3">
-              <div className="wireframe aspect-[9/16] w-full max-w-[280px] rounded-xl shrink-0">App mockup</div>
-              <div className="wireframe w-24 h-24 rounded-lg shrink-0">QR</div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* Find a store — store images wireframes */}
       <section className="full-bleed py-16">
         <Container>
@@ -154,36 +136,24 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* Enjoy the freshest — produce */}
-      <section className="full-bleed bg-white py-16">
-        <Container>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
-            Enjoy the freshest
-          </h2>
-          <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
-            We handpick the freshest from selected farms to your plates.
-          </p>
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-thin">
-            {["Potatoes", "Broccoli", "Cucumbers", "Cauliflowers", "Brinjals", "Onions", "Mangoes"].map((name) => (
-              <div key={name} className="wireframe shrink-0 w-32 h-32 rounded-xl">{name}</div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* Enjoy the freshest — floating product boxes, grey bg, scroll parallax */}
+      <EnjoyFreshestSection />
 
       {/* Crafted with love — in-house collections */}
       <section className="full-bleed bg-muted/40 py-16">
-        <Container>
+        <Container className="w-full max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
             Crafted with love
           </h2>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
             Discover our in-house collections and daily essentials.
           </p>
-          <div className="flex gap-4 overflow-x-auto pb-4">
-            {["Premium Staples", "Value Staples", "Cleaning", "Fun Foods", "Ready to Eat", "Daily Needs"].map((label) => (
-              <div key={label} className="wireframe shrink-0 w-40 h-44 rounded-xl">{label}</div>
-            ))}
+          <div className="w-full min-w-0 overflow-x-auto pb-4">
+            <div className="flex gap-4">
+              {["Premium Staples", "Value Staples", "Cleaning", "Fun Foods", "Ready to Eat", "Daily Needs"].map((label) => (
+                <div key={label} className="wireframe shrink-0 w-40 h-44 rounded-xl">{label}</div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
