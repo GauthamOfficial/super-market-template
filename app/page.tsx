@@ -4,6 +4,7 @@ import { getProducts } from "@/features/products/actions";
 import { getBranches } from "@/lib/dal";
 import { ProductCard } from "@/features/products/product-card";
 import { HeroBranchCarousel } from "@/features/home/HeroBranchCarousel";
+import { HeroTagline } from "@/features/home/HeroTagline";
 import { EnjoyFreshestSection } from "@/features/home/EnjoyFreshestSection";
 import { HeroProductSearch } from "@/features/search/HeroProductSearch";
 import { Button } from "@/components/ui/button";
@@ -62,12 +63,7 @@ export default async function HomePage() {
           <h1 className="font-impact text-4xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
-          <p
-            className="mt-3 text-lg text-white/95 opacity-0 animate-hero-fade-in-up sm:text-xl"
-            style={{ animationDelay: "0.1s" }}
-          >
-            Get more of life with {siteConfig.name}
-          </p>
+          <HeroTagline />
 
           {/* Search bar — product search with suggestions */}
           <div
