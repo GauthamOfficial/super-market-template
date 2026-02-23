@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
@@ -9,6 +9,7 @@ const DEBOUNCE_MS = 300;
 
 export function SearchInput() {
   const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const q = searchParams.get("q") ?? "";
   const [value, setValue] = useState(q);
@@ -19,12 +20,13 @@ export function SearchInput() {
 
   const updateUrl = useCallback(
     (term: string) => {
+      const path = pathname ?? "/search";
       const url = term.trim()
-        ? `/search?q=${encodeURIComponent(term.trim())}`
-        : "/search";
+        ? `${path}?q=${encodeURIComponent(term.trim())}`
+        : path;
       router.replace(url);
     },
-    [router]
+    [router, pathname]
   );
 
   useEffect(() => {

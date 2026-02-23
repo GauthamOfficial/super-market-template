@@ -1,23 +1,59 @@
 import Link from "next/link";
-import { getProducts } from "@/features/products/actions";
-import { ProductCard } from "@/features/products/product-card";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { cookies } from "next/headers";
+import { getSelectedBranchId } from "@/lib/branch-cookie";
+import { getSearchProductsWithDetails } from "@/lib/dal";
+import { CategoryProductGrid } from "@/features/category/CategoryProductGrid";
+import { SearchInput } from "@/features/search/SearchInput";
 
-export default async function ProductsPage() {
-  const products = await getProducts();
+interface ProductsPageProps {
+  searchParams: Promise<{ q?: string }>;
+}
+
+export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  const cookieStore = await cookies();
+  const branchId = getSelectedBranchId(cookieStore);
+
+  if (!branchId) {
+    redirect("/find-store");
+  }
+
+  const { q } = await searchParams;
+  const query = typeof q === "string" ? q.trim() : "";
+
+  const result = await getSearchProductsWithDetails(branchId, query);
+  const items = result.ok ? result.data : [];
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Products</h1>
-      {products.length > 0 ? (
-        <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} compact />
-          ))}
+      <section>
+        <h1 className="text-3xl font-bold mb-4">Products</h1>
+        <Suspense
+          fallback={
+            <div className="h-10 w-full max-w-md rounded-md border bg-muted animate-pulse" />
+          }
+        >
+          <SearchInput />
+        </Suspense>
+      </section>
+
+      {items.length === 0 ? (
+        <div className="rounded-lg border border-dashed p-8 text-center space-y-4">
+          <p className="text-muted-foreground">
+            {query
+              ? `No results for "${query}". Try different keywords or browse categories.`
+              : "Enter a search term above, or browse all products."}
+          </p>
+          <Link
+            href="/home"
+            className="inline-block text-sm font-medium text-primary hover:underline"
+          >
+            Browse categories on home
+          </Link>
         </div>
       ) : (
-        <div className="rounded-lg border border-dashed p-12 text-center text-muted-foreground">
-          <p>No products in the database. Create tables in Supabase and add data.</p>
-        </div>
+        <CategoryProductGrid branchId={branchId} items={items} />
       )}
     </div>
   );

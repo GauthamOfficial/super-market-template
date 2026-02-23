@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Search, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { getProducts } from "@/features/products/actions";
 import { getBranches } from "@/lib/dal";
 import { ProductCard } from "@/features/products/product-card";
 import { HeroBranchCarousel } from "@/features/home/HeroBranchCarousel";
 import { EnjoyFreshestSection } from "@/features/home/EnjoyFreshestSection";
+import { HeroProductSearch } from "@/features/search/HeroProductSearch";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
@@ -68,28 +69,12 @@ export default async function HomePage() {
             Get more of life with {siteConfig.name}
           </p>
 
-          {/* Search bar + Find A Store button (glassmorphism, single pill) */}
+          {/* Search bar — product search with suggestions */}
           <div
-            className="hero-search-glass mt-6 flex h-12 w-full max-w-2xl items-stretch overflow-hidden opacity-0 animate-hero-fade-in-up sm:max-w-xl sm:h-14"
+            className="relative z-20 mt-6 w-full max-w-2xl opacity-0 animate-hero-fade-in-up sm:max-w-xl"
             style={{ animationDelay: "0.2s" }}
           >
-            <Link
-              href="/find-store"
-              className="flex min-w-0 flex-1 items-center gap-3 px-4 text-left text-white/90 sm:px-5"
-            >
-              <Search className="h-5 w-5 shrink-0 text-white/80" />
-              <span className="truncate text-sm sm:text-base">
-                Search for stores, area, city or PIN
-              </span>
-            </Link>
-            <Button
-              asChild
-              className="h-full min-w-0 shrink-0 rounded-none rounded-r-full border-0 bg-primary px-5 font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:px-6"
-            >
-              <Link href="/find-store" className="flex h-full items-center justify-center">
-                Find A Store
-              </Link>
-            </Button>
+            <HeroProductSearch />
           </div>
 
           {/* Store location cards carousel: 3 visible, arrows, no scrollbar */}

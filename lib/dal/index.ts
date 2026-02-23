@@ -26,6 +26,7 @@ export {
   getPopularProductsWithDetails,
   getProductsByCategoryWithDetails,
   getSearchProductsWithDetails,
+  getProductSuggestions,
   getOrderByOrderNumber,
   type GetDeliveryAreasOptions,
   type ProductWithPriceAndStock,

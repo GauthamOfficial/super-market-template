@@ -205,6 +205,30 @@ export async function searchProducts(
   }
 }
 
+/** Lightweight product suggestions by name/description (no branch). For autocomplete. */
+export async function getProductSuggestions(
+  query: string
+): Promise<Result<{ id: string; name: string; slug: string }[]>> {
+  try {
+    const term = query.trim();
+    if (!term) return ok([]);
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select("id, name, slug")
+      .eq("is_active", true)
+      .or(`name.ilike.%${term}%,description.ilike.%${term}%`)
+      .order("name")
+      .limit(8);
+    if (error) return err(error.message);
+    return ok((data ?? []) as { id: string; name: string; slug: string }[]);
+  } catch (e) {
+    return err(
+      e instanceof Error ? e.message : "Failed to fetch suggestions"
+    );
+  }
+}
+
 export async function getProductBySlug(
   branchId: string,
   productSlug: string
