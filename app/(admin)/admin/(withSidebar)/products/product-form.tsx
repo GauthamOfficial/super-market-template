@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -75,6 +75,8 @@ export function ProductForm({
 }) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  /** Latest uploaded image URL; used on submit so we never lose it if form state is stale. */
+  const latestImageUrlRef = useRef<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -83,6 +85,13 @@ export function ProductForm({
     resolver: zodResolver(productFormSchema) as any,
     defaultValues: toFormValues(initialProduct, initialVariants),
   });
+
+  // Keep ref in sync with initial image so we don't drop it on submit when editing
+  useEffect(() => {
+    if (initialProduct?.image_url) {
+      latestImageUrlRef.current = initialProduct.image_url;
+    }
+  }, [initialProduct?.image_url]);
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -111,6 +120,7 @@ export function ProductForm({
       formData.set("file", compressed);
       const result = await uploadProductImage(formData);
       if (result.ok) {
+        latestImageUrlRef.current = result.url;
         form.setValue("image_url", result.url);
       } else {
         form.setError("image_url", { message: result.error });
@@ -121,15 +131,24 @@ export function ProductForm({
     }
   };
 
+  const handleRemoveImage = () => {
+    latestImageUrlRef.current = null;
+    form.setValue("image_url", "");
+    form.clearErrors("image_url");
+  };
+
   const onSubmit = async (values: ProductFormValues) => {
     setSubmitError(null);
+    // Use ref so we never lose a just-uploaded image (RHF submit can have stale values)
+    const imageUrl =
+      latestImageUrlRef.current ?? values.image_url ?? initialProduct?.image_url ?? null;
     const result = await upsertProductAction(
       {
         id: initialProduct?.id,
         name: values.name,
         slug: values.slug,
         description: values.description || null,
-        image_url: values.image_url || null,
+        image_url: imageUrl && imageUrl !== "" ? imageUrl : null,
         base_price: values.base_price,
         is_active: values.is_active,
         category_id: values.category_id || null,
@@ -195,6 +214,8 @@ export function ProductForm({
 
           <div className="space-y-2">
             <Label>Image</Label>
+            {/* Register image_url so it is included in submit values (setValue alone can be omitted in RHF v7+) */}
+            <input type="hidden" {...form.register("image_url")} />
             <input
               ref={fileInputRef}
               type="file"
@@ -231,14 +252,26 @@ export function ProductForm({
               </p>
             )}
             {form.watch("image_url") && (
-              <div className="relative h-24 w-24 rounded border overflow-hidden">
-                <Image
-                  src={form.watch("image_url")!}
-                  alt="Product preview"
-                  fill
-                  className="object-cover"
-                  sizes="96px"
-                />
+              <div className="flex items-start gap-2">
+                <div className="relative h-24 w-24 rounded border overflow-hidden shrink-0">
+                  <Image
+                    src={form.watch("image_url")!}
+                    alt="Product preview"
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleRemoveImage}
+                  className="gap-1.5 text-muted-foreground hover:text-destructive"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Remove image
+                </Button>
               </div>
             )}
           </div>
