@@ -53,9 +53,104 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
+}
+
+/* Full-width section that breaks out of container (for landing hero, etc.) */
+.full-bleed {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Gray wireframe placeholder for image areas */
+.wireframe {
+  @apply bg-neutral-200 border-2 border-dashed border-neutral-400 flex items-center justify-center text-neutral-500 text-sm;
+}
+
+/* Hero: glassmorphism panel */
+.hero-glass {
+  @apply rounded-2xl sm:rounded-3xl border border-white/20 bg-white/40 shadow-xl shadow-black/5 backdrop-blur-xl;
+}
+
+/* Hero: entrance animations */
+@keyframes hero-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(2%, -2%) scale(1.02);
+  }
+  66% {
+    transform: translate(-1%, 1%) scale(0.98);
+  }
+}
+
+@keyframes hero-gradient-shift {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-hero-fade-in-up {
+  animation: hero-fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-hero-float {
+  animation: hero-float 12s ease-in-out infinite;
+}
+
+.animate-hero-gradient {
+  animation: hero-gradient-shift 8s ease-in-out infinite;
+}
+
+/* Hero reference style: overlay, search bar glass, store cards */
+.hero-overlay {
+  @apply absolute inset-0 bg-black/35;
+}
+
+.hero-search-glass {
+  @apply flex items-center gap-0 rounded-full border border-white/25 bg-white/20 shadow-xl backdrop-blur-md;
+}
+
+.hero-store-card {
+  @apply relative shrink-0 overflow-hidden rounded-2xl bg-neutral-300 shadow-lg;
+}
+
+.hero-nav-pill {
+  @apply rounded-full border border-white/20 bg-white/15 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/25;
+}
+
+/* Hide scrollbar while keeping scroll (e.g. hero branch carousel) */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 @layer components {

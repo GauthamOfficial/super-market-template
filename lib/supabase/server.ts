@@ -1,5 +1,22 @@
+import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+
+/**
+ * Create a Supabase client that does NOT use cookies. Use only inside
+ * unstable_cache() or other contexts where dynamic data (cookies) is not allowed.
+ * Safe for public read-only data (e.g. branches, categories).
+ */
+export function createClientForCache() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error(
+      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    );
+  }
+  return createSupabaseClient(supabaseUrl, supabaseAnonKey);
+}
 
 /**
  * Create a Supabase client for use in Server Components and Server Actions.

@@ -34,12 +34,18 @@ export function Footer() {
               </div>
             )}
           </div>
-          <nav className="flex gap-6 text-sm">
+          <nav className="flex flex-wrap gap-6 text-sm">
             <Link
               href="/"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Home
+            </Link>
+            <Link
+              href="/select-branch"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Find a store
             </Link>
             <Link
               href="/products"

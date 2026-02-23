@@ -12,10 +12,10 @@
 
 export const siteConfig = {
   /** Store name shown in header, footer, meta titles, and across the site */
-  name: "Super Market",
+  name: "GK FAMILY MART",
 
   /** Short tagline or description for meta and footer */
-  tagline: "Supermarket e-commerce template",
+  tagline: "Your supermarket — get more of life with GK Family Mart",
 
   /** Logo image URL. If set, header shows logo instead of text name. */
   logoUrl: null as string | null,
@@ -42,14 +42,14 @@ export const siteConfig = {
 
   /**
    * Theme colors (HSL for CSS variables).
+   * GK FAMILY MART: Primary White, Brand #00a54f (green) & #e4e30d (yellow), Black.
    * Format: "H S% L%" e.g. "222 47% 11%".
-   * Leave null to use default theme in globals.css.
    */
   colors: {
-    primary: null as string | null,
-    primaryForeground: null as string | null,
-    accent: null as string | null,
-    accentForeground: null as string | null,
+    primary: "149 100% 32%" as string | null,       // #00a54f brand green
+    primaryForeground: "0 0% 100%" as string | null,
+    accent: "60 91% 47%" as string | null,          // #e4e30d brand yellow
+    accentForeground: "0 0% 9%" as string | null,
   },
 } as const;
 

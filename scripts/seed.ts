@@ -10,18 +10,40 @@
  * - A few sample orders with order_items
  *
  * Run: npm run seed
- * Requires: .env with NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
+ * Requires: .env or .env.local with NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY
  */
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { readFileSync, existsSync } from "fs";
+import { resolve } from "path";
 
-// Load .env (optional; can also set env vars in shell)
-try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require("dotenv").config();
-} catch {
-  // dotenv not installed; rely on process.env
+// Load .env.local first (Next.js convention), then .env
+function loadEnv() {
+  const root = resolve(process.cwd());
+  const paths = [
+    resolve(root, ".env.local"),
+    resolve(root, ".env"),
+  ];
+  for (const p of paths) {
+    if (!existsSync(p)) continue;
+    try {
+      const content = readFileSync(p, "utf8");
+      for (const line of content.split("\n")) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith("#")) continue;
+        const eq = trimmed.indexOf("=");
+        if (eq <= 0) continue;
+        const key = trimmed.slice(0, eq).trim();
+        const value = trimmed.slice(eq + 1).trim().replace(/^["']|["']$/g, "");
+        if (!process.env[key]) process.env[key] = value;
+      }
+      break;
+    } catch {
+      // ignore read errors
+    }
+  }
 }
+loadEnv();
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -29,7 +51,7 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
   console.error(
     "Missing env: NEXT_PUBLIC_SUPABASE_URL and/or SUPABASE_SERVICE_ROLE_KEY. " +
-      "Copy .env.example to .env and set values, or install dotenv and add a .env file."
+      "Set them in .env.local or .env (same file Next.js uses), or pass them in the shell."
   );
   process.exit(1);
 }

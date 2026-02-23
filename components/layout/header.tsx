@@ -29,6 +29,12 @@ export function Header() {
             Home
           </Link>
           <Link
+            href="/select-branch"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Find a store
+          </Link>
+          <Link
             href="/products"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >

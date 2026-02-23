@@ -1,7 +1,7 @@
 "use server";
 
 import { unstable_cache } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createClientForCache } from "@/lib/supabase/server";
 import { ok, err, type Result } from "./result";
 import type {
   Branch,
@@ -47,7 +47,7 @@ export async function getBranches(): Promise<Result<Branch[]>> {
   return unstable_cache(
     async () => {
       try {
-        const supabase = await createClient();
+        const supabase = createClientForCache();
         const { data, error } = await supabase
           .from("branches")
           .select("*")
@@ -69,7 +69,7 @@ export async function getCategories(): Promise<Result<Category[]>> {
   return unstable_cache(
     async () => {
       try {
-        const supabase = await createClient();
+        const supabase = createClientForCache();
         const { data, error } = await supabase
           .from("categories")
           .select("*")
