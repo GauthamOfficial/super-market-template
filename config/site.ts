@@ -4,7 +4,7 @@
  * To customize for a new store (about 5 minutes):
  * 1. Set name, tagline, and optionally logoUrl, faviconUrl.
  * 2. Set contact (email, phone, address) for footer and SEO.
- * 3. Set currency (e.g. "USD", "EUR", "GBP").
+ * 3. Set currency (e.g. "LKR", "USD", "EUR").
  * 4. Set branchesMode: "single" (one branch, no picker) or "multi" (user picks branch).
  * 5. Optionally set colors.primary / accent (HSL: "H S% L%" e.g. "262 83% 58%").
  * 6. If logo or favicon is from a new domain, add it in next.config.js → images.remotePatterns.
@@ -47,8 +47,8 @@ export const siteConfig = {
   /** Footer: QR code image URL (e.g. WhatsApp QR). Optional. */
   footerQrCodeUrl: null as string | null,
 
-  /** Currency code for prices (ISO 4217, e.g. USD, EUR, GBP) */
-  currency: "USD",
+  /** Currency code for prices (ISO 4217, e.g. LKR, USD, EUR) */
+  currency: "LKR",
 
   /**
    * Branches mode:

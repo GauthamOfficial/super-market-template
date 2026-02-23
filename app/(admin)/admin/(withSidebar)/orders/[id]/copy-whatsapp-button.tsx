@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { formatPrice } from "@/lib/utils";
 import type { Order } from "@/types/db";
 import type { OrderItem } from "@/types/db";
 import type { ProductVariant } from "@/types/db";
@@ -29,13 +30,6 @@ function buildWhatsAppMessage(
   ].filter(Boolean) as string[];
 
   return lines.join("\n");
-}
-
-function formatPrice(n: number): string {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "USD",
-  }).format(n);
 }
 
 export function CopyWhatsAppButton({

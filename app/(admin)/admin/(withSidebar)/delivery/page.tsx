@@ -12,14 +12,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DeliveryAreaForm } from "./delivery-area-form";
+import { formatPrice } from "@/lib/utils";
 import { PlusCircle } from "lucide-react";
-
-function formatPrice(n: number): string {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "USD",
-  }).format(n);
-}
 
 export default async function AdminDeliveryPage() {
   const [areasResult, branchesResult] = await Promise.all([

@@ -93,8 +93,11 @@ export function Footer() {
               <Link href="/products" className="text-sm text-neutral-300 transition-colors hover:text-white">
                 Products
               </Link>
-              <Link href="/#contact" className="text-sm text-neutral-300 transition-colors hover:text-white">
-                Contact
+              <Link href="/about" className="text-sm text-neutral-300 transition-colors hover:text-white">
+                About Us
+              </Link>
+              <Link href="/contact" className="text-sm text-neutral-300 transition-colors hover:text-white">
+                Contact Us
               </Link>
             </nav>
           </div>

@@ -23,14 +23,8 @@ import {
 import { fetchStockAction, saveStockAction } from "./actions";
 import type { StockRow } from "@/lib/dal";
 import type { Branch, Category } from "@/types/db";
+import { formatPrice } from "@/lib/utils";
 import { Loader2, Search, Save } from "lucide-react";
-
-function formatPrice(n: number): string {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "USD",
-  }).format(n);
-}
 
 export function StockManager({ branches, categories }: { branches: Branch[]; categories: Category[] }) {
   const router = useRouter();

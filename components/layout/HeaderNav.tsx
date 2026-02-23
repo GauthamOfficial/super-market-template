@@ -7,6 +7,8 @@ const LINKS = [
   { href: "/", label: "Home", match: (path: string) => path === "/" },
   { href: "/find-store", label: "Find a store", match: (path: string) => path === "/find-store" },
   { href: "/products", label: "Products", match: (path: string) => path === "/products" || path.startsWith("/products/") },
+  { href: "/about", label: "About Us", match: (path: string) => path === "/about" },
+  { href: "/contact", label: "Contact Us", match: (path: string) => path === "/contact" },
 ] as const;
 
 export function HeaderNav() {

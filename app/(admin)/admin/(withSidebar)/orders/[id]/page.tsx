@@ -13,13 +13,7 @@ import {
 } from "@/components/ui/table";
 import { OrderStatusSelect } from "./order-status-select";
 import { CopyWhatsAppButton } from "./copy-whatsapp-button";
-
-function formatPrice(n: number): string {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "USD",
-  }).format(n);
-}
+import { formatPrice } from "@/lib/utils";
 
 export default async function AdminOrderDetailPage({
   params,
