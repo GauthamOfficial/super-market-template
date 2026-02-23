@@ -21,9 +21,9 @@ export async function uploadProductImage(
     return { ok: false, error: "No file provided" };
   }
 
-  const maxSize = 5 * 1024 * 1024; // 5MB
+  const maxSize = 1 * 1024 * 1024; // 1MB
   if (file.size > maxSize) {
-    return { ok: false, error: "File must be under 5MB" };
+    return { ok: false, error: "File must be under 1MB" };
   }
 
   const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];

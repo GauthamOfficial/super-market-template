@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Image from "next/image";
+import imageCompression from "browser-image-compression";
 import { productFormSchema, slugFromName, type ProductFormValues } from "./product-schema";
 import { uploadProductImage, upsertProductAction } from "./actions";
 import type { Category } from "@/types/db";
@@ -100,15 +101,23 @@ export function ProductForm({
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const formData = new FormData();
-    formData.set("file", file);
-    const result = await uploadProductImage(formData);
-    setUploading(false);
-    e.target.value = "";
-    if (result.ok) {
-      form.setValue("image_url", result.url);
-    } else {
-      form.setError("image_url", { message: result.error });
+    try {
+      const compressed = await imageCompression(file, {
+        maxSizeMB: 0.9,
+        maxWidthOrHeight: 1200,
+        useWebWorker: true,
+      });
+      const formData = new FormData();
+      formData.set("file", compressed);
+      const result = await uploadProductImage(formData);
+      if (result.ok) {
+        form.setValue("image_url", result.url);
+      } else {
+        form.setError("image_url", { message: result.error });
+      }
+    } finally {
+      setUploading(false);
+      e.target.value = "";
     }
   };
 
