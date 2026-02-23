@@ -50,6 +50,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        impact: ["Impact", "Haettenschweiler", "Arial Narrow Bold", "sans-serif"],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

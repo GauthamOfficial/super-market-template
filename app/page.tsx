@@ -36,7 +36,7 @@ export default async function HomePage() {
           <Link href="/products" className="hero-nav-pill">
             Products
           </Link>
-          <Link href="/select-branch" className="hero-nav-pill">
+          <Link href="/find-store" className="hero-nav-pill">
             Find a store
           </Link>
           <Link
@@ -58,7 +58,7 @@ export default async function HomePage() {
 
         {/* Main hero content: headline, subtitle, search bar, store cards */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-20 pb-10 text-center sm:pt-24">
-          <h1 className="text-4xl font-bold tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-impact text-4xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
           <p
@@ -74,7 +74,7 @@ export default async function HomePage() {
             style={{ animationDelay: "0.2s" }}
           >
             <Link
-              href="/select-branch"
+              href="/find-store"
               className="flex min-w-0 flex-1 items-center gap-3 px-4 text-left text-white/90 sm:px-5"
             >
               <Search className="h-5 w-5 shrink-0 text-white/80" />
@@ -86,7 +86,7 @@ export default async function HomePage() {
               asChild
               className="h-full min-w-0 shrink-0 rounded-none rounded-r-full border-0 bg-primary px-5 font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:px-6"
             >
-              <Link href="/select-branch" className="flex h-full items-center justify-center">
+              <Link href="/find-store" className="flex h-full items-center justify-center">
                 Find A Store
               </Link>
             </Button>
@@ -108,7 +108,7 @@ export default async function HomePage() {
           </div>
           <div className="mt-6 text-center">
             <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link href="/select-branch">Find a store</Link>
+              <Link href="/find-store">Find a store</Link>
             </Button>
           </div>
         </Container>
@@ -125,7 +125,7 @@ export default async function HomePage() {
               Earn points and cashback on every order. Redeem anytime you like.
             </p>
             <Button asChild size="lg" className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90 border-0">
-              <Link href="/select-branch">Explore</Link>
+              <Link href="/find-store">Explore</Link>
             </Button>
           </div>
           <div className="mt-10 flex justify-center">

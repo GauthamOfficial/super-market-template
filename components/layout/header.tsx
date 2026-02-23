@@ -29,7 +29,7 @@ export function Header() {
               >
                 Logo
               </span>
-              <span className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+              <span className="font-impact text-base font-normal tracking-tight text-foreground sm:text-lg" style={{ letterSpacing: "0.03em" }}>
                 {siteConfig.name}
               </span>
             </>

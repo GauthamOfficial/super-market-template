@@ -42,7 +42,7 @@ export function Footer() {
               Home
             </Link>
             <Link
-              href="/select-branch"
+              href="/find-store"
               className="text-muted-foreground transition-colors hover:text-foreground"
             >
               Find a store

@@ -12,10 +12,10 @@
 
 export const siteConfig = {
   /** Store name shown in header, footer, meta titles, and across the site */
-  name: "GK FAMILY MART",
+  name: "FN FAMILY MART",
 
   /** Short tagline or description for meta and footer */
-  tagline: "Your supermarket — get more of life with GK Family Mart",
+  tagline: "Your supermarket — get more of life with FN Family Mart",
 
   /** Logo image URL. If set, header shows logo instead of text name. */
   logoUrl: null as string | null,
@@ -42,7 +42,7 @@ export const siteConfig = {
 
   /**
    * Theme colors (HSL for CSS variables).
-   * GK FAMILY MART: Primary White, Brand #00a54f (green) & #e4e30d (yellow), Black.
+   * FN FAMILY MART: Primary White, Brand #00a54f (green) & #e4e30d (yellow), Black.
    * Format: "H S% L%" e.g. "222 47% 11%".
    */
   colors: {

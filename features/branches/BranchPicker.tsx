@@ -60,21 +60,25 @@ export function BranchPicker({ branches }: BranchPickerProps) {
   }
 
   return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
       {branches.map((branch) => {
         const badgeLabel = getOpenNowLabel(branch);
         const isOpenNow = badgeLabel === "Open now";
         return (
           <li key={branch.id}>
-            <Card className="h-full transition-shadow hover:shadow-md">
+            <Card className="h-full transition-shadow hover:shadow-md overflow-hidden">
+              {/* Thumbnail placeholder */}
+              <div className="w-full aspect-[16/9] bg-muted shrink-0" aria-hidden />
               <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg">{branch.name}</CardTitle>
-                <Badge
-                  variant={isOpenNow ? "default" : "secondary"}
-                  className="shrink-0"
-                >
-                  {badgeLabel}
-                </Badge>
+                {badgeLabel !== "—" && (
+                  <Badge
+                    variant={isOpenNow ? "default" : "secondary"}
+                    className="shrink-0"
+                  >
+                    {badgeLabel}
+                  </Badge>
+                )}
               </CardHeader>
               <CardContent className="space-y-3">
                 {branch.address && (
