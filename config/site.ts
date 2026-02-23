@@ -18,17 +18,34 @@ export const siteConfig = {
   tagline: "Your supermarket — get more of life with FN Family Mart",
 
   /** Logo image URL. If set, header shows logo instead of text name. */
-  logoUrl: null as string | null,
+  logoUrl: "/fn-logo.png",
 
   /** Favicon URL (optional). Otherwise browser uses default. */
   faviconUrl: null as string | null,
 
   /** Contact shown in footer and useful for SEO */
   contact: {
-    email: null as string | null,
-    phone: null as string | null,
-    address: null as string | null,
+    email: "support@fngroup.lk",
+    phone: "+94 71 480 7030",
+    address: "Kandy Road, Kurnegala, Sri Lanka",
   },
+
+  /** Social media URLs (footer icons). Set when you have the links. */
+  socials: {
+    whatsapp: null as string | null,
+    facebook: null as string | null,
+    instagram: null as string | null,
+    tiktok: null as string | null,
+  },
+
+  /** Footer: establishment year (e.g. "2021"), shown under logo */
+  establishedYear: null as string | null,
+
+  /** Footer: short company description under logo (optional; falls back to tagline) */
+  footerDescription: "FN Family Mart is a supermarket network committed to excellence and customer satisfaction, offering convenience and quality products.",
+
+  /** Footer: QR code image URL (e.g. WhatsApp QR). Optional. */
+  footerQrCodeUrl: null as string | null,
 
   /** Currency code for prices (ISO 4217, e.g. USD, EUR, GBP) */
   currency: "USD",

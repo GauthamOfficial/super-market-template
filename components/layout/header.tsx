@@ -14,13 +14,19 @@ export function Header() {
           className="flex shrink-0 items-center gap-3 font-semibold text-white transition-opacity hover:opacity-90"
         >
           {siteConfig.logoUrl ? (
-            <Image
-              src={siteConfig.logoUrl}
-              alt={siteConfig.name}
-              width={120}
-              height={36}
-              className="h-9 w-auto object-contain"
-            />
+            <>
+              <Image
+                src={siteConfig.logoUrl}
+                alt=""
+                width={44}
+                height={44}
+                className="h-10 w-10 object-contain sm:h-11 sm:w-11"
+                aria-hidden
+              />
+              <span className="font-impact text-base font-normal tracking-tight text-white sm:text-lg" style={{ letterSpacing: "0.03em" }}>
+                {siteConfig.name}
+              </span>
+            </>
           ) : (
             <>
               <span
