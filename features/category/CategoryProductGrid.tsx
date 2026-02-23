@@ -49,7 +49,7 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
             : "No in-stock products. Turn off “In stock only” to see all."}
         </div>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {filtered.map((item) => (
             <li key={item.product.id}>
               <Card className="overflow-hidden transition-shadow hover:shadow-md">
@@ -61,22 +61,22 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                         alt={item.product.name}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 50vw, 33vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
                       />
                     ) : (
-                      <div className="flex h-full items-center justify-center text-muted-foreground text-sm">
+                      <div className="flex h-full items-center justify-center text-muted-foreground text-xs">
                         No image
                       </div>
                     )}
                     {item.inStock && (
-                      <Badge className="absolute right-2 top-2 bg-green-600 hover:bg-green-600">
+                      <Badge className="absolute right-1.5 top-1.5 bg-green-600 hover:bg-green-600 text-xs">
                         In stock
                       </Badge>
                     )}
                   </div>
                 </Link>
-                <CardContent className="p-4">
-                  <h2 className="font-semibold line-clamp-2">
+                <CardContent className="p-2">
+                  <h2 className="font-semibold line-clamp-2 text-sm">
                     <Link
                       href={`/product/${item.product.slug}`}
                       className="hover:underline"
@@ -84,11 +84,11 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                       {item.product.name}
                     </Link>
                   </h2>
-                  <p className="mt-1 text-lg font-semibold">
+                  <p className="mt-0.5 text-sm font-semibold">
                     {formatPrice(item.minPrice)}
                   </p>
                 </CardContent>
-                <CardFooter className="flex flex-col items-stretch gap-2 p-4 pt-0">
+                <CardFooter className="flex flex-col items-stretch gap-1.5 p-2 pt-0">
                   {item.primaryVariant && item.inStock ? (
                     <AddToCartButton
                       branchId={branchId}
@@ -99,16 +99,10 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                       imageUrl={item.product.image_url}
                     />
                   ) : (
-                    <Button variant="outline" disabled>
+                    <Button variant="outline" disabled size="sm" className="h-7 text-xs">
                       Out of stock
                     </Button>
                   )}
-                  <Link
-                    href={`/product/${item.product.slug}`}
-                    className="text-center text-sm font-medium text-primary hover:underline"
-                  >
-                    View details
-                  </Link>
                 </CardFooter>
               </Card>
             </li>

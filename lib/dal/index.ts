@@ -23,6 +23,7 @@ export {
   getProductBySlug,
   getInventoryForVariants,
   getPopularProducts,
+  getPopularProductsWithDetails,
   getProductsByCategoryWithDetails,
   getSearchProductsWithDetails,
   getOrderByOrderNumber,

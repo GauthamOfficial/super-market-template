@@ -571,6 +571,93 @@ export async function getPopularProducts(
   }
 }
 
+/** Latest products with min price, in-stock, and primary variant (for add-to-cart). */
+export async function getPopularProductsWithDetails(
+  branchId: string,
+  limit: number = 8
+): Promise<Result<ProductWithPriceStockAndVariant[]>> {
+  try {
+    const supabase = await createClient();
+    const { data: products, error: productsError } = await supabase
+      .from("products")
+      .select("*")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false })
+      .limit(limit);
+
+    if (productsError) return err(productsError.message);
+    const list = (products ?? []) as Product[];
+
+    if (list.length === 0) return ok([]);
+
+    const { data: variants } = await supabase
+      .from("product_variants")
+      .select("id, product_id, name, price")
+      .in("product_id", list.map((p) => p.id))
+      .order("price");
+
+    const variantList = (variants ?? []) as {
+      id: string;
+      product_id: string;
+      name: string;
+      price: number;
+    }[];
+    const variantIds = variantList.map((v) => v.id);
+
+    const minPriceByProduct = new Map<string, number>();
+    const variantsByProduct = new Map<string, typeof variantList>();
+    variantList.forEach((v) => {
+      const current = minPriceByProduct.get(v.product_id);
+      if (current === undefined || v.price < current) {
+        minPriceByProduct.set(v.product_id, v.price);
+      }
+      if (!variantsByProduct.has(v.product_id)) {
+        variantsByProduct.set(v.product_id, []);
+      }
+      variantsByProduct.get(v.product_id)!.push(v);
+    });
+
+    let inStockVariantIds = new Set<string>();
+    if (variantIds.length > 0) {
+      const { data: inv } = await supabase
+        .from("inventory")
+        .select("product_variant_id")
+        .eq("branch_id", branchId)
+        .in("product_variant_id", variantIds)
+        .gt("quantity", 0);
+      inStockVariantIds = new Set(
+        (inv ?? []).map((r: { product_variant_id: string }) => r.product_variant_id)
+      );
+    }
+
+    const productIdsInStock = new Set(
+      variantList
+        .filter((v) => inStockVariantIds.has(v.id))
+        .map((v) => v.product_id)
+    );
+
+    const result: ProductWithPriceStockAndVariant[] = list.map((product) => {
+      const productVariants = variantsByProduct.get(product.id) ?? [];
+      const firstInStock = productVariants.find((v) => inStockVariantIds.has(v.id));
+      const primary = firstInStock ?? productVariants[0] ?? null;
+      return {
+        product,
+        minPrice: minPriceByProduct.get(product.id) ?? product.base_price,
+        inStock: productIdsInStock.has(product.id),
+        primaryVariant: primary
+          ? { id: primary.id, name: primary.name, price: primary.price }
+          : null,
+      };
+    });
+
+    return ok(result);
+  } catch (e) {
+    return err(
+      e instanceof Error ? e.message : "Failed to fetch popular products with details"
+    );
+  }
+}
+
 async function getVariantIdsForProducts(
   supabase: Awaited<ReturnType<typeof createClient>>,
   productIds: string[]
