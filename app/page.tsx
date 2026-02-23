@@ -59,9 +59,7 @@ export default async function HomePage() {
         {/* Main hero content: headline, subtitle, search bar, store cards */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-20 pb-10 text-center sm:pt-24">
           <h1 className="text-4xl font-bold tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl">
-            Your
-            <br />
-            <span className="text-white">{siteConfig.name}</span>
+            {siteConfig.name}
           </h1>
           <p
             className="mt-3 text-lg text-white/95 opacity-0 animate-hero-fade-in-up sm:text-xl"
