@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProducts } from "@/lib/dal";
+import { getProducts, getCategories } from "@/lib/dal";
 import { isOk } from "@/lib/dal";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +11,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PlusCircle } from "lucide-react";
+import { ProductCategoryFilter } from "./product-category-filter";
 
-export default async function AdminProductsPage() {
+export default async function AdminProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ categoryId?: string }>;
+}) {
+  const { categoryId } = await searchParams;
   const result = await getProducts();
+  const categoriesResult = await getCategories();
+  const allCategories = isOk(categoriesResult) ? categoriesResult.data : [];
 
   if (!isOk(result)) {
     return (
@@ -25,17 +33,23 @@ export default async function AdminProductsPage() {
   }
 
   const { products, categories } = result.data;
+  const filteredProducts = categoryId
+    ? products.filter((p) => p.category_id === categoryId)
+    : products;
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-semibold">Products</h1>
-        <Button asChild>
-          <Link href="/admin/products/new" className="gap-2">
-            <PlusCircle className="h-4 w-4" />
-            New product
-          </Link>
-        </Button>
+        <div className="flex flex-wrap items-end gap-3">
+          <ProductCategoryFilter categories={allCategories} />
+          <Button asChild>
+            <Link href="/admin/products/new" className="gap-2">
+              <PlusCircle className="h-4 w-4" />
+              New product
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="admin-table-wrapper">
@@ -50,14 +64,16 @@ export default async function AdminProductsPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.length === 0 ? (
+            {filteredProducts.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
-                  No products yet. Create one to get started.
+                  {categoryId
+                    ? "No products in this category."
+                    : "No products yet. Create one to get started."}
                 </TableCell>
               </TableRow>
             ) : (
-              products.map((product) => (
+              filteredProducts.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.name}</TableCell>
                   <TableCell className="text-muted-foreground">{product.slug}</TableCell>

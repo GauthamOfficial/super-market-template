@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table";
 import { fetchStockAction, saveStockAction } from "./actions";
 import type { StockRow } from "@/lib/dal";
-import type { Branch } from "@/types/db";
+import type { Branch, Category } from "@/types/db";
 import { Loader2, Search, Save } from "lucide-react";
 
 function formatPrice(n: number): string {
@@ -32,7 +32,7 @@ function formatPrice(n: number): string {
   }).format(n);
 }
 
-export function StockManager({ branches }: { branches: Branch[] }) {
+export function StockManager({ branches, categories }: { branches: Branch[]; categories: Category[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const branchParam = searchParams.get("branchId");
@@ -47,6 +47,7 @@ export function StockManager({ branches }: { branches: Branch[] }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [categoryId, setCategoryId] = useState<string>("");
 
   // Sync URL with branch
   const updateBranch = useCallback(
@@ -101,14 +102,20 @@ export function StockManager({ branches }: { branches: Branch[] }) {
 
   const filteredRows = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
-    if (!q) return rows;
-    return rows.filter(
-      (r) =>
-        r.productName.toLowerCase().includes(q) ||
-        r.variantName.toLowerCase().includes(q) ||
-        r.sku.toLowerCase().includes(q)
-    );
-  }, [rows, searchQuery]);
+    let list = rows;
+    if (q) {
+      list = list.filter(
+        (r) =>
+          r.productName.toLowerCase().includes(q) ||
+          r.variantName.toLowerCase().includes(q) ||
+          r.sku.toLowerCase().includes(q)
+      );
+    }
+    if (categoryId) {
+      list = list.filter((r) => r.categoryId === categoryId);
+    }
+    return list;
+  }, [rows, searchQuery, categoryId]);
 
   const dirtyCount = Object.keys(dirty).length;
   const hasDirty = dirtyCount > 0;
@@ -184,6 +191,26 @@ export function StockManager({ branches }: { branches: Branch[] }) {
               />
             </div>
           </div>
+          <div className="space-y-1">
+            <Label className="text-xs text-muted-foreground">Category</Label>
+            <Select
+              value={categoryId || "all"}
+              onValueChange={(v) => setCategoryId(v === "all" ? "" : v)}
+              disabled={loading}
+            >
+              <SelectTrigger className="w-[200px]">
+                <SelectValue placeholder="All categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All categories</SelectItem>
+                {categories.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         {hasDirty && (
           <Button
@@ -219,6 +246,7 @@ export function StockManager({ branches }: { branches: Branch[] }) {
             <TableHeader>
               <TableRow>
                 <TableHead>Product</TableHead>
+                <TableHead>Category</TableHead>
                 <TableHead>Variant</TableHead>
                 <TableHead className="text-right">Price</TableHead>
                 <TableHead className="w-[100px]">In stock</TableHead>
@@ -228,7 +256,7 @@ export function StockManager({ branches }: { branches: Branch[] }) {
             <TableBody>
               {filteredRows.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                     {searchQuery.trim()
                       ? "No variants match your search."
                       : "No variants. Add products and variants first."}
@@ -242,6 +270,9 @@ export function StockManager({ branches }: { branches: Branch[] }) {
                     <TableRow key={row.variantId}>
                       <TableCell className="font-medium">
                         {row.productName || "—"}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground text-sm">
+                        {row.categoryName || "—"}
                       </TableCell>
                       <TableCell>
                         <span className="text-muted-foreground text-xs">

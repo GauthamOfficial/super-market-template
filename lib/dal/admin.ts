@@ -200,6 +200,8 @@ export interface StockRow {
   sku: string;
   price: number;
   productName: string;
+  categoryId: string | null;
+  categoryName: string;
   quantity: number;
 }
 
@@ -229,13 +231,36 @@ export async function getStockForBranch(
     const productIds = [...new Set(variantList.map((v) => v.product_id))];
     const { data: products, error: productsError } = await supabase
       .from("products")
-      .select("id, name")
+      .select("id, name, category_id")
       .in("id", productIds);
 
     if (productsError) return err(productsError.message);
     const productMap = new Map(
-      (products ?? []).map((p: { id: string; name: string }) => [p.id, p.name])
+      (products ?? []).map(
+        (p: { id: string; name: string; category_id: string | null }) => [
+          p.id,
+          { name: p.name, category_id: p.category_id },
+        ]
+      )
     );
+
+    const categoryIds = [
+      ...new Set(
+        (products ?? [])
+          .map((p: { category_id: string | null }) => p.category_id)
+          .filter(Boolean)
+      ),
+    ] as string[];
+    let categoryMap = new Map<string, string>();
+    if (categoryIds.length > 0) {
+      const { data: cats } = await supabase
+        .from("categories")
+        .select("id, name")
+        .in("id", categoryIds);
+      categoryMap = new Map(
+        (cats ?? []).map((c: { id: string; name: string }) => [c.id, c.name])
+      );
+    }
 
     const variantIds = variantList.map((v) => v.id);
     const { data: inv, error: invError } = await supabase
@@ -252,14 +277,22 @@ export async function getStockForBranch(
       ])
     );
 
-    const rows: StockRow[] = variantList.map((v) => ({
-      variantId: v.id,
-      variantName: v.name,
-      sku: v.sku,
-      price: v.price,
-      productName: productMap.get(v.product_id) ?? "",
-      quantity: qtyByVariant.get(v.id) ?? 0,
-    }));
+    const rows: StockRow[] = variantList.map((v) => {
+      const productInfo = productMap.get(v.product_id);
+      const productName = productInfo?.name ?? "";
+      const categoryId = productInfo?.category_id ?? null;
+      const categoryName = categoryId ? categoryMap.get(categoryId) ?? "" : "";
+      return {
+        variantId: v.id,
+        variantName: v.name,
+        sku: v.sku,
+        price: v.price,
+        productName,
+        categoryId,
+        categoryName,
+        quantity: qtyByVariant.get(v.id) ?? 0,
+      };
+    });
 
     return ok(rows);
   } catch (e) {

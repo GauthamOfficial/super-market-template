@@ -3,9 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import type { LucideIcon } from "lucide-react";
+import {
+  LayoutDashboard,
+  Package,
+  ListOrdered,
+  Warehouse,
+  Building2,
+  Truck,
+} from "lucide-react";
 
-type NavItem = { href: string; label: string; icon: LucideIcon };
+const ICON_MAP = {
+  LayoutDashboard,
+  ListOrdered,
+  Package,
+  Warehouse,
+  Building2,
+  Truck,
+} as const;
+
+type NavItem = { href: string; label: string; icon: keyof typeof ICON_MAP };
 
 export function AdminSidebar({
   navItems,
@@ -26,7 +42,8 @@ export function AdminSidebar({
         </Link>
       </div>
       <nav className="flex flex-1 flex-col gap-1 p-2">
-        {navItems.map(({ href, label, icon: Icon }) => {
+        {navItems.map(({ href, label, icon: iconKey }) => {
+          const Icon = ICON_MAP[iconKey];
           const isActive =
             href === "/admin"
               ? pathname === "/admin"

@@ -1,16 +1,15 @@
-import { LayoutDashboard, Package, ListOrdered, Warehouse, Building2, Truck } from "lucide-react";
 import { AdminSidebar } from "./admin-sidebar";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { AdminSignOut } from "./admin-sign-out";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/orders", label: "Orders", icon: ListOrdered },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/stock", label: "Stock", icon: Warehouse },
-  { href: "/admin/branches", label: "Branches", icon: Building2 },
-  { href: "/admin/delivery", label: "Delivery", icon: Truck },
+  { href: "/admin", label: "Dashboard", icon: "LayoutDashboard" },
+  { href: "/admin/orders", label: "Orders", icon: "ListOrdered" },
+  { href: "/admin/products", label: "Products", icon: "Package" },
+  { href: "/admin/stock", label: "Stock", icon: "Warehouse" },
+  { href: "/admin/branches", label: "Branches", icon: "Building2" },
+  { href: "/admin/delivery", label: "Delivery", icon: "Truck" },
 ] as const;
 
 export default async function AdminWithSidebarLayout({
