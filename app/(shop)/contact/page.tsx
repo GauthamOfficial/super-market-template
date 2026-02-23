@@ -3,117 +3,122 @@ import { siteConfig } from "@/config/site";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ContactHero } from "./ContactHero";
+import { ContactForm } from "./ContactForm";
 
 export const metadata = {
   title: "Contact Us",
-  description: `Get in touch with ${siteConfig.name}. Phone, email, and address.`,
+  description: `Get in touch with ${siteConfig.name}. Send a message or call us.`,
 };
+
+function ContactBlock({
+  icon: Icon,
+  topic,
+  children,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  topic: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex gap-4">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-primary/30 bg-primary/5 text-primary">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div>
+        <p className="font-semibold text-foreground mb-1">{topic}</p>
+        <div className="text-muted-foreground text-sm">{children}</div>
+      </div>
+    </div>
+  );
+}
 
 export default function ContactPage() {
   const { contact } = siteConfig;
 
   return (
-    <div className="min-w-0">
-      {/* Hero */}
-      <section className="full-bleed bg-gradient-to-br from-primary/95 via-primary to-primary/90 py-16 sm:py-20 text-primary-foreground">
-        <Container className="text-center">
-          <h1 className="font-impact text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight" style={{ letterSpacing: "0.03em" }}>
-            Contact Us
-          </h1>
-          <p className="mt-4 text-primary-foreground/90 max-w-2xl mx-auto text-lg">
-            We&apos;d love to hear from you. Reach out anytime.
-          </p>
-        </Container>
-      </section>
+    <div className="min-w-0 -mt-8 -mb-8">
+      <ContactHero />
 
-      {/* Contact cards + map placeholder */}
-      <section className="full-bleed py-12 sm:py-16 bg-background">
-        <Container className="max-w-5xl">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {contact.phone && (
-              <a
-                href={`tel:${contact.phone.replace(/\D/g, "")}`}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-md hover:bg-primary/5"
-              >
-                <div className="rounded-xl bg-primary/10 p-3 w-fit text-primary mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Phone className="h-6 w-6" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                <p className="text-muted-foreground text-sm">{contact.phone}</p>
-                <p className="mt-2 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  Click to call
+      {/* Get In Touch + Contact details (left) | Form (right) — fit to screen width */}
+      <section className="full-bleed py-12 sm:py-16 bg-muted/30">
+        <Container className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            {/* Left: Get In Touch + contact details */}
+            <div className="space-y-8 order-2 lg:order-1">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Get In Touch</h2>
+                <p className="mt-3 text-muted-foreground leading-relaxed max-w-lg">
+                  We&apos;d love to hear from you. Whether you have questions about our products, need support, or want to partner with us, reach out and we&apos;ll get back to you as soon as we can.
                 </p>
-              </a>
-            )}
-            {contact.email && (
-              <a
-                href={`mailto:${contact.email}`}
-                className="group rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:border-primary hover:shadow-md hover:bg-primary/5"
-              >
-                <div className="rounded-xl bg-primary/10 p-3 w-fit text-primary mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Mail className="h-6 w-6" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                <p className="text-muted-foreground text-sm break-all">{contact.email}</p>
-                <p className="mt-2 text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  Send an email
-                </p>
-              </a>
-            )}
-            {contact.address && (
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:col-span-2 lg:col-span-1">
-                <div className="rounded-xl bg-primary/10 p-3 w-fit text-primary mb-4">
-                  <MapPin className="h-6 w-6" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-1">Address</h3>
-                <p className="text-muted-foreground text-sm">{contact.address}</p>
               </div>
-            )}
+
+              <div className="space-y-6">
+                {contact.phone && (
+                  <ContactBlock icon={Phone} topic="Phone">
+                    <a
+                      href={`tel:${contact.phone.replace(/\D/g, "")}`}
+                      className="hover:text-primary transition-colors"
+                    >
+                      {contact.phone}
+                    </a>
+                  </ContactBlock>
+                )}
+                {contact.email && (
+                  <ContactBlock icon={Mail} topic="Email">
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="hover:text-primary transition-colors break-all"
+                    >
+                      {contact.email}
+                    </a>
+                  </ContactBlock>
+                )}
+                {contact.address && (
+                  <ContactBlock icon={MapPin} topic="Address">
+                    <span>{contact.address}</span>
+                  </ContactBlock>
+                )}
+                <ContactBlock icon={Clock} topic="Business Hours">
+                  <span>Mon – Sat: 8:00 AM – 8:00 PM. We aim to respond within 24 hours.</span>
+                </ContactBlock>
+                {siteConfig.socials.whatsapp && (
+                  <Button asChild variant="outline" className="gap-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10">
+                    <a href={siteConfig.socials.whatsapp} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="h-4 w-4" />
+                      Chat on WhatsApp
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            {/* Right: Form card */}
+            <div className="order-1 lg:order-2">
+              <div className="rounded-2xl border border-border bg-card shadow-md p-6 sm:p-8">
+                <h2 className="text-xl font-semibold text-foreground mb-1">Send Us a Message</h2>
+                <p className="text-muted-foreground text-sm mb-6">
+                  Fill out the form below and we&apos;ll get back to you as soon as we can.
+                </p>
+                <ContactForm />
+              </div>
+            </div>
           </div>
 
-          {/* Map / location placeholder */}
-          <div className="rounded-2xl overflow-hidden border border-border bg-neutral-100">
+          {/* Map placeholder */}
+          <div className="mt-12 rounded-2xl overflow-hidden border border-border bg-neutral-100">
             <div className="aspect-[21/9] sm:aspect-[3/1] flex items-center justify-center bg-neutral-200 border-2 border-dashed border-neutral-400 text-neutral-500 text-sm">
               Map placeholder — add your Google Maps embed or image
             </div>
           </div>
-
-          {/* WhatsApp CTA if configured */}
-          {siteConfig.socials.whatsapp && (
-            <div className="mt-10 text-center">
-              <Button asChild size="lg" className="bg-[#25D366] hover:bg-[#20BD5A] text-white border-0">
-                <a
-                  href={siteConfig.socials.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Chat on WhatsApp
-                </a>
-              </Button>
-            </div>
-          )}
-
-          {/* Optional: business hours placeholder */}
-          <div className="mt-12 pt-8 border-t border-border">
-            <div className="flex items-center gap-3 text-muted-foreground">
-              <Clock className="h-5 w-5 shrink-0" />
-              <div>
-                <p className="font-medium text-foreground">Business hours</p>
-                <p className="text-sm">Contact us during standard business hours. We aim to respond within 24 hours.</p>
-              </div>
-            </div>
-          </div>
         </Container>
       </section>
 
-      {/* Back to home */}
-      <section className="full-bleed py-8 bg-muted/40 border-t">
+      <section className="full-bleed py-8 bg-muted/40">
         <Container className="text-center">
-          <Link href="/" className="text-primary font-medium hover:underline">
-            ← Back to home
-          </Link>
+          <Button asChild size="default">
+            <Link href="/">Back to home</Link>
+          </Button>
         </Container>
       </section>
     </div>
