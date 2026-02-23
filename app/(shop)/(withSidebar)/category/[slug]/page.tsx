@@ -31,7 +31,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   if (!category) notFound();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <section>
         <h1 className="text-2xl font-bold">{category.name}</h1>
         {category.description && (

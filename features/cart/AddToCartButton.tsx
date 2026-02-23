@@ -40,7 +40,7 @@ export function AddToCartButton({
         })
       }
     >
-      Add to cart — {variantLabel}
+      Add to cart
     </Button>
   );
 }
