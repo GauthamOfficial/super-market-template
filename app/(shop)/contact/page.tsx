@@ -2,11 +2,12 @@ import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { ContactHero } from "./ContactHero";
 import { ContactForm } from "./ContactForm";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact Us",
   description: `Get in touch with ${siteConfig.name}. Send a message or call us.`,
 };
@@ -114,7 +115,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="full-bleed py-8 bg-muted/40">
+      <section className="full-bleed pb-16 bg-muted/40">
         <Container className="text-center">
           <Button asChild size="default">
             <Link href="/">Back to home</Link>

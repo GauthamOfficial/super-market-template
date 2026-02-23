@@ -84,19 +84,19 @@ export function Footer() {
               Quick links
             </h3>
             <nav className="flex flex-col gap-2" aria-label="Footer navigation">
-              <Link href="/" className="text-sm text-neutral-300 transition-colors hover:text-white">
+              <Link href="/" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Home
               </Link>
-              <Link href="/find-store" className="text-sm text-neutral-300 transition-colors hover:text-white">
+              <Link href="/find-store" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Find a store
               </Link>
-              <Link href="/products" className="text-sm text-neutral-300 transition-colors hover:text-white">
+              <Link href="/products" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Products
               </Link>
-              <Link href="/about" className="text-sm text-neutral-300 transition-colors hover:text-white">
+              <Link href="/about" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 About Us
               </Link>
-              <Link href="/contact" className="text-sm text-neutral-300 transition-colors hover:text-white">
+              <Link href="/contact" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Contact Us
               </Link>
             </nav>
@@ -111,7 +111,7 @@ export function Footer() {
               {contact.phone && (
                 <li className="flex items-start gap-3">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-neutral-400" />
-                  <a href={`tel:${contact.phone.replace(/\D/g, "")}`} className="hover:text-white transition-colors">
+                  <a href={`tel:${contact.phone.replace(/\D/g, "")}`} className="hover:text-primary transition-colors">
                     {contact.phone}
                   </a>
                 </li>
@@ -119,7 +119,7 @@ export function Footer() {
               {contact.email && (
                 <li className="flex items-start gap-3">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-neutral-400" />
-                  <a href={`mailto:${contact.email}`} className="hover:text-white transition-colors">
+                  <a href={`mailto:${contact.email}`} className="hover:text-primary transition-colors">
                     {contact.email}
                   </a>
                 </li>
@@ -182,7 +182,7 @@ export function Footer() {
         {/* Bottom: copyright */}
         <div className="mt-12 border-t border-neutral-800 pt-6 text-center">
           <p className="text-sm text-neutral-400">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            © 2022 {siteConfig.name}. All rights reserved.
           </p>
         </div>
       </Container>
