@@ -21,9 +21,14 @@ export default async function CheckoutPage() {
   const deliveryAreas = areasResult.ok ? areasResult.data : [];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Checkout</h1>
-      <CheckoutForm deliveryAreas={deliveryAreas} />
+    <div className="min-w-0 min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center py-6">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="mb-4 text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Checkout</h1>
+          <p className="mt-1 text-base text-muted-foreground">Complete your order with the details below.</p>
+        </div>
+        <CheckoutForm deliveryAreas={deliveryAreas} />
+      </div>
     </div>
   );
 }
