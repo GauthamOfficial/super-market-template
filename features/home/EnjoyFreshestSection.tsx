@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 const FLOATING_ITEMS: { label: string; left: string; top: string; width: number; height: number; speed: number; z: number }[] = [
@@ -53,16 +54,22 @@ export function EnjoyFreshestSection() {
   return (
     <section
       ref={sectionRef}
-      className="full-bleed relative min-h-[100vh] overflow-hidden"
+      className="full-bleed relative min-h-[100vh] overflow-hidden bg-white"
       style={{ perspective: "1200px" }}
     >
-      {/* Grey background (placeholder for scenic image) */}
+      {/* Background image */}
+      <div className="absolute inset-0" aria-hidden>
+        <Image
+          src="/bg-2.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+      {/* Full white at top and bottom so image edges fade into white (no sharp crop) */}
       <div
-        className="absolute inset-0 bg-neutral-400"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-neutral-500/40 via-transparent to-neutral-600/30"
+        className="absolute inset-0 bg-gradient-to-b from-white from-[0%] via-transparent via-[25%] to-transparent to-[75%] to-white to-[100%] pointer-events-none"
         aria-hidden
       />
 

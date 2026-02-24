@@ -123,7 +123,7 @@ export default async function HomePage() {
       <EnjoyFreshestSection />
 
       {/* Crafted with love — in-house collections */}
-      <section className="full-bleed bg-muted/40 py-16">
+      <section className="full-bleed bg-white py-16">
         <Container className="w-full max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
             Crafted with love

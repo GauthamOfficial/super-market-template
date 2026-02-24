@@ -52,11 +52,11 @@ export function HeroProductSearch() {
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full max-w-2xl sm:max-w-xl">
+    <div ref={wrapperRef} className="relative z-10 w-full max-w-2xl sm:max-w-xl">
       <form
         action="/search"
         method="get"
-        className="hero-search-glass flex h-12 w-full items-stretch overflow-hidden sm:h-14"
+        className="hero-search-glass flex h-12 w-full items-stretch overflow-hidden sm:h-14 focus-within:outline-none focus-within:ring-0"
       >
         <label htmlFor="hero-product-search" className="sr-only">
           Search products
@@ -91,7 +91,7 @@ export function HeroProductSearch() {
         <ul
           id="hero-search-suggestions"
           role="listbox"
-          className="absolute top-full left-0 right-0 z-[100] mt-1 max-h-72 overflow-auto rounded-xl border border-white/20 bg-white/95 shadow-xl backdrop-blur-md"
+          className="absolute top-full left-0 right-0 z-[100] mt-1 max-h-72 overflow-auto rounded-xl border border-border bg-background shadow-xl"
         >
           {isLoading ? (
             <li className="px-4 py-3 text-sm text-muted-foreground">Searching…</li>
