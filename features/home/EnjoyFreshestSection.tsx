@@ -58,7 +58,7 @@ export function EnjoyFreshestSection() {
       style={{ perspective: "1200px" }}
     >
       {/* Background image */}
-      <div className="absolute inset-0" aria-hidden>
+      <div className="absolute inset-0 opacity-90" aria-hidden>
         <Image
           src="/bg-2.jpg"
           alt=""
@@ -67,9 +67,19 @@ export function EnjoyFreshestSection() {
           sizes="100vw"
         />
       </div>
-      {/* Full white at top and bottom so image edges fade into white (no sharp crop) */}
+      {/* Green overlay with soft-light blend */}
       <div
-        className="absolute inset-0 bg-gradient-to-b from-white from-[0%] via-transparent via-[25%] to-transparent to-[75%] to-white to-[100%] pointer-events-none"
+        className="absolute inset-0 bg-green-600/25 mix-blend-soft-light pointer-events-none"
+        aria-hidden
+      />
+      {/* Dark overlay to improve text visibility */}
+      <div
+        className="absolute inset-0 bg-black/25 pointer-events-none"
+        aria-hidden
+      />
+      {/* White at top; bottom gradient only at the very edge so it doesn't reach text area */}
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-white from-[0%] via-transparent via-[20%] to-transparent to-[96%] to-white to-[100%] pointer-events-none"
         aria-hidden
       />
 
@@ -110,11 +120,11 @@ export function EnjoyFreshestSection() {
       </div>
 
       {/* Central text */}
-      <div className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-4 py-24 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-neutral-800 sm:text-4xl md:text-5xl">
-          enjoy the <span className="font-accent italic text-[1.1em]">freshest</span>
+      <div className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-4 py-24 text-center -translate-y-12">
+        <h2 className="text-3xl font-bold tracking-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)] sm:text-4xl md:text-5xl">
+          Enjoy the <span className="font-accent italic text-[1.1em]">freshest</span>
         </h2>
-        <p className="mt-4 max-w-xl text-lg text-neutral-700 sm:text-xl">
+        <p className="mt-4 max-w-xl text-lg font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] sm:text-xl">
           we handpick the freshest from selected organic farms to your plates
         </p>
       </div>
