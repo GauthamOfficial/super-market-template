@@ -1,12 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone } from "lucide-react";
 import { BRANCH_LOCALSTORAGE_KEY } from "@/lib/branch-cookie";
 import { selectBranch } from "@/app/(shop)/select-branch/actions";
+import { getBranchImageUrl } from "@/lib/branch-image";
 import type { Branch } from "@/types/db";
 
 /** Branch with optional opening hours (e.g. "09:00-21:00" or JSON). */
@@ -67,8 +69,15 @@ export function BranchPicker({ branches }: BranchPickerProps) {
         return (
           <li key={branch.id}>
             <Card className="h-full transition-shadow hover:shadow-md overflow-hidden">
-              {/* Thumbnail placeholder */}
-              <div className="w-full aspect-[16/9] bg-muted shrink-0" aria-hidden />
+              <div className="relative w-full aspect-[16/9] bg-muted shrink-0">
+                <Image
+                  src={getBranchImageUrl(branch)}
+                  alt={branch.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
               <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg">{branch.name}</CardTitle>
                 {badgeLabel !== "—" && (

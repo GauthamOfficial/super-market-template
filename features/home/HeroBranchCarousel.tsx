@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import type { Branch } from "@/types/db";
+import { getBranchImageUrl } from "@/lib/branch-image";
 
 const CARD_WIDTH_PX = 256;
 const GAP_PX = 16;
@@ -51,10 +53,18 @@ export function HeroBranchCarousel({ branches }: { branches: Branch[] }) {
             {branches.map((branch) => (
               <Link
                 key={branch.id}
-                href="/select-branch"
+                href="/find-store"
                 className="hero-store-card w-64 shrink-0 [scroll-snap-align:start] sm:w-72"
               >
-                <div className="wireframe aspect-[4/3] w-full" />
+                <div className="relative aspect-[4/3] w-full bg-muted">
+                  <Image
+                    src={getBranchImageUrl(branch)}
+                    alt={branch.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 256px, 288px"
+                  />
+                </div>
                 <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-lg bg-black/60 px-2.5 py-1.5 text-xs font-medium text-white backdrop-blur-sm">
                   <MapPin className="h-3.5 w-3.5 shrink-0" />
                   <span className="truncate">{branch.name}</span>

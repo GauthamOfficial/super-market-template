@@ -58,6 +58,12 @@ export const siteConfig = {
   branchesMode: "multi" as "single" | "multi",
 
   /**
+   * Branch names and order for the landing page (hero carousel + Find a store).
+   * Must match image filenames in public: theliyagonna.jpg, mallawapitiya.jpg, etc.
+   */
+  branchNames: ["Theliyagonna", "Mallawapitiya", "Kurunegala", "Paragahadeniya"] as const,
+
+  /**
    * Theme colors (HSL for CSS variables).
    * FN FAMILY MART: Primary White, Brand #00a54f (green) & #e4e30d (yellow), Black.
    * Format: "H S% L%" e.g. "222 47% 11%".

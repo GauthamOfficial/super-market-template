@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { getProducts } from "@/features/products/actions";
 import { getBranches } from "@/lib/dal";
+import { getBranchImageUrl } from "@/lib/branch-image";
 import { ProductCard } from "@/features/products/product-card";
 import { HeroBranchCarousel } from "@/features/home/HeroBranchCarousel";
 import { HeroTagline } from "@/features/home/HeroTagline";
@@ -10,6 +12,9 @@ import { HeroProductSearch } from "@/features/search/HeroProductSearch";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
+
+/** Landing page always shows these 4 branches (names + images) from site config. */
+const displayBranches = siteConfig.branchNames.map((name, i) => ({ id: `branch-${i}`, name }));
 
 export default async function HomePage() {
   const [productsResult, branchesResult] = await Promise.all([
@@ -73,18 +78,34 @@ export default async function HomePage() {
             <HeroProductSearch />
           </div>
 
-          {/* Store location cards carousel: 3 visible, arrows, no scrollbar */}
-          {branches.length > 0 && <HeroBranchCarousel branches={branches} />}
+          {/* Store location cards carousel: always show 4 branches from config with images */}
+          <HeroBranchCarousel branches={displayBranches} />
         </div>
       </section>
 
-      {/* Find a store — store images wireframes */}
+      {/* Find a store — branch images */}
       <section className="full-bleed py-16">
         <Container>
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">Find a store</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="wireframe aspect-[4/3] rounded-xl">Store {i}</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {displayBranches.map((branch) => (
+              <Link
+                key={branch.id}
+                href="/find-store"
+                className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-muted border border-border shadow-sm transition hover:shadow-md"
+              >
+                <Image
+                  src={getBranchImageUrl(branch)}
+                  alt={branch.name}
+                  fill
+                  className="object-cover transition group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+                  <span className="text-sm font-semibold text-white">{branch.name}</span>
+                </div>
+              </Link>
             ))}
           </div>
           <div className="mt-6 text-center">
