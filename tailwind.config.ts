@@ -53,6 +53,7 @@ const config: Config = {
       fontFamily: {
         impact: ["Impact", "Haettenschweiler", "Arial Narrow Bold", "sans-serif"],
         accent: ["Georgia", "Cambria", "Times New Roman", "serif"],
+        playfair: ["var(--font-playfair)", "Georgia", "serif"],
       },
     },
   },

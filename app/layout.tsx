@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -11,6 +11,7 @@ import { CartDrawer } from "@/features/cart/CartDrawer";
 import { siteConfig } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
   title: {
@@ -50,7 +51,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className={`${inter.className} flex min-h-screen flex-col`}>
+      <body className={`${inter.className} ${playfair.variable} flex min-h-screen flex-col`}>
         <a
           href="#main-content"
           className="absolute left-[-9999px] top-4 z-[100] rounded-md bg-primary px-4 py-2 text-primary-foreground focus:left-4 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"

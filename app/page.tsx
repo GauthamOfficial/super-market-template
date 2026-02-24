@@ -164,23 +164,37 @@ export default async function HomePage() {
       </section>
       </AnimateOnScroll>
 
-      {/* Happy customers / testimonials */}
+      {/* Happy customers — image with gradient overlay and text */}
       <AnimateOnScroll delay={100}>
       <section className="full-bleed py-16 bg-white">
         <Container>
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-black">
-              Happy <span className="font-accent italic text-[1.1em]">customers</span>
-            </h2>
-            <p className="mt-2 text-muted-foreground">Join us on this journey built on trust and satisfaction.</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="wireframe aspect-video rounded-xl">Customer photo</div>
-            <div className="space-y-4">
-              <p className="text-muted-foreground italic">
-                &ldquo;Great experience shopping here. Clean, well-organized, and fully stocked. Checkout is quick and efficient.&rdquo;
+          <div className="w-full relative h-96 rounded-xl overflow-hidden">
+            <Image
+              src="/customer.jpg"
+              alt="Happy customers"
+              fill
+              className="object-cover object-[50%_28%]"
+              sizes="100vw"
+              priority={false}
+            />
+            {/* Black gradient from bottom-left at 45° */}
+            <div
+              className="absolute inset-0 pointer-events-none rounded-xl"
+              style={{
+                background: "linear-gradient(45deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.4) 45%, transparent 75%)",
+              }}
+              aria-hidden
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 flex flex-col justify-end">
+              <p className="font-playfair text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white drop-shadow-lg italic">
+                1000+
               </p>
-              <p className="font-semibold text-black">— Happy Customer</p>
+              <p className="font-playfair text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-white drop-shadow-lg mt-1 italic">
+                Happy Customers
+              </p>
+              <p className="mt-3 text-white/95 text-base sm:text-lg max-w-md font-medium drop-shadow">
+                join us on this journey built on trust and satisfaction
+              </p>
             </div>
           </div>
         </Container>
