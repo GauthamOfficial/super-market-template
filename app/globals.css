@@ -147,7 +147,7 @@
 }
 
 .hero-search-glass {
-  @apply flex items-center gap-0 rounded-full border border-white/25 bg-white/20 shadow-xl backdrop-blur-md;
+  @apply flex items-center gap-0 rounded-full border border-white/25 bg-white/20 shadow-xl backdrop-blur-2xl;
 }
 
 .hero-store-card {

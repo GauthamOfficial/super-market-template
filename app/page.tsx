@@ -32,7 +32,7 @@ export default async function HomePage() {
         {/* Black base */}
         <div className="absolute inset-0 bg-black" aria-hidden />
         {/* Background image — lowered opacity so black shows through */}
-        <div className="absolute inset-0 opacity-50" aria-hidden>
+        <div className="absolute inset-0 opacity-40" aria-hidden>
           <Image
             src="/bg-1.jpeg"
             alt=""
