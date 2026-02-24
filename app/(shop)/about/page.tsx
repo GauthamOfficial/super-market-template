@@ -2,11 +2,12 @@ import { Container } from "@/components/layout/container";
 import { siteConfig } from "@/config/site";
 import { Quote } from "lucide-react";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { AboutSlider } from "./AboutSlider";
 import { AboutHero } from "./AboutHero";
 import { AnimateOnScroll } from "@/components/layout/AnimateOnScroll";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "About Us",
   description: `Learn about ${siteConfig.name} and FN Group (Pvt) Ltd — our vision, mission, and leadership.`,
 };
@@ -23,9 +24,11 @@ export default function AboutPage() {
       {/* Leadership — Chairman & Director */}
       <section className="full-bleed py-12 sm:py-20 bg-background">
         <Container className="max-w-5xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground mb-12">
-            Leadership
-          </h2>
+          <div className="mb-12 pb-4 border-b-2 border-primary">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground">
+              Leadership
+            </h2>
+          </div>
 
           {/* Chairman */}
           <AnimateOnScroll>
