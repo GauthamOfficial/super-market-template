@@ -4,6 +4,7 @@ import { Quote } from "lucide-react";
 import Image from "next/image";
 import { AboutSlider } from "./AboutSlider";
 import { AboutHero } from "./AboutHero";
+import { AnimateOnScroll } from "@/components/layout/AnimateOnScroll";
 
 export const metadata = {
   title: "About Us",
@@ -27,6 +28,7 @@ export default function AboutPage() {
           </h2>
 
           {/* Chairman */}
+          <AnimateOnScroll>
           <div className="mb-16 sm:mb-20">
             <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
               <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
@@ -69,8 +71,10 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+          </AnimateOnScroll>
 
           {/* Director — image on right */}
+          <AnimateOnScroll delay={100}>
           <div>
             <div className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-start">
               <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
@@ -116,6 +120,7 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+          </AnimateOnScroll>
         </Container>
       </section>
     </div>

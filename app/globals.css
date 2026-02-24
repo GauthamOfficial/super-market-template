@@ -119,6 +119,47 @@
   animation: hero-fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Page load: smooth fade-in + slide-up for main content */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-enter {
+  opacity: 0;
+  animation: page-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Scroll-triggered reveal: smooth fade-in + slide-up when element enters viewport */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .animate-hero-float {
   animation: hero-float 12s ease-in-out infinite;
 }

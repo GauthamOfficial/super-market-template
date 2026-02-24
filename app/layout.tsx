@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Container } from "@/components/layout/container";
+import { PageContentTransition } from "@/components/layout/PageContentTransition";
+import { AnimateOnScroll } from "@/components/layout/AnimateOnScroll";
 import { Toaster } from "@/components/ui/toaster";
 import { CartDrawer } from "@/features/cart/CartDrawer";
 import { siteConfig } from "@/config/site";
@@ -57,7 +59,11 @@ export default function RootLayout({
         </a>
         <Header />
         <main id="main-content" className="flex-1 py-8" role="main">
-          <Container>{children}</Container>
+          <PageContentTransition>
+            <Container>
+              <AnimateOnScroll>{children}</AnimateOnScroll>
+            </Container>
+          </PageContentTransition>
         </main>
         <Footer />
         <CartDrawer />

@@ -11,6 +11,7 @@ import { EnjoyFreshestSection } from "@/features/home/EnjoyFreshestSection";
 import { HeroProductSearch } from "@/features/search/HeroProductSearch";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
+import { AnimateOnScroll } from "@/components/layout/AnimateOnScroll";
 import { siteConfig } from "@/config/site";
 
 /** Landing page always shows these 4 branches (names + images) from site config. */
@@ -87,6 +88,7 @@ export default async function HomePage() {
       </section>
 
       {/* Find a store — branch images */}
+      <AnimateOnScroll>
       <section className="full-bleed py-16">
         <Container>
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">Find a <span className="font-accent italic text-[1.1em]">store</span></h2>
@@ -118,11 +120,15 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+      </AnimateOnScroll>
 
       {/* Enjoy the freshest — floating product boxes, grey bg, scroll parallax */}
+      <AnimateOnScroll>
       <EnjoyFreshestSection />
+      </AnimateOnScroll>
 
       {/* Crafted with love — in-house collections */}
+      <AnimateOnScroll delay={80}>
       <section className="full-bleed bg-white py-16">
         <Container className="w-full max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
@@ -140,8 +146,10 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+      </AnimateOnScroll>
 
       {/* Happy customers / testimonials */}
+      <AnimateOnScroll delay={100}>
       <section className="full-bleed py-16 bg-white">
         <Container>
           <div className="text-center mb-10">
@@ -161,8 +169,10 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+      </AnimateOnScroll>
 
       {/* Featured products — keep existing behaviour */}
+      <AnimateOnScroll delay={120}>
       <section className="full-bleed border-t bg-muted/30 py-16">
         <Container>
           <h2 className="text-2xl font-bold text-black mb-6">Featured <span className="font-accent italic text-[1.1em]">products</span></h2>
@@ -187,6 +197,7 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+      </AnimateOnScroll>
     </div>
   );
 }
