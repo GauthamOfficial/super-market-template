@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -6,7 +5,6 @@ import { getSelectedBranchId } from "@/lib/branch-cookie";
 import { getBranches, getPopularProductsWithDetails } from "@/lib/dal";
 import { HomeProductCard } from "@/features/products/HomeProductCard";
 import { HomeSearchBar } from "@/features/home/HomeSearchBar";
-import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Home",
@@ -34,8 +32,17 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       <section className="space-y-2">
-        <h1 className="text-2xl font-bold tracking-tight">
-          {branchName ? `Welcome, ${branchName}` : "Home"}
+        <h1 className="text-2xl font-bold tracking-tight flex flex-wrap items-center gap-2">
+          {branchName ? (
+            <>
+              <span>Welcome!</span>
+              <span className="inline-flex items-center rounded-md bg-accent px-2.5 py-0.5 text-sm font-semibold text-accent-foreground shadow-sm ring-1 ring-accent/50">
+                {branchName}
+              </span>
+            </>
+          ) : (
+            "Home"
+          )}
         </h1>
         <p className="text-muted-foreground">
           {branchName
@@ -46,14 +53,6 @@ export default async function HomePage() {
           <Suspense fallback={<div className="h-10 w-full max-w-md rounded-md border bg-muted animate-pulse" />}>
             <HomeSearchBar />
           </Suspense>
-          {siteConfig.branchesMode === "multi" && (
-            <Link
-              href="/select-branch"
-              className="text-sm text-muted-foreground hover:text-foreground underline"
-            >
-              Change branch
-            </Link>
-          )}
         </div>
       </section>
 

@@ -26,10 +26,10 @@ export function HomeSearchBar() {
         <Input
           type="search"
           name="q"
-          placeholder="Search products..."
+          placeholder="Search"
           defaultValue={defaultValue}
           className="pl-9"
-          aria-label="Search products"
+          aria-label="Search"
         />
       </div>
       <Button type="submit">Search</Button>

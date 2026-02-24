@@ -63,10 +63,10 @@ const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROL
 // ---------------------------------------------------------------------------
 
 const BRANCHES = [
-  { name: "Downtown Main", address: "100 Main St", phone: "+1-555-0100", timezone: "America/New_York" },
-  { name: "Westside Mall", address: "200 Mall Dr", phone: "+1-555-0200", timezone: "America/New_York" },
-  { name: "East End", address: "300 East Ave", phone: "+1-555-0300", timezone: "America/New_York" },
-  { name: "North Plaza", address: "400 North Rd", phone: "+1-555-0400", timezone: "America/New_York" },
+  { name: "Theliyagonna", address: "Kandy road, Theliyagonna, Kurunegala", phone: "+94 37 010 1000", timezone: "Asia/Colombo" },
+  { name: "Mallawapitiya", address: "Kandy road, Mallawapitiya, Kurunegala", phone: "+94 37 020 2000", timezone: "Asia/Colombo" },
+  { name: "Kurunegala", address: "Kandy road, Kurunegala", phone: "+94 37 030 3000", timezone: "Asia/Colombo" },
+  { name: "Paragahadeniya", address: "Kandy road, Paragahadeniya, Kurunegala", phone: "+94 37 040 4000", timezone: "Asia/Colombo" },
 ];
 
 const CATEGORIES = [
