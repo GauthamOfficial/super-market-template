@@ -28,8 +28,26 @@ export default async function HomePage() {
   return (
     <div className="min-w-0">
       {/* Hero — reference style: full-bleed image background, white text, search bar, store carousel */}
-      <section className="full-bleed -mt-8 relative min-h-[90vh] flex flex-col overflow-hidden">
+      <section className="full-bleed -mt-8 relative min-h-[90vh] flex flex-col overflow-hidden bg-black">
+        {/* Black base */}
+        <div className="absolute inset-0 bg-black" aria-hidden />
+        {/* Background image — lowered opacity so black shows through */}
+        <div className="absolute inset-0 opacity-50" aria-hidden>
+          <Image
+            src="/bg-1.jpeg"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
         <div className="hero-overlay" aria-hidden />
+        {/* Green gradient from bottom */}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent pointer-events-none"
+          aria-hidden
+        />
 
         {/* Top right: nav pills + Explore card */}
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex flex-wrap items-center justify-end gap-2 sm:gap-3">
@@ -41,24 +59,16 @@ export default async function HomePage() {
           </Link>
           <Link
             href="/products"
-            className="flex items-center gap-1.5 rounded-full bg-black/70 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md transition hover:bg-black/85"
+            className="flex items-center gap-1.5 rounded-full bg-black/70 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md transition hover:bg-black/85 shadow-[0_0_16px_6px_rgba(0,165,79,0.35)]"
           >
             Explore more
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Left: App teaser (glass panel) */}
-        <div className="absolute left-4 top-1/2 z-20 hidden -translate-y-1/2 lg:block">
-          <div className="rounded-2xl border border-white/20 bg-white/15 px-4 py-3 backdrop-blur-md">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/90">App</p>
-            <div className="mt-2 wireframe aspect-[9/16] w-28 rounded-xl">App</div>
-          </div>
-        </div>
-
         {/* Main hero content: headline, subtitle, search bar, store cards */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-20 pb-10 text-center sm:pt-24">
-          <h1 className="font-impact text-4xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl" style={{ letterSpacing: "0.03em" }}>
+          <h1 className="font-impact text-5xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-6xl md:text-7xl lg:text-8xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
           <HeroTagline />
@@ -105,26 +115,6 @@ export default async function HomePage() {
             <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Link href="/find-store">Find a store</Link>
             </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* Membership / rewards */}
-      <section className="full-bleed bg-primary py-16 text-primary-foreground">
-        <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
-              The world&apos;s best grocery membership
-            </h2>
-            <p className="mt-4 text-primary-foreground/90">
-              Earn points and cashback on every order. Redeem anytime you like.
-            </p>
-            <Button asChild size="lg" className="mt-6 bg-accent text-accent-foreground hover:bg-accent/90 border-0">
-              <Link href="/find-store">Explore</Link>
-            </Button>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <div className="wireframe w-full max-w-sm aspect-[3/2] rounded-xl bg-white/20 border-white/40 text-white/90">Membership card</div>
           </div>
         </Container>
       </section>
