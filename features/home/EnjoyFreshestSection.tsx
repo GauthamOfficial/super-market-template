@@ -3,17 +3,17 @@
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
-const FLOATING_ITEMS: { label: string; left: string; top: string; width: number; height: number; speed: number; z: number }[] = [
-  { label: "Potatoes", left: "3%", top: "10%", width: 165, height: 142, speed: 0.28, z: 10 },
-  { label: "Cucumbers", left: "68%", top: "5%", width: 128, height: 155, speed: 0.4, z: 30 },
-  { label: "Tomatoes", left: "85%", top: "14%", width: 178, height: 148, speed: 0.22, z: 20 },
-  { label: "Cauliflower", left: "6%", top: "38%", width: 152, height: 168, speed: 0.45, z: 5 },
-  { label: "Bell peppers", left: "20%", top: "46%", width: 138, height: 118, speed: 0.32, z: 25 },
-  { label: "Onions", left: "2%", top: "68%", width: 188, height: 162, speed: 0.38, z: 15 },
-  { label: "Lemons", left: "16%", top: "74%", width: 112, height: 135, speed: 0.3, z: 35 },
-  { label: "Eggplants", left: "66%", top: "64%", width: 145, height: 152, speed: 0.35, z: 18 },
-  { label: "Carrots", left: "78%", top: "70%", width: 122, height: 178, speed: 0.25, z: 28 },
-  { label: "Broccoli", left: "88%", top: "54%", width: 158, height: 138, speed: 0.42, z: 8 },
+const FLOATING_ITEMS: { label: string; src: string; left: string; top: string; width: number; height: number; speed: number; z: number }[] = [
+  { label: "Potatoes", src: "/vegetables/veg-1.jpg", left: "3%", top: "10%", width: 165, height: 142, speed: 0.28, z: 10 },
+  { label: "Cucumbers", src: "/vegetables/veg-6.jpg", left: "68%", top: "5%", width: 128, height: 155, speed: 0.4, z: 30 },
+  { label: "Tomatoes", src: "/vegetables/veg-7.jpg", left: "85%", top: "14%", width: 178, height: 148, speed: 0.22, z: 20 },
+  { label: "Cauliflower", src: "/vegetables/veg-2.jpg", left: "2%", top: "36%", width: 152, height: 168, speed: 0.45, z: 5 },
+  { label: "Bell peppers", src: "/vegetables/veg-3.jpg", left: "18%", top: "40%", width: 138, height: 118, speed: 0.32, z: 25 },
+  { label: "Onions", src: "/vegetables/veg-4.jpg", left: "8%", top: "62%", width: 188, height: 162, speed: 0.38, z: 15 },
+  { label: "Lemons", src: "/vegetables/veg-5.jpg", left: "24%", top: "8%", width: 112, height: 135, speed: 0.3, z: 35 },
+  { label: "Eggplants", src: "/vegetables/veg-8.jpg", left: "66%", top: "64%", width: 145, height: 152, speed: 0.35, z: 18 },
+  { label: "Carrots", src: "/vegetables/veg-9.jpg", left: "78%", top: "70%", width: 122, height: 178, speed: 0.25, z: 28 },
+  { label: "Broccoli", src: "/vegetables/veg-10.jpg", left: "88%", top: "54%", width: 158, height: 138, speed: 0.42, z: 8 },
 ];
 
 export function EnjoyFreshestSection() {
@@ -84,7 +84,7 @@ export function EnjoyFreshestSection() {
           return (
             <div
               key={item.label}
-              className="absolute rounded-xl border-2 border-neutral-500 bg-neutral-300 shadow-xl flex items-center justify-center text-neutral-600 text-xs font-medium text-center"
+              className="absolute rounded-xl border-4 border-white bg-neutral-300 shadow-xl overflow-hidden flex items-center justify-center text-neutral-600 text-xs font-medium text-center"
               style={{
                 left: item.left,
                 top: item.top,
@@ -96,7 +96,14 @@ export function EnjoyFreshestSection() {
                 backfaceVisibility: "hidden",
               }}
             >
-              {item.label}
+              <Image
+                src={item.src}
+                alt={item.label}
+                width={item.width}
+                height={item.height}
+                className="object-cover w-full h-full"
+                sizes={`${item.width}px`}
+              />
             </div>
           );
         })}
