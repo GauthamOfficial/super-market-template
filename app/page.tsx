@@ -139,8 +139,24 @@ export default async function HomePage() {
           </p>
           <div className="w-full min-w-0 overflow-x-auto pb-4">
             <div className="flex gap-4">
-              {["Premium Staples", "Value Staples", "Cleaning", "Fun Foods", "Ready to Eat", "Daily Needs"].map((label) => (
-                <div key={label} className="wireframe shrink-0 w-40 h-44 rounded-xl">{label}</div>
+              {[
+                { label: "Premium Staples", src: "/fn/fn-1.png" },
+                { label: "Value Staples", src: "/fn/fn-2.png" },
+                { label: "Cleaning", src: "/fn/fn-3.png" },
+                { label: "Fun Foods", src: "/fn/fn-4.png" },
+                { label: "Ready to Eat", src: "/fn/fn-5.png" },
+                { label: "Daily Needs", src: "/fn/fn-6.png" },
+              ].map(({ label, src }) => (
+                <div key={label} className="shrink-0 w-40 h-44 rounded-xl overflow-hidden border border-border bg-muted">
+                  <Image
+                    src={src}
+                    alt={label}
+                    width={160}
+                    height={176}
+                    className="object-cover w-full h-full"
+                    sizes="160px"
+                  />
+                </div>
               ))}
             </div>
           </div>

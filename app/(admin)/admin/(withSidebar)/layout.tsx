@@ -27,11 +27,11 @@ export default async function AdminWithSidebarLayout({
   }
 
   return (
-    <div className="flex min-h-[60vh] w-full">
+    <div className="flex min-h-[60vh] w-full min-w-0 overflow-x-hidden">
       <AdminSidebar navItems={navItems} userEmail={user.email ?? undefined}>
         <AdminSignOut />
       </AdminSidebar>
-      <main className="flex-1 overflow-auto p-6">
+      <main className="flex-1 min-w-0 overflow-auto p-6">
         {children}
       </main>
     </div>

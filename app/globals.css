@@ -55,11 +55,24 @@
   }
   html {
     overflow-x: hidden;
+    scrollbar-gutter: stable;
+    width: 100%;
   }
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
   }
+}
+
+/* Prevent layout shift when Radix dropdowns/select open (react-remove-scroll) */
+body[data-scroll-locked] {
+  --removed-body-scroll-bar-size: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: visible !important;
 }
 
 /* Full-width section that breaks out of container (for landing hero, etc.) */
