@@ -26,9 +26,14 @@ export function HeroBranchCarousel({ branches }: { branches: Branch[] }) {
 
   return (
     <div
-      className="mt-8 w-full max-w-[calc(256px*3+16px*2)] opacity-0 animate-hero-fade-in-up sm:max-w-[calc(288px*3+16px*2)]"
+      className="mt-8 relative w-full max-w-[calc(256px*3+16px*2)] opacity-0 animate-hero-fade-in-up sm:max-w-[calc(288px*3+16px*2)]"
       style={{ animationDelay: "0.35s" }}
     >
+      {/* Blurred background: slightly larger than the carousel */}
+      <div
+        className="absolute -inset-3 rounded-3xl bg-white/10 backdrop-blur-xl sm:-inset-4"
+        aria-hidden
+      />
       <div className="relative flex items-center gap-2">
         {/* Left arrow */}
         <button

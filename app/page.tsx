@@ -29,13 +29,6 @@ export default async function HomePage() {
     <div className="min-w-0">
       {/* Hero — reference style: full-bleed image background, white text, search bar, store carousel */}
       <section className="full-bleed -mt-8 relative min-h-[90vh] flex flex-col overflow-hidden">
-        {/* Background: image area (wireframe for now — replace with real image later) */}
-        <div
-          className="absolute inset-0 wireframe flex items-center justify-center text-neutral-500"
-          aria-hidden
-        >
-          <span className="text-base">Hero background image</span>
-        </div>
         <div className="hero-overlay" aria-hidden />
 
         {/* Top right: nav pills + Explore card */}

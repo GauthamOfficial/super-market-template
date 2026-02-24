@@ -44,7 +44,7 @@ export function HeroTagline() {
 
   return (
     <p
-      className={`${cormorant.className} mt-3 text-xl italic tracking-wide text-accent opacity-0 animate-hero-fade-in-up sm:text-2xl`}
+      className={`${cormorant.className} mt-3 text-2xl italic tracking-wide text-accent opacity-0 animate-hero-fade-in-up sm:text-3xl md:text-4xl`}
       style={{ animationDelay: "0.1s" }}
     >
       {visibleText}
