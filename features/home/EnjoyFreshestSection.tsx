@@ -105,7 +105,7 @@ export function EnjoyFreshestSection() {
       {/* Central text */}
       <div className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-4 py-24 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-neutral-800 sm:text-4xl md:text-5xl">
-          enjoy the freshest
+          enjoy the <span className="font-accent italic text-[1.1em]">freshest</span>
         </h2>
         <p className="mt-4 max-w-xl text-lg text-neutral-700 sm:text-xl">
           we handpick the freshest from selected organic farms to your plates

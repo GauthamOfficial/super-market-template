@@ -89,7 +89,7 @@ export default async function HomePage() {
       {/* Find a store — branch images */}
       <section className="full-bleed py-16">
         <Container>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">Find a store</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">Find a <span className="font-accent italic text-[1.1em]">store</span></h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {displayBranches.map((branch) => (
               <Link
@@ -113,7 +113,7 @@ export default async function HomePage() {
           </div>
           <div className="mt-6 text-center">
             <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link href="/find-store">Find a store</Link>
+              <Link href="/find-store">Find a <span className="font-accent italic text-[1.1em]">store</span></Link>
             </Button>
           </div>
         </Container>
@@ -126,7 +126,7 @@ export default async function HomePage() {
       <section className="full-bleed bg-white py-16">
         <Container className="w-full max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
-            Crafted with love
+            Crafted with <span className="font-accent italic text-[1.1em]">love</span>
           </h2>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
             Discover our in-house collections and daily essentials.
@@ -146,7 +146,7 @@ export default async function HomePage() {
         <Container>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-black">
-              Happy customers
+              Happy <span className="font-accent italic text-[1.1em]">customers</span>
             </h2>
             <p className="mt-2 text-muted-foreground">Join us on this journey built on trust and satisfaction.</p>
           </div>
@@ -165,7 +165,7 @@ export default async function HomePage() {
       {/* Featured products — keep existing behaviour */}
       <section className="full-bleed border-t bg-muted/30 py-16">
         <Container>
-          <h2 className="text-2xl font-bold text-black mb-6">Featured products</h2>
+          <h2 className="text-2xl font-bold text-black mb-6">Featured <span className="font-accent italic text-[1.1em]">products</span></h2>
           {featured.length > 0 ? (
             <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {featured.map((product) => (
