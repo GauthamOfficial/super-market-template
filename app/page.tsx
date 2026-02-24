@@ -31,17 +31,17 @@ export default async function HomePage() {
       <section className="full-bleed -mt-8 relative min-h-[90vh] flex flex-col overflow-hidden bg-black">
         {/* Black base */}
         <div className="absolute inset-0 bg-black" aria-hidden />
-        {/* Background image — lowered opacity so black shows through */}
+        {/* Background image — lowered opacity so black shows through
         <div className="absolute inset-0 opacity-40" aria-hidden>
           <Image
-            src="/bg-1.jpeg"
+            src="/bg-3.jpg"
             alt=""
             fill
             className="object-cover"
             priority
             sizes="100vw"
           />
-        </div>
+        </div> */}
         <div className="hero-overlay" aria-hidden />
         {/* Green gradient from bottom */}
         <div

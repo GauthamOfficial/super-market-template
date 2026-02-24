@@ -4,15 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
-import type { Branch } from "@/types/db";
 import { getBranchImageUrl } from "@/lib/branch-image";
+
+/** Minimal branch shape for hero carousel (id + name from site config). */
+export type HeroBranch = { id: string; name: string };
 
 const CARD_WIDTH_PX = 256;
 const GAP_PX = 16;
 const VISIBLE_CARDS = 3;
 const STEP_PX = (CARD_WIDTH_PX + GAP_PX) * VISIBLE_CARDS;
 
-export function HeroBranchCarousel({ branches }: { branches: Branch[] }) {
+export function HeroBranchCarousel({ branches }: { branches: HeroBranch[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = useCallback((direction: "left" | "right") => {
