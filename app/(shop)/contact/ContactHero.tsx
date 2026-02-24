@@ -1,15 +1,18 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 
-const FLOATING_BOXES: { label: string; left: string; top: string; width: number; height: number; speed: number; z: number }[] = [
-  { label: "Image", left: "3%", top: "15%", width: 100, height: 88, speed: 0.28, z: 10 },
-  { label: "Image", left: "78%", top: "10%", width: 90, height: 95, speed: 0.4, z: 30 },
-  { label: "Image", left: "88%", top: "35%", width: 95, height: 85, speed: 0.22, z: 20 },
-  { label: "Image", left: "5%", top: "55%", width: 88, height: 92, speed: 0.38, z: 15 },
-  { label: "Image", left: "82%", top: "62%", width: 100, height: 80, speed: 0.35, z: 18 },
-  { label: "Image", left: "12%", top: "75%", width: 85, height: 78, speed: 0.3, z: 25 },
-  { label: "Image", left: "70%", top: "78%", width: 90, height: 82, speed: 0.42, z: 8 },
+const HERO_IMAGES = ["/sp-1.jpg", "/sp-2.jpg", "/sp-3.jpg", "/sp-4.jpg", "/sp-5.jpg", "/sp-6.jpg", "/sp-7.jpg"];
+
+const FLOATING_BOXES: { left: string; top: string; width: number; height: number; speed: number; z: number }[] = [
+  { left: "3%", top: "15%", width: 100, height: 88, speed: 0.28, z: 10 },
+  { left: "78%", top: "10%", width: 90, height: 95, speed: 0.4, z: 30 },
+  { left: "88%", top: "35%", width: 95, height: 85, speed: 0.22, z: 20 },
+  { left: "5%", top: "55%", width: 88, height: 92, speed: 0.38, z: 15 },
+  { left: "82%", top: "62%", width: 100, height: 80, speed: 0.35, z: 18 },
+  { left: "12%", top: "75%", width: 85, height: 78, speed: 0.3, z: 25 },
+  { left: "70%", top: "78%", width: 90, height: 82, speed: 0.42, z: 8 },
 ];
 
 export function ContactHero() {
@@ -50,9 +53,14 @@ export function ContactHero() {
   return (
     <section
       ref={sectionRef}
-      className="full-bleed relative overflow-hidden bg-gradient-to-br from-primary/95 via-primary to-primary/90 py-16 sm:py-20"
+      className="full-bleed relative overflow-hidden bg-black py-16 sm:py-20"
       style={{ perspective: "1200px" }}
     >
+      {/* Black and green gradient — matches landing hero style */}
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent pointer-events-none"
+        aria-hidden
+      />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ perspective: "1200px", transformStyle: "preserve-3d" }}
@@ -60,10 +68,11 @@ export function ContactHero() {
       >
         {FLOATING_BOXES.map((item, i) => {
           const t = transforms[i] ?? { y: 0, rotate: 0 };
+          const src = HERO_IMAGES[i] ?? HERO_IMAGES[0];
           return (
             <div
               key={i}
-              className="absolute rounded-xl border-2 border-neutral-400 bg-neutral-200/95 shadow-xl flex items-center justify-center text-neutral-500 text-xs font-medium text-center"
+              className="absolute rounded-xl overflow-hidden border-2 border-white/20 shadow-xl"
               style={{
                 left: item.left,
                 top: item.top,
@@ -75,7 +84,13 @@ export function ContactHero() {
                 backfaceVisibility: "hidden",
               }}
             >
-              {item.label}
+              <Image
+                src={src}
+                alt=""
+                fill
+                className="object-cover"
+                sizes={`${item.width}px`}
+              />
             </div>
           );
         })}
