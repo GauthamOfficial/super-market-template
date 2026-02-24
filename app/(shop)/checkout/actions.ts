@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import type { CartItem } from "@/features/cart/cartUtils";
 
 export interface CheckoutFormData {
@@ -35,7 +35,7 @@ export async function placeOrder(
         ? "Pickup"
         : null;
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
   const insertPayload: Record<string, unknown> = {
     branch_id: branchId,
@@ -46,6 +46,7 @@ export async function placeOrder(
     customer_phone: form.phone.trim() || null,
     delivery_address: deliveryAddress,
     payment_method: form.paymentMethod,
+    user_id: null,
   };
 
   const { data: order, error: orderError } = await supabase
