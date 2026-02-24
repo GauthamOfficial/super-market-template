@@ -115,7 +115,7 @@ export default async function HomePage() {
           </div>
           <div className="mt-6 text-center">
             <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link href="/find-store">Find a <span className="font-accent italic text-[1.1em]">store</span></Link>
+              <Link href="/find-store">Find a store</Link>
             </Button>
           </div>
         </Container>
