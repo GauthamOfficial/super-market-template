@@ -4,13 +4,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function ContactForm() {
-  const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
+  const [sent, setSent] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,16 +29,28 @@ export function ContactForm() {
     await new Promise((r) => setTimeout(r, 600));
     setSubmitting(false);
     setFormData({ name: "", email: "", phone: "", message: "" });
-    toast({
-      title: "Message sent",
-      description: "Thank you for reaching out. We'll get back to you within 24 hours.",
-    });
+    setSent(true);
   };
+
+  if (sent) {
+    return (
+      <div className="flex flex-col items-center justify-center py-8 sm:py-12 text-center">
+        <CheckCircle2 className="h-14 w-14 sm:h-16 sm:w-16 text-primary mb-4" aria-hidden />
+        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">Message sent</h3>
+        <p className="text-muted-foreground text-sm sm:text-base max-w-sm mb-6">
+          Thank you for reaching out. We&apos;ll get back to you within 24 hours.
+        </p>
+        <Button type="button" variant="outline" onClick={() => setSent(false)}>
+          Send another message
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
       <div className="space-y-1.5 sm:space-y-2">
-        <Label htmlFor="contact-name" className="text-sm sm:text-base">Full Name *</Label>
+        <Label htmlFor="contact-name" className="text-sm sm:text-base">Full Name</Label>
         <Input
           id="contact-name"
           name="name"
@@ -52,7 +63,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-1.5 sm:space-y-2">
-        <Label htmlFor="contact-phone" className="text-sm sm:text-base">Phone *</Label>
+        <Label htmlFor="contact-phone" className="text-sm sm:text-base">Phone</Label>
         <Input
           id="contact-phone"
           name="phone"
@@ -65,7 +76,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-1.5 sm:space-y-2">
-        <Label htmlFor="contact-email" className="text-sm sm:text-base">Email *</Label>
+        <Label htmlFor="contact-email" className="text-sm sm:text-base">Email</Label>
         <Input
           id="contact-email"
           name="email"
@@ -78,7 +89,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-1.5 sm:space-y-2">
-        <Label htmlFor="contact-message" className="text-sm sm:text-base">Message *</Label>
+        <Label htmlFor="contact-message" className="text-sm sm:text-base">Message</Label>
         <textarea
           id="contact-message"
           name="message"
