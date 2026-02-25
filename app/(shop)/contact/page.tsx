@@ -96,7 +96,7 @@ export default function ContactPage() {
 
             {/* Right: Form card */}
             <div className="order-1 lg:order-2">
-              <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 via-green-500/15 to-emerald-600/20 shadow-md p-4 sm:p-8">
+              <div className="rounded-2xl border border-primary/20 bg-gradient-to-t from-primary/20 via-primary/5 to-white dark:to-card shadow-md p-4 sm:p-8">
                 <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-1">Send Us a Message</h2>
                 <p className="text-muted-foreground text-sm mb-4 sm:mb-6">
                   Fill out the form below and we&apos;ll get back to you as soon as we can.

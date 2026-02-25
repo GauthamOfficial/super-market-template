@@ -111,44 +111,44 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="grid w-full gap-4 sm:grid-cols-[1fr,300px] sm:gap-5 max-w-4xl mx-auto items-start">
       {/* Left: Single form card */}
       <Card className="max-w-2xl bg-gradient-to-t from-green-100 to-white dark:from-green-950/30 dark:to-card">
-        <CardContent className="p-4 sm:p-5 space-y-0">
-          {/* Contact information — single row on sm+ */}
-          <div className="space-y-3 pb-4">
+        <CardContent className="p-3 sm:p-5 space-y-0">
+          {/* Contact information — single row on sm+; tighter on mobile */}
+          <div className="space-y-2 sm:space-y-3 pb-2 sm:pb-4">
             <div className="flex items-center gap-2">
-              <User className="h-5 w-5 text-primary" />
-              <h2 className="text-base font-semibold">Contact information</h2>
+              <User className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+              <h2 className="text-sm sm:text-base font-semibold">Contact information</h2>
             </div>
-            <div className="grid gap-3 grid-cols-1 sm:grid-cols-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="name" className="text-sm">Name</Label>
-                <Input id="name" placeholder="Full name" {...register("name")} className="h-10 text-base" />
+            <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
+              <div className="space-y-1 sm:space-y-1.5">
+                <Label htmlFor="name" className="text-xs sm:text-sm">Name</Label>
+                <Input id="name" placeholder="Full name" {...register("name")} className="h-9 sm:h-10 text-sm sm:text-base" />
                 {errors.name && (
-                  <p className="text-sm text-destructive">{errors.name.message}</p>
+                  <p className="text-xs sm:text-sm text-destructive">{errors.name.message}</p>
                 )}
               </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-sm">Email</Label>
-                <Input id="email" type="email" placeholder="Your email" {...register("email")} className="h-10 text-base" />
+              <div className="space-y-1 sm:space-y-1.5">
+                <Label htmlFor="email" className="text-xs sm:text-sm">Email</Label>
+                <Input id="email" type="email" placeholder="Your email" {...register("email")} className="h-9 sm:h-10 text-sm sm:text-base" />
                 {errors.email && (
-                  <p className="text-sm text-destructive">{errors.email.message}</p>
+                  <p className="text-xs sm:text-sm text-destructive">{errors.email.message}</p>
                 )}
               </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="phone" className="text-sm">Phone</Label>
-                <Input id="phone" type="tel" placeholder="+94 7x xxx xxxx" {...register("phone")} className="h-10 text-base" />
+              <div className="space-y-1 sm:space-y-1.5">
+                <Label htmlFor="phone" className="text-xs sm:text-sm">Phone</Label>
+                <Input id="phone" type="tel" placeholder="+94 7x xxx xxxx" {...register("phone")} className="h-9 sm:h-10 text-sm sm:text-base" />
                 {errors.phone && (
-                  <p className="text-sm text-destructive">{errors.phone.message}</p>
+                  <p className="text-xs sm:text-sm text-destructive">{errors.phone.message}</p>
                 )}
               </div>
             </div>
           </div>
 
-          <div className="border-t py-4">
+          <div className="border-t py-3 sm:py-4">
             {/* Delivery method — horizontal on sm+ */}
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2">
-                <Truck className="h-5 w-5 text-primary" />
-                <h2 className="text-base font-semibold">Delivery method</h2>
+                <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                <h2 className="text-sm sm:text-base font-semibold">Delivery method</h2>
               </div>
               <RadioGroup
                 value={deliveryMethod}
@@ -157,35 +157,35 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
               >
                 <label
                   htmlFor="pickup"
-                  className="flex items-center gap-2 rounded-md border p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
+                  className="flex items-center gap-2 rounded-md border p-2.5 sm:p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
                 >
                   <RadioGroupItem value="pickup" id="pickup" />
                   <div className="min-w-0">
-                    <span className="font-medium text-base">Pickup</span>
-                    <p className="text-sm text-muted-foreground truncate">Collect from store</p>
+                    <span className="font-medium text-sm sm:text-base">Pickup</span>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">Collect from store</p>
                   </div>
                 </label>
                 <label
                   htmlFor="delivery"
-                  className="flex items-center gap-2 rounded-md border p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
+                  className="flex items-center gap-2 rounded-md border p-2.5 sm:p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
                 >
                   <RadioGroupItem value="delivery" id="delivery" />
                   <div className="min-w-0">
-                    <span className="font-medium text-base">Delivery</span>
-                    <p className="text-sm text-muted-foreground truncate">We deliver</p>
+                    <span className="font-medium text-sm sm:text-base">Delivery</span>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate">We deliver</p>
                   </div>
                 </label>
               </RadioGroup>
 
               {deliveryMethod === "delivery" && (
-                <div className="pt-2">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="address" className="text-sm">Address</Label>
+                <div className="pt-1.5 sm:pt-2">
+                  <div className="space-y-1 sm:space-y-1.5">
+                    <Label htmlFor="address" className="text-xs sm:text-sm">Address</Label>
                     <Input
                       id="address"
                       {...register("address")}
                       placeholder="Your address"
-                      className="h-10 text-base"
+                      className="h-9 sm:h-10 text-sm sm:text-base"
                     />
                     {errors.address && (
                       <p className="text-sm text-destructive">{errors.address.message}</p>
@@ -196,12 +196,12 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
             </div>
           </div>
 
-          <div className="border-t py-4">
+          <div className="border-t py-3 sm:py-4">
             {/* Payment method — horizontal on sm+ */}
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2">
-                <CreditCard className="h-5 w-5 text-primary" />
-                <h2 className="text-base font-semibold">Payment method</h2>
+                <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                <h2 className="text-sm sm:text-base font-semibold">Payment method</h2>
               </div>
               <RadioGroup
                 value={watch("paymentMethod")}
@@ -210,17 +210,17 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
               >
                 <label
                   htmlFor="cod"
-                  className="flex items-center gap-2 rounded-md border p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
+                  className="flex items-center gap-2 rounded-md border p-2.5 sm:p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
                 >
                   <RadioGroupItem value="cod" id="cod" />
-                  <span className="font-medium text-base">Cash (COD)</span>
+                  <span className="font-medium text-sm sm:text-base">Cash (COD)</span>
                 </label>
                 <label
                   htmlFor="bank_transfer"
-                  className="flex items-center gap-2 rounded-md border p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
+                  className="flex items-center gap-2 rounded-md border p-2.5 sm:p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5 flex-1"
                 >
                   <RadioGroupItem value="bank_transfer" id="bank_transfer" />
-                  <span className="font-medium text-base">Bank transfer</span>
+                  <span className="font-medium text-sm sm:text-base">Bank transfer</span>
                 </label>
               </RadioGroup>
             </div>
