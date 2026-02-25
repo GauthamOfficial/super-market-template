@@ -36,7 +36,7 @@ function StatusTimeline({ status }: { status: OrderStatus }) {
                       : "border-muted bg-muted text-muted-foreground"
                 }`}
               >
-                {isDone ? "✓" : idx + 1}
+                {isDone || (isCurrent && status === "completed") ? "✓" : idx + 1}
               </div>
               {idx < STEPS.length - 1 && (
                 <div

@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { sendContactMessage } from "./actions";
 
 export function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,16 +22,21 @@ export function ContactForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate submit — replace with your API route or server action when ready
-    await new Promise((r) => setTimeout(r, 600));
+    setError(null);
+    const result = await sendContactMessage(formData);
     setSubmitting(false);
-    setFormData({ name: "", email: "", phone: "", message: "" });
-    setSent(true);
+    if (result.ok) {
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setSent(true);
+    } else {
+      setError(result.error);
+    }
   };
 
   if (sent) {
@@ -88,6 +95,11 @@ export function ContactForm() {
           className="h-9 sm:h-11"
         />
       </div>
+      {error && (
+        <p className="text-sm text-destructive rounded-md bg-destructive/10 p-2" role="alert">
+          {error}
+        </p>
+      )}
       <div className="space-y-1.5 sm:space-y-2">
         <Label htmlFor="contact-message" className="text-sm sm:text-base">Message</Label>
         <textarea

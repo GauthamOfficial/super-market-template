@@ -23,10 +23,10 @@ export const siteConfig = {
   /** Favicon URL (optional). Otherwise browser uses default. */
   faviconUrl: null as string | null,
 
-  /** Contact shown in footer and useful for SEO */
+  /** Contact shown in footer, contact page, and used as fallback for WhatsApp on order success */
   contact: {
-    email: "support@fngroup.lk",
-    phone: "+94 71 480 7030",
+    email: "hello.diffindo@gmail.com",
+    phone: "+94 704462999",
     address: "Kandy Road, Kurnegala, Sri Lanka",
   },
 

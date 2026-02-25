@@ -1,4 +1,5 @@
 import { formatPrice } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 import type { Order } from "@/types/db";
 import type { OrderItem } from "@/types/db";
 import type { ProductVariant } from "@/types/db";
@@ -8,7 +9,7 @@ export interface OrderItemWithVariant extends OrderItem {
 }
 
 /**
- * Build a formatted order summary for WhatsApp (orderId, customer, address, items, totals, payment method).
+ * Build a formatted order summary for WhatsApp — professional layout with clear sections and icons.
  */
 export function buildOrderSummaryMessage(
   order: Order,
@@ -23,40 +24,56 @@ export function buildOrderSummaryMessage(
         ? "Cash on delivery (COD)"
         : order.payment_method ?? "—";
 
+  const addressLine =
+    order.delivery_address && order.delivery_address.trim().toLowerCase() !== "pickup"
+      ? order.delivery_address.trim().replace(/\n/g, ", ")
+      : "Pickup at store";
+
   const lines: string[] = [
-    `*Order:* ${order.order_number}`,
-    `Order ID: ${order.id}`,
-    `Customer: ${order.customer_name ?? order.customer_email}`,
-    order.customer_phone ? `Phone: ${order.customer_phone}` : null,
-    order.delivery_address ? `Address: ${order.delivery_address.replace(/\n/g, ", ")}` : null,
+    "*NEW ORDER*",
+    "────────────────",
     "",
-    "*Items:*",
+    "*Order details*",
+    `   ${order.order_number}`,
+    `   ID: ${order.id}`,
+    "",
+    "*Customer*",
+    `   ${order.customer_name ?? order.customer_email}`,
+    order.customer_phone ? `   Phone: ${order.customer_phone}` : null,
+    `   Address: ${addressLine}`,
+    "",
+    "*Items*",
     ...items.map((i) => {
       const name = i.variant?.name ?? "Item";
-      return `• ${name} × ${i.quantity} @ ${formatPrice(i.unit_price)} = ${formatPrice(i.quantity * i.unit_price)}`;
+      return `   • ${name} x ${i.quantity}   ${formatPrice(i.unit_price)}   = ${formatPrice(i.quantity * i.unit_price)}`;
     }),
     "",
-    `Subtotal: ${formatPrice(subtotal)}`,
-    total !== subtotal ? `Total: ${formatPrice(total)}` : null,
-    `Payment: ${paymentLabel}`,
+    "*Summary*",
+    `   Subtotal:   ${formatPrice(subtotal)}`,
+    total !== subtotal ? `   Total:      ${formatPrice(total)}` : null,
+    `   Payment:    ${paymentLabel}`,
+    "",
+    "────────────────",
+    `_${siteConfig.name}_`,
   ].filter(Boolean) as string[];
 
   return lines.join("\n");
 }
 
 /**
- * Resolve WhatsApp number: branch whatsapp_phone → branch phone → env NEXT_PUBLIC_WHATSAPP_NUMBER.
+ * Resolve WhatsApp number for "Send to Shop" and admin copy.
+ * Uses site config contact.phone first so one number can be used for all shop WhatsApp links; falls back to branch then env.
  * Returns digits only (no +) for wa.me links.
  */
 export function getShopWhatsAppNumber(branch: { whatsapp_phone?: string | null; phone?: string | null } | null): string | null {
+  const sitePhone = siteConfig.contact.phone?.trim();
+  if (sitePhone) return sitePhone.replace(/\D/g, "");
   const fromBranch = branch?.whatsapp_phone?.trim() || branch?.phone?.trim();
-  if (fromBranch) {
-    return fromBranch.replace(/\D/g, "");
-  }
+  if (fromBranch) return fromBranch.replace(/\D/g, "");
   const env =
     typeof process !== "undefined" ? process.env?.NEXT_PUBLIC_WHATSAPP_NUMBER : undefined;
-  const str = typeof env === "string" ? env.trim() : "";
-  if (str) return str.replace(/\D/g, "");
+  const envStr = typeof env === "string" ? env.trim() : "";
+  if (envStr) return envStr.replace(/\D/g, "");
   return null;
 }
 

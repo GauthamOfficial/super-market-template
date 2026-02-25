@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { ok, err, type Result } from "./result";
 import type {
   Branch,
@@ -382,7 +383,8 @@ export async function getOrderById(
   }>
 > {
   try {
-    const supabase = await createClient();
+    // Use admin client so the public order-success page can read the order (RLS would block anon)
+    const supabase = createAdminClient();
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("*")

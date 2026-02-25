@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -48,6 +48,7 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
   const items = useCartStore((s) => s.items);
   const clearCart = useCartStore((s) => s.clearCart);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const didNavigateToSuccess = useRef(false);
 
   const {
     register,
@@ -66,10 +67,11 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
   const deliveryMethod = watch("deliveryMethod");
   const deliveryAreaId = watch("deliveryAreaId");
 
-  // Only redirect when cart is empty *after* store has rehydrated from localStorage
+  // Redirect to cart when cart is empty (e.g. user landed here with empty cart). Skip if we just placed an order and are navigating to success.
   useEffect(() => {
+    if (didNavigateToSuccess.current) return;
     const id = window.setTimeout(() => {
-      if (items.length === 0) {
+      if (!didNavigateToSuccess.current && items.length === 0) {
         router.replace("/cart");
       }
     }, 100);
@@ -94,8 +96,9 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
     };
     const result = await placeOrder(items, formData);
     if (result.ok) {
+      didNavigateToSuccess.current = true;
       clearCart();
-      router.push(`/order/success?orderId=${result.orderId}`);
+      router.replace(`/order/success?orderId=${result.orderId}`);
     } else {
       setSubmitError(result.error);
     }

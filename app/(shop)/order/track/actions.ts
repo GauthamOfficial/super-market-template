@@ -1,7 +1,7 @@
 "use server";
 
 import { getOrderByOrderNumber } from "@/lib/dal";
-import { normalizePhone } from "@/lib/utils";
+import { normalizePhoneForComparison } from "@/lib/utils";
 import type { OrderStatus } from "@/types/db";
 
 export type TrackOrderResult =
@@ -21,7 +21,7 @@ export async function trackOrder(
   if (!result.ok) return { ok: false, error: result.error };
 
   const { order, items } = result.data;
-  if (normalizePhone(order.customer_phone) !== normalizePhone(trimmedPhone)) {
+  if (normalizePhoneForComparison(order.customer_phone) !== normalizePhoneForComparison(trimmedPhone)) {
     return { ok: false, error: "Order not found or phone does not match." };
   }
 
