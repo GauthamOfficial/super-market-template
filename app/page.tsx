@@ -209,7 +209,7 @@ export default async function HomePage() {
             <div className="grid min-w-0 gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {featured.map((product) => (
                 <div key={product.id} className="min-w-0">
-                  <ProductCard product={product} compact />
+                  <ProductCard product={product} compact actionLabel="View" />
                 </div>
               ))}
             </div>

@@ -75,49 +75,68 @@ export function HeaderWithMobileNav() {
           <HeaderNav />
         </nav>
 
-        {/* Mobile menu — hamburger + sheet */}
-        <div className="flex flex-1 items-center justify-center md:hidden">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white hover:bg-white/20 hover:text-white"
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[min(100vw-2rem,320px)] p-0">
-              <SheetHeader className="border-b p-4 text-left">
-                <SheetTitle className="text-lg">Menu</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col p-2" aria-label="Mobile navigation">
-                {LINKS.map(({ href, label, match }) => {
-                  const isActive = match(path);
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={() => setOpen(false)}
-                      className={`rounded-md px-3 py-2.5 font-medium transition-colors ${
-                        isActive
-                          ? "bg-primary/12 text-primary"
-                          : "text-foreground hover:bg-muted"
-                      }`}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      {label}
-                    </Link>
-                  );
-                })}
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        <div className="shrink-0">
+        {/* Right side: cart then menu (menu only on mobile), right-aligned */}
+        <div className="ml-auto flex shrink-0 items-center justify-end gap-1">
           <CartTrigger />
+          <div className="md:hidden">
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-black hover:bg-black/10 hover:text-black"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" showClose={false} className="w-[min(100vw-2rem,320px)] p-0">
+                <SheetHeader className="flex flex-row items-center gap-3 border-b border-primary/20 bg-gradient-to-r from-primary via-primary/95 to-primary/80 p-4 text-left">
+                  <SheetTitle className="sr-only">Menu</SheetTitle>
+                  {siteConfig.logoUrl ? (
+                    <Image
+                      src={siteConfig.logoUrl}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 shrink-0 object-contain"
+                      aria-hidden
+                    />
+                  ) : (
+                    <span
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/20 text-sm font-medium text-white"
+                      aria-hidden
+                    >
+                      N
+                    </span>
+                  )}
+                  <span className="font-impact text-base font-normal tracking-tight text-white" style={{ letterSpacing: "0.03em" }}>
+                    {siteConfig.name}
+                  </span>
+                </SheetHeader>
+                <nav className="flex flex-col p-2" aria-label="Mobile navigation">
+                  {LINKS.map(({ href, label, match }) => {
+                    const isActive = match(path);
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setOpen(false)}
+                        className={`rounded-md px-3 py-2.5 font-medium transition-colors ${
+                          isActive
+                            ? "bg-primary/12 text-primary"
+                            : "text-foreground hover:bg-muted"
+                        }`}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </Container>
     </header>

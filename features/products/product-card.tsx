@@ -9,9 +9,11 @@ interface ProductCardProps {
   product: Product;
   /** Smaller layout for grids with many columns (e.g. Featured products) */
   compact?: boolean;
+  /** Button label (e.g. "View" on home page, "Add to cart" elsewhere). Default: "Add to cart" */
+  actionLabel?: string;
 }
 
-export function ProductCard({ product, compact }: ProductCardProps) {
+export function ProductCard({ product, compact, actionLabel = "Add to cart" }: ProductCardProps) {
   return (
     <Card className="min-w-0 overflow-hidden text-left transition-shadow hover:shadow-md">
       <Link href={`/products/${product.slug}`} className="block">
@@ -44,7 +46,7 @@ export function ProductCard({ product, compact }: ProductCardProps) {
           {formatPrice(product.base_price)}
         </span>
         <Button asChild variant="default" size="sm" className={compact ? "h-7 w-full min-w-0 shrink-0 rounded-md text-xs px-2 sm:h-6 sm:w-auto sm:min-w-0 sm:px-2 sm:text-xs" : "w-full shrink-0 rounded-md sm:h-7 sm:w-auto sm:min-w-0 sm:px-2 sm:text-xs"}>
-          <Link href={`/product/${product.slug}`} className="truncate">Add to cart</Link>
+          <Link href={`/product/${product.slug}`} className="truncate">{actionLabel}</Link>
         </Button>
       </CardFooter>
     </Card>
