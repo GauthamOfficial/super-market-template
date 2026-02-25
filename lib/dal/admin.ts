@@ -572,7 +572,8 @@ export async function createDeliveryArea(
   input: DeliveryAreaInsert
 ): Promise<Result<DeliveryArea>> {
   try {
-    const supabase = await createClient();
+    // Use admin client; RLS on delivery_areas has no insert policy
+    const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("delivery_areas")
       .insert({
@@ -598,7 +599,8 @@ export async function updateDeliveryArea(
   input: Partial<DeliveryAreaInsert>
 ): Promise<Result<DeliveryArea>> {
   try {
-    const supabase = await createClient();
+    // Use admin client; RLS on delivery_areas has no update policy
+    const supabase = createAdminClient();
     const payload: Record<string, unknown> = {};
     if (input.name !== undefined) payload.name = input.name.trim();
     if (input.fee !== undefined) payload.fee = Number(input.fee) >= 0 ? Number(input.fee) : 0;
@@ -623,7 +625,8 @@ export async function updateDeliveryArea(
 
 export async function deleteDeliveryArea(id: string): Promise<Result<void>> {
   try {
-    const supabase = await createClient();
+    // Use admin client; RLS on delivery_areas has no delete policy
+    const supabase = createAdminClient();
     const { error } = await supabase.from("delivery_areas").delete().eq("id", id);
     if (error) return err(error.message);
     return ok(undefined);

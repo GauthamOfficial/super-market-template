@@ -17,27 +17,38 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { formatPrice } from "@/lib/utils";
 import type { DeliveryArea } from "@/types/db";
 
-const schema = z
-  .object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().min(1, "Email is required").email("Invalid email"),
-    phone: z.string().min(1, "Phone is required"),
-    deliveryMethod: z.enum(["delivery", "pickup"]),
-    address: z.string().optional(),
-    deliveryAreaId: z.string().optional(),
-    paymentMethod: z.enum(["cod", "bank_transfer"]),
-  })
-  .refine(
-    (data) => {
-      if (data.deliveryMethod === "delivery") {
-        return (data.address?.trim()?.length ?? 0) > 0;
-      }
-      return true;
-    },
-    { message: "Address is required for delivery", path: ["address"] }
-  );
+function createCheckoutSchema(deliveryAreas: DeliveryArea[]) {
+  return z
+    .object({
+      name: z.string().min(1, "Name is required"),
+      email: z.string().min(1, "Email is required").email("Invalid email"),
+      phone: z.string().min(1, "Phone is required"),
+      deliveryMethod: z.enum(["delivery", "pickup"]),
+      address: z.string().optional(),
+      deliveryAreaId: z.string().optional(),
+      paymentMethod: z.enum(["cod", "bank_transfer"]),
+    })
+    .refine(
+      (data) => {
+        if (data.deliveryMethod === "delivery") {
+          return (data.address?.trim()?.length ?? 0) > 0;
+        }
+        return true;
+      },
+      { message: "Address is required for delivery", path: ["address"] }
+    )
+    .refine(
+      (data) => {
+        if (data.deliveryMethod === "delivery" && deliveryAreas.length > 0) {
+          return (data.deliveryAreaId?.trim()?.length ?? 0) > 0;
+        }
+        return true;
+      },
+      { message: "Please select a delivery area", path: ["deliveryAreaId"] }
+    );
+}
 
-type FormValues = z.infer<typeof schema>;
+type FormValues = z.infer<ReturnType<typeof createCheckoutSchema>>;
 
 interface CheckoutFormProps {
   deliveryAreas: DeliveryArea[];
@@ -56,7 +67,7 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(createCheckoutSchema(deliveryAreas)),
     defaultValues: {
       deliveryMethod: "pickup",
       paymentMethod: "cod",
@@ -65,6 +76,13 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
 
   const deliveryMethod = watch("deliveryMethod");
   const deliveryAreaId = watch("deliveryAreaId");
+
+  // When switching to delivery and there is exactly one area, auto-select it
+  useEffect(() => {
+    if (deliveryMethod === "delivery" && deliveryAreas.length === 1 && !deliveryAreaId) {
+      setValue("deliveryAreaId", deliveryAreas[0].id);
+    }
+  }, [deliveryMethod, deliveryAreas, deliveryAreaId, setValue]);
 
   // Redirect to cart when cart is empty (e.g. user landed here with empty cart). Skip if we just placed an order and are navigating to success.
   useEffect(() => {
@@ -180,7 +198,36 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
               </RadioGroup>
 
               {deliveryMethod === "delivery" && (
-                <div className="pt-1.5 sm:pt-2">
+                <div className="pt-1.5 sm:pt-2 space-y-3">
+                  {deliveryAreas.length > 0 && (
+                    <div className="space-y-1.5">
+                      <Label className="text-xs sm:text-sm">Delivery area</Label>
+                      <RadioGroup
+                        value={deliveryAreaId ?? ""}
+                        onValueChange={(v) => setValue("deliveryAreaId", v)}
+                        className="flex flex-col gap-2"
+                      >
+                        {deliveryAreas.map((area) => (
+                          <label
+                            key={area.id}
+                            htmlFor={`area-${area.id}`}
+                            className="flex items-center justify-between gap-3 rounded-md border p-2.5 sm:p-3 cursor-pointer transition-colors hover:bg-muted/50 has-[[data-state=checked]]:border-primary has-[[data-state=checked]]:bg-primary/5"
+                          >
+                            <div className="flex items-center gap-2 min-w-0">
+                              <RadioGroupItem value={area.id} id={`area-${area.id}`} />
+                              <span className="font-medium text-sm sm:text-base truncate">{area.name}</span>
+                            </div>
+                            <span className="text-sm font-medium text-muted-foreground shrink-0">
+                              {formatPrice(area.fee)}
+                            </span>
+                          </label>
+                        ))}
+                      </RadioGroup>
+                      {errors.deliveryAreaId && (
+                        <p className="text-sm text-destructive">{errors.deliveryAreaId.message}</p>
+                      )}
+                    </div>
+                  )}
                   <div className="space-y-1 sm:space-y-1.5">
                     <Label htmlFor="address" className="text-xs sm:text-sm">Address</Label>
                     <Input
