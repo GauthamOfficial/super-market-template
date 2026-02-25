@@ -38,7 +38,7 @@ export default function ContactPage() {
   const { contact } = siteConfig;
 
   return (
-    <div className="min-w-0 -mt-8 -mb-8">
+    <div className="min-w-0 -mt-8">
       <ContactHero />
 
       {/* Get In Touch + Contact details (left) | Form (right) — fit to screen width */}
@@ -96,9 +96,9 @@ export default function ContactPage() {
 
             {/* Right: Form card */}
             <div className="order-1 lg:order-2">
-              <div className="rounded-2xl border border-border bg-card shadow-md p-6 sm:p-8">
-                <h2 className="text-xl font-semibold text-foreground mb-1">Send Us a Message</h2>
-                <p className="text-muted-foreground text-sm mb-6">
+              <div className="rounded-2xl border border-border bg-card shadow-md p-4 sm:p-8">
+                <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-1">Send Us a Message</h2>
+                <p className="text-muted-foreground text-sm mb-4 sm:mb-6">
                   Fill out the form below and we&apos;ll get back to you as soon as we can.
                 </p>
                 <ContactForm />
@@ -122,7 +122,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="full-bleed pb-16 bg-muted/40">
+      <section className="full-bleed border-b-0 pb-16 bg-muted/40">
         <Container className="text-center">
           <Button asChild size="default">
             <Link href="/">Back to home</Link>

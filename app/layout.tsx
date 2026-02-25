@@ -65,7 +65,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <HeaderWithMobileNav />
-        <main id="main-content" className="flex-1 py-6 sm:py-8" role="main">
+        <main id="main-content" className="flex-1 pt-6 sm:pt-8 pb-10 sm:pb-14" role="main">
           <PageContentTransition>
             <Container>
               <AnimateOnScroll>{children}</AnimateOnScroll>

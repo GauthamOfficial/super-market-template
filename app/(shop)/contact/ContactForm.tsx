@@ -37,9 +37,9 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="space-y-2">
-        <Label htmlFor="contact-name">Full Name *</Label>
+    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-5">
+      <div className="space-y-1.5 sm:space-y-2">
+        <Label htmlFor="contact-name" className="text-sm sm:text-base">Full Name *</Label>
         <Input
           id="contact-name"
           name="name"
@@ -48,11 +48,11 @@ export function ContactForm() {
           placeholder="Your name"
           value={formData.name}
           onChange={handleChange}
-          className="h-11"
+          className="h-9 sm:h-11"
         />
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="contact-phone">Phone *</Label>
+      <div className="space-y-1.5 sm:space-y-2">
+        <Label htmlFor="contact-phone" className="text-sm sm:text-base">Phone *</Label>
         <Input
           id="contact-phone"
           name="phone"
@@ -61,11 +61,11 @@ export function ContactForm() {
           placeholder="Your phone number"
           value={formData.phone}
           onChange={handleChange}
-          className="h-11"
+          className="h-9 sm:h-11"
         />
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="contact-email">Email *</Label>
+      <div className="space-y-1.5 sm:space-y-2">
+        <Label htmlFor="contact-email" className="text-sm sm:text-base">Email *</Label>
         <Input
           id="contact-email"
           name="email"
@@ -74,25 +74,25 @@ export function ContactForm() {
           placeholder="your@email.com"
           value={formData.email}
           onChange={handleChange}
-          className="h-11"
+          className="h-9 sm:h-11"
         />
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="contact-message">Message *</Label>
+      <div className="space-y-1.5 sm:space-y-2">
+        <Label htmlFor="contact-message" className="text-sm sm:text-base">Message *</Label>
         <textarea
           id="contact-message"
           name="message"
           required
-          rows={5}
+          rows={3}
           placeholder="How can we help you?"
           value={formData.message}
           onChange={handleChange}
           className={cn(
-            "flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[120px] resize-y"
+            "flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[80px] sm:min-h-[120px] resize-y"
           )}
         />
       </div>
-      <Button type="submit" size="lg" disabled={submitting} className="w-full gap-2">
+      <Button type="submit" size="default" disabled={submitting} className="w-full gap-2">
         {submitting ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />

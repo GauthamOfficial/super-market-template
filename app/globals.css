@@ -66,6 +66,14 @@
   }
 }
 
+/* No border line between main and footer */
+main {
+  border-bottom-width: 0 !important;
+}
+footer {
+  border-top-width: 0 !important;
+}
+
 /* Prevent layout shift when Radix dropdowns/select open (react-remove-scroll) */
 body[data-scroll-locked] {
   --removed-body-scroll-bar-size: 0 !important;
