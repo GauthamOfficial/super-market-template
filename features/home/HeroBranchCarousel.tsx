@@ -36,7 +36,7 @@ export function HeroBranchCarousel({ branches }: { branches: HeroBranch[] }) {
 
   return (
     <div
-      className="relative mt-12 w-full max-w-full overflow-visible rounded-2xl opacity-0 animate-hero-fade-in-up aspect-[5/4] sm:mt-8 sm:aspect-auto sm:max-w-[calc(288px*3+16px*2)]"
+      className="relative mx-auto mt-12 w-[calc(100%-2rem)] max-w-full overflow-visible rounded-2xl opacity-0 animate-hero-fade-in-up aspect-[5/4] sm:mx-0 sm:mt-8 sm:w-full sm:aspect-auto sm:max-w-[calc(288px*3+16px*2)]"
       style={{ animationDelay: "0.35s" }}
     >
       {/* Glassmorphism: frosted panel extends a bit past content (larger width & height) */}
