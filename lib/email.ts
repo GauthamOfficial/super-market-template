@@ -38,7 +38,14 @@ export async function sendEmailToShop(options: {
     });
     return { ok: true };
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Failed to send email";
-    return { ok: false, error: message };
+    const raw = err instanceof Error ? err.message : String(err);
+    if (raw.includes("535") || raw.includes("Username and Password not accepted") || raw.includes("BadCredentials")) {
+      return {
+        ok: false,
+        error:
+          "Gmail login failed. Use an App Password, not your normal Gmail password. Turn on 2-Step Verification, then create one at https://myaccount.google.com/apppasswords and set GMAIL_APP_PASSWORD in .env",
+      };
+    }
+    return { ok: false, error: raw || "Failed to send email" };
   }
 }
