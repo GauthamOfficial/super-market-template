@@ -4,14 +4,15 @@ import { Button } from "@/components/ui/button";
 import { getOrderById } from "@/lib/dal";
 import { formatPrice } from "@/lib/utils";
 import { buildOrderSummaryMessage, getShopWhatsAppNumber } from "@/lib/orderWhatsApp";
+import { ClearCartOnSuccess } from "./ClearCartOnSuccess";
 import { OrderWhatsAppButtons } from "./OrderWhatsAppButtons";
 import type { Order } from "@/types/db";
 import type { OrderItem } from "@/types/db";
 import type { ProductVariant } from "@/types/db";
 
 export const metadata = {
-  title: "Order placed",
-  description: "Your order has been received",
+  title: "Order confirmed",
+  description: "Your order has been received and is being processed",
 };
 
 function OrderSummary({
@@ -23,30 +24,38 @@ function OrderSummary({
 }) {
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.unit_price, 0);
   return (
-    <div className="rounded-lg border bg-card p-4 text-left space-y-4 sm:p-6">
-      <div className="flex justify-between items-center">
-        <span className="text-muted-foreground">Order number</span>
-        <span className="font-mono font-medium">{order.order_number}</span>
+    <div className="rounded-xl border bg-card shadow-sm overflow-hidden">
+      <div className="bg-primary/5 px-4 py-3 border-b">
+        <h2 className="text-sm font-semibold text-foreground">Order details</h2>
+        <p className="text-xs text-muted-foreground mt-0.5">Keep this number for tracking</p>
       </div>
-      <div className="flex justify-between items-center">
-        <span className="text-muted-foreground">Status</span>
-        <span className="capitalize font-medium">{order.status}</span>
-      </div>
-      <div className="border-t pt-4 space-y-2">
-        <p className="text-sm font-medium text-muted-foreground">Summary</p>
-        <ul className="space-y-1 text-sm">
-          {items.map((item, idx) => (
-            <li key={idx} className="flex justify-between">
-              <span>
-                {item.variant?.name ?? "Item"} × {item.quantity}
-              </span>
-              <span>{formatPrice(item.quantity * item.unit_price)}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex justify-between font-medium pt-2 border-t">
-          <span>Subtotal</span>
-          <span>{formatPrice(subtotal)}</span>
+      <div className="p-4 sm:p-6 space-y-4 text-left">
+        <div className="flex justify-between items-center gap-4">
+          <span className="text-muted-foreground text-sm">Order number</span>
+          <span className="font-mono font-semibold text-foreground">{order.order_number}</span>
+        </div>
+        <div className="flex justify-between items-center gap-4">
+          <span className="text-muted-foreground text-sm">Status</span>
+          <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-sm font-medium capitalize text-primary">
+            {order.status}
+          </span>
+        </div>
+        <div className="border-t pt-4 space-y-3">
+          <p className="text-sm font-medium text-muted-foreground">Items</p>
+          <ul className="space-y-2 text-sm">
+            {items.map((item, idx) => (
+              <li key={idx} className="flex justify-between gap-4">
+                <span className="text-foreground">
+                  {item.variant?.name ?? "Item"} × {item.quantity}
+                </span>
+                <span className="font-medium tabular-nums">{formatPrice(item.quantity * item.unit_price)}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="flex justify-between font-semibold pt-3 border-t text-base">
+            <span>Subtotal</span>
+            <span className="tabular-nums">{formatPrice(subtotal)}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -93,21 +102,44 @@ async function SuccessContent({
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6 px-2 sm:px-0">
-      <div className="text-center space-y-2">
-        <h1 className="text-xl font-bold sm:text-2xl">Order placed</h1>
-        <p className="text-muted-foreground">
-          Thank you. Your order has been received.
+      <div className="text-center space-y-3">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl text-foreground">
+          Order confirmed
+        </h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Thank you for your order.
         </p>
       </div>
       <OrderSummary
         order={order}
         items={items}
       />
-      <OrderWhatsAppButtons message={message} whatsappNumber={whatsappNumber} />
-      <div className="flex justify-center">
-        <Button asChild>
+      <div className="space-y-2">
+        <p className="text-center text-sm text-muted-foreground">
+          Share this order with the shop
+        </p>
+        <OrderWhatsAppButtons message={message} whatsappNumber={whatsappNumber} />
+      </div>
+      <div className="flex justify-center pt-2">
+        <Button asChild size="lg" className="min-w-[200px]">
           <Link href="/home">Back to home</Link>
         </Button>
+      </div>
+    </div>
+  );
+}
+
+function OrderSuccessLoading() {
+  return (
+    <div className="w-full max-w-md mx-auto space-y-6 px-2 sm:px-0">
+      <div className="space-y-4">
+        <p className="text-center text-sm text-muted-foreground">Loading your order…</p>
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-green-100 dark:bg-green-950/50">
+          <div
+            className="h-full w-1/3 min-w-[120px] rounded-full bg-green-500 dark:bg-green-500 animate-order-loading-bar"
+            aria-hidden
+          />
+        </div>
       </div>
     </div>
   );
@@ -120,7 +152,10 @@ export default async function OrderSuccessPage({
 }) {
   return (
     <div className="space-y-6">
-      <Suspense fallback={<div className="h-32 animate-pulse rounded-lg bg-muted" />}>
+      <Suspense fallback={null}>
+        <ClearCartOnSuccess />
+      </Suspense>
+      <Suspense fallback={<OrderSuccessLoading />}>
         <SuccessContent searchParams={searchParams} />
       </Suspense>
     </div>

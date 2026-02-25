@@ -46,7 +46,6 @@ interface CheckoutFormProps {
 export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
   const router = useRouter();
   const items = useCartStore((s) => s.items);
-  const clearCart = useCartStore((s) => s.clearCart);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const didNavigateToSuccess = useRef(false);
 
@@ -97,8 +96,8 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
     const result = await placeOrder(items, formData);
     if (result.ok) {
       didNavigateToSuccess.current = true;
-      clearCart();
       router.replace(`/order/success?orderId=${result.orderId}`);
+      // Cart is cleared on the order success page so this form stays visible until redirect
     } else {
       setSubmitError(result.error);
     }

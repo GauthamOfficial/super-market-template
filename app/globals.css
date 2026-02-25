@@ -203,6 +203,19 @@ body[data-scroll-locked] {
   animation: float-subtle 4s ease-in-out infinite;
 }
 
+/* Order success: indeterminate green loading bar */
+@keyframes order-loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+.animate-order-loading-bar {
+  animation: order-loading-bar 1.4s ease-in-out infinite;
+}
+
 /* Hero reference style: overlay, search bar glass, store cards */
 .hero-overlay {
   @apply absolute inset-0 bg-black/35;
