@@ -90,6 +90,9 @@ export function Footer() {
               <Link href="/find-store" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Find a store
               </Link>
+              <Link href="/order/track" className="text-sm text-neutral-300 transition-colors hover:text-primary">
+                Track order
+              </Link>
               <Link href="/products" className="text-sm text-neutral-300 transition-colors hover:text-primary">
                 Products
               </Link>

@@ -346,7 +346,8 @@ export async function getOrders(
   filters: OrderFilters = {}
 ): Promise<Result<{ orders: Order[]; total?: number }>> {
   try {
-    const supabase = await createClient();
+    // Use admin client so admin can see all orders; RLS only allows users to see own orders (user_id = auth.uid())
+    const supabase = createAdminClient();
     let query = supabase.from("orders").select("*", { count: "exact" });
 
     if (filters.branchId) query = query.eq("branch_id", filters.branchId);
@@ -453,7 +454,8 @@ export async function updateOrderStatus(
   status: OrderStatus
 ): Promise<Result<Order>> {
   try {
-    const supabase = await createClient();
+    // Use admin client so admin can update any order; RLS has no update policy on orders
+    const supabase = createAdminClient();
     const { data, error } = await supabase
       .from("orders")
       .update({ status })

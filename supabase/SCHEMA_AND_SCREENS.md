@@ -87,7 +87,9 @@
 - **Admin: Order list**  
   Filter by branch, status, date; show order_number, customer, status, totals.
 - **Admin: Order detail**  
-  Single order: header (status, customer, branch) and line items; change **orders.status** (pending → packed → dispatched → completed / cancelled).
+  Single order: header (status, customer, branch, payment method) and line items; change **orders.status** (pending → packed → dispatched → completed / cancelled).
+- **Order retention**  
+  Completed orders stay in the database. Good practice: keep all orders for accounting, analytics, and support; do not delete. Use status (e.g. `completed`, `cancelled`) to filter. Soft-delete or archival is optional for very old data.
 
 ---
 

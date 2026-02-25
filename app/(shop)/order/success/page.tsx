@@ -120,7 +120,10 @@ async function SuccessContent({
         </p>
         <OrderWhatsAppButtons message={message} whatsappNumber={whatsappNumber} />
       </div>
-      <div className="flex justify-center pt-2">
+      <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+        <Button asChild variant="outline" size="lg" className="min-w-[200px]">
+          <Link href="/order/track">Track your order</Link>
+        </Button>
         <Button asChild size="lg" className="min-w-[200px]">
           <Link href="/home">Back to home</Link>
         </Button>

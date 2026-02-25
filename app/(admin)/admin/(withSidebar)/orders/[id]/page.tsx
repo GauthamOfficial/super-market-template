@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import { OrderStatusSelect } from "./order-status-select";
 import { CopyWhatsAppButton } from "./copy-whatsapp-button";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatPaymentMethod } from "@/lib/utils";
 
 export default async function AdminOrderDetailPage({
   params,
@@ -77,6 +77,10 @@ export default async function AdminOrderDetailPage({
             <div>
               <dt className="text-muted-foreground">Phone</dt>
               <dd>{order.customer_phone ?? "—"}</dd>
+            </div>
+            <div>
+              <dt className="text-muted-foreground">Payment</dt>
+              <dd>{formatPaymentMethod(order.payment_method)}</dd>
             </div>
           </dl>
         </section>

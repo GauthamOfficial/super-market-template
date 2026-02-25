@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import type { Order } from "@/types/db";
+import type { Order, OrderStatus } from "@/types/db";
 import type { OrderItem } from "@/types/db";
 import type { ProductVariant } from "@/types/db";
 
@@ -58,6 +58,74 @@ export function buildOrderSummaryMessage(
   ].filter(Boolean) as string[];
 
   return lines.join("\n");
+}
+
+function paymentLabel(order: Order): string {
+  return order.payment_method === "bank_transfer"
+    ? "Bank transfer"
+    : order.payment_method === "cod"
+      ? "Cash on delivery (COD)"
+      : order.payment_method ?? "—";
+}
+
+function deliveryLine(order: Order): string {
+  if (
+    !order.delivery_address ||
+    order.delivery_address.trim().toLowerCase() === "pickup"
+  ) {
+    return "Pickup at store";
+  }
+  return order.delivery_address.trim().replace(/\n/g, ", ");
+}
+
+function statusOpening(status: OrderStatus): string {
+  switch (status) {
+    case "pending":
+      return "We've received your order. Here are the details:";
+    case "packed":
+      return "Your order is being prepared. Details:";
+    case "dispatched":
+      return "Your order is on its way!";
+    case "completed":
+      return "Your order has been completed. Thank you for your order!";
+    case "cancelled":
+      return "Your order was cancelled.";
+    default:
+      return "Order details:";
+  }
+}
+
+/**
+ * Build a customer-facing WhatsApp message for "Send to customer" from admin.
+ * Includes status-based opening, order details (no Customer/Phone), payment and delivery.
+ */
+export function buildCustomerOrderMessage(
+  order: Order,
+  items: OrderItemWithVariant[],
+  total: number
+): string {
+  const opening = statusOpening(order.status);
+  const payLabel = paymentLabel(order);
+  const delivery = deliveryLine(order);
+
+  const bodyLines: string[] = [
+    "",
+    `Order: ${order.order_number}`,
+    "",
+    "Items:",
+    ...items.map((i) => {
+      const name = i.variant?.name ?? "Item";
+      return `• ${name} x${i.quantity} @ ${formatPrice(i.unit_price)}`;
+    }),
+    "",
+    `Total: ${formatPrice(total)}`,
+    `Payment: ${payLabel}`,
+    `Delivery: ${delivery}`,
+  ];
+
+  const closing = ["", `— ${siteConfig.name}`];
+
+  return [opening, ...bodyLines, ...closing].join("\n");
 }
 
 /**

@@ -32,3 +32,12 @@ export function normalizePhoneForComparison(phone: string | null | undefined): s
   }
   return digits;
 }
+
+/** Format payment_method for display (e.g. in admin). */
+export function formatPaymentMethod(
+  method: string | null | undefined
+): string {
+  if (method === "bank_transfer") return "Bank transfer";
+  if (method === "cod") return "Cash on delivery (COD)";
+  return method?.trim() ? String(method) : "—";
+}

@@ -2,6 +2,7 @@
 
 import { unstable_cache } from "next/cache";
 import { createClient, createClientForCache } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { ok, err, type Result } from "./result";
 import type {
   Branch,
@@ -696,6 +697,7 @@ async function getVariantIdsForProducts(
 
 /**
  * Fetch order by order_number (e.g. ORD-xxx). Use for tracking with phone verification.
+ * Uses admin client so guest orders (user_id null) can be found; caller must verify phone.
  */
 export async function getOrderByOrderNumber(
   orderNumber: string
@@ -706,7 +708,7 @@ export async function getOrderByOrderNumber(
   }>
 > {
   try {
-    const supabase = await createClient();
+    const supabase = createAdminClient();
     const { data: order, error: orderError } = await supabase
       .from("orders")
       .select("*")
