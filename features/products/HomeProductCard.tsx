@@ -17,15 +17,15 @@ export function HomeProductCard({ item, branchId, compact }: HomeProductCardProp
   const { product, minPrice, inStock, primaryVariant } = item;
 
   return (
-    <Card className="overflow-hidden transition-shadow hover:shadow-md">
-      <Link href={`/product/${product.slug}`}>
+    <Card className="min-w-0 overflow-hidden transition-shadow hover:shadow-md">
+      <Link href={`/product/${product.slug}`} className="block">
         <div className="relative aspect-square bg-muted">
           {product.image_url ? (
             <Image
               src={product.image_url}
               alt={product.name}
               fill
-              className="object-cover"
+              className="object-cover object-[55%_50%] sm:object-center"
               sizes={compact ? "(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw" : "(max-width: 768px) 50vw, 25vw"}
             />
           ) : (
@@ -40,26 +40,28 @@ export function HomeProductCard({ item, branchId, compact }: HomeProductCardProp
           )}
         </div>
       </Link>
-      <CardContent className={compact ? "p-2" : "p-4"}>
-        <h3 className={`font-semibold line-clamp-2 ${compact ? "text-sm" : ""}`}>
+      <CardContent className={compact ? "p-2" : "p-3 sm:p-4"}>
+        <h3 className={`font-semibold line-clamp-2 break-words ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>
           <Link href={`/product/${product.slug}`} className="hover:underline">
             {product.name}
           </Link>
         </h3>
       </CardContent>
-      <CardFooter className={`flex flex-col items-stretch gap-1.5 pt-0 ${compact ? "p-2" : "p-4"}`}>
-        <span className={compact ? "text-sm font-semibold" : "text-lg font-semibold"}>{formatPrice(minPrice)}</span>
+      <CardFooter className={`flex flex-col items-stretch gap-1.5 pt-0 text-left ${compact ? "p-2" : "p-3 sm:p-4"}`}>
+        <span className={`font-semibold text-left ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>{formatPrice(minPrice)}</span>
         {primaryVariant && inStock ? (
-          <AddToCartButton
-            branchId={branchId}
-            variantId={primaryVariant.id}
-            productName={product.name}
-            variantLabel={primaryVariant.name}
-            unitPrice={primaryVariant.price}
-            imageUrl={product.image_url}
-          />
+          <div className="w-full min-w-0 [&>button]:w-full [&>button]:sm:w-auto [&>button]:text-xs [&>button]:sm:text-sm">
+            <AddToCartButton
+              branchId={branchId}
+              variantId={primaryVariant.id}
+              productName={product.name}
+              variantLabel={primaryVariant.name}
+              unitPrice={primaryVariant.price}
+              imageUrl={product.image_url}
+            />
+          </div>
         ) : (
-          <Button variant="outline" disabled size="sm" className={compact ? "h-7 text-xs" : ""}>
+          <Button variant="outline" disabled size="sm" className={`w-full min-w-0 ${compact ? "h-7 text-xs sm:w-auto" : "sm:w-auto"}`}>
             Out of stock
           </Button>
         )}

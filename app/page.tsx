@@ -122,38 +122,35 @@ export default async function HomePage() {
       <EnjoyFreshestSection />
       </AnimateOnScroll>
 
-      {/* Crafted with love — in-house collections */}
+      {/* Crafted with love — mobile: 2 cols × 3 rows; desktop: single row */}
       <AnimateOnScroll delay={80}>
       <section className="full-bleed bg-white py-16">
-        <Container className="w-full max-w-6xl mx-auto">
+        <Container className="w-full max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
             Crafted with <span className="font-accent italic text-[1.1em]">love</span>
           </h2>
           <p className="text-center text-muted-foreground max-w-xl mx-auto mb-8">
             Discover our in-house collections and daily essentials.
           </p>
-          <div className="w-full min-w-0 overflow-x-auto pb-4">
-            <div className="flex gap-4">
-              {[
-                { label: "Premium Staples", src: "/fn/fn-1.png" },
-                { label: "Value Staples", src: "/fn/fn-2.png" },
-                { label: "Cleaning", src: "/fn/fn-3.png" },
-                { label: "Fun Foods", src: "/fn/fn-4.png" },
-                { label: "Ready to Eat", src: "/fn/fn-5.png" },
-                { label: "Daily Needs", src: "/fn/fn-6.png" },
-              ].map(({ label, src }) => (
-                <div key={label} className="shrink-0 w-40 h-44 rounded-xl overflow-hidden border border-border bg-muted">
-                  <Image
-                    src={src}
-                    alt={label}
-                    width={160}
-                    height={176}
-                    className="object-cover w-full h-full"
-                    sizes="160px"
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 sm:gap-4 max-w-2xl sm:max-w-none mx-auto">
+            {[
+              { label: "Premium Staples", src: "/fn/fn-1.png" },
+              { label: "Value Staples", src: "/fn/fn-2.png" },
+              { label: "Cleaning", src: "/fn/fn-3.png" },
+              { label: "Fun Foods", src: "/fn/fn-4.png" },
+              { label: "Ready to Eat", src: "/fn/fn-5.png" },
+              { label: "Daily Needs", src: "/fn/fn-6.png" },
+            ].map(({ label, src }) => (
+              <div key={label} className="relative aspect-[5/6] rounded-xl overflow-hidden border border-border bg-muted">
+                <Image
+                  src={src}
+                  alt={label}
+                  fill
+                  className="object-cover w-full h-full"
+                  sizes="(max-width: 640px) 50vw, 280px"
+                />
+              </div>
+            ))}
           </div>
         </Container>
       </section>
@@ -168,13 +165,20 @@ export default async function HomePage() {
               src="/customer.jpg"
               alt="Happy customers"
               fill
-              className="object-cover object-[50%_28%]"
+              className="object-cover object-[38%_28%] sm:object-[50%_28%]"
               sizes="100vw"
               priority={false}
             />
-            {/* Black gradient from bottom-left at 45° */}
+            {/* Black gradient from bottom-left at 45° — stronger on mobile */}
             <div
-              className="absolute inset-0 pointer-events-none rounded-xl"
+              className="absolute inset-0 pointer-events-none rounded-xl sm:hidden"
+              style={{
+                background: "linear-gradient(45deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.58) 45%, transparent 75%)",
+              }}
+              aria-hidden
+            />
+            <div
+              className="absolute inset-0 pointer-events-none rounded-xl hidden sm:block"
               style={{
                 background: "linear-gradient(45deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.4) 45%, transparent 75%)",
               }}
@@ -202,9 +206,11 @@ export default async function HomePage() {
         <Container>
           <h2 className="text-2xl font-bold text-black mb-6">Featured <span className="font-accent italic text-[1.1em]">products</span></h2>
           {featured.length > 0 ? (
-            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            <div className="grid min-w-0 gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {featured.map((product) => (
-                <ProductCard key={product.id} product={product} compact />
+                <div key={product.id} className="min-w-0">
+                  <ProductCard product={product} compact />
+                </div>
               ))}
             </div>
           ) : (

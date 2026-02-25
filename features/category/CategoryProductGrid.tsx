@@ -49,10 +49,10 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
             : "No in-stock products. Turn off “In stock only” to see all."}
         </div>
       ) : (
-        <ul className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <ul className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 min-w-0">
           {filtered.map((item) => (
-            <li key={item.product.id}>
-              <Card className="overflow-hidden transition-shadow hover:shadow-md">
+            <li key={item.product.id} className="min-w-0">
+              <Card className="min-w-0 overflow-hidden transition-shadow hover:shadow-md">
                 <Link href={`/product/${item.product.slug}`}>
                   <div className="relative aspect-square bg-muted">
                     {item.product.image_url ? (
@@ -60,7 +60,7 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                         src={item.product.image_url}
                         alt={item.product.name}
                         fill
-                        className="object-cover"
+                        className="object-cover object-[55%_50%] sm:object-center"
                         sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
                       />
                     ) : (
@@ -76,7 +76,7 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                   </div>
                 </Link>
                 <CardContent className="p-2">
-                  <h2 className="font-semibold line-clamp-2 text-sm">
+                  <h2 className="font-semibold line-clamp-2 break-words text-xs sm:text-sm">
                     <Link
                       href={`/product/${item.product.slug}`}
                       className="hover:underline"
@@ -84,12 +84,13 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                       {item.product.name}
                     </Link>
                   </h2>
-                  <p className="mt-0.5 text-sm font-semibold">
+                  <p className="mt-0.5 text-left text-sm font-semibold">
                     {formatPrice(item.minPrice)}
                   </p>
                 </CardContent>
-                <CardFooter className="flex flex-col items-stretch gap-1.5 p-2 pt-0">
+                <CardFooter className="flex flex-col items-stretch gap-1.5 p-2 pt-0 text-left">
                   {item.primaryVariant && item.inStock ? (
+                    <div className="w-full min-w-0 [&>button]:w-full [&>button]:sm:w-auto [&>button]:text-xs [&>button]:sm:text-sm">
                     <AddToCartButton
                       branchId={branchId}
                       variantId={item.primaryVariant.id}
@@ -98,8 +99,9 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                       unitPrice={item.primaryVariant.price}
                       imageUrl={item.product.image_url}
                     />
+                    </div>
                   ) : (
-                    <Button variant="outline" disabled size="sm" className="h-7 text-xs">
+                    <Button variant="outline" disabled size="sm" className="h-7 w-full min-w-0 text-xs sm:w-auto">
                       Out of stock
                     </Button>
                   )}
