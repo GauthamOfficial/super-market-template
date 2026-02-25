@@ -109,6 +109,7 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
       deliveryMethod: data.deliveryMethod,
       address: data.address,
       deliveryAreaId: data.deliveryAreaId,
+      deliveryFee: deliveryFee,
       paymentMethod: data.paymentMethod,
     };
     const result = await placeOrder(items, formData);

@@ -29,6 +29,7 @@ export function buildOrderSummaryMessage(
       ? order.delivery_address.trim().replace(/\n/g, ", ")
       : "Pickup at store";
 
+  const deliveryFee = order.delivery_fee ?? 0;
   const lines: string[] = [
     "*NEW ORDER*",
     "────────────────",
@@ -50,7 +51,8 @@ export function buildOrderSummaryMessage(
     "",
     "*Summary*",
     `   Subtotal:   ${formatPrice(subtotal)}`,
-    total !== subtotal ? `   Total:      ${formatPrice(total)}` : null,
+    deliveryFee > 0 ? `   Delivery:   ${formatPrice(deliveryFee)}` : null,
+    `   Total:      ${formatPrice(total)}`,
     `   Payment:    ${paymentLabel}`,
     "",
     "────────────────",
@@ -107,6 +109,8 @@ export function buildCustomerOrderMessage(
   const opening = statusOpening(order.status);
   const payLabel = paymentLabel(order);
   const delivery = deliveryLine(order);
+  const deliveryFee = order.delivery_fee ?? 0;
+  const subtotal = items.reduce((s, i) => s + i.quantity * i.unit_price, 0);
 
   const bodyLines: string[] = [
     "",
@@ -118,6 +122,8 @@ export function buildCustomerOrderMessage(
       return `• ${name} x${i.quantity} @ ${formatPrice(i.unit_price)}`;
     }),
     "",
+    `Subtotal: ${formatPrice(subtotal)}`,
+    ...(deliveryFee > 0 ? [`Delivery fee: ${formatPrice(deliveryFee)}`] : []),
     `Total: ${formatPrice(total)}`,
     `Payment: ${payLabel}`,
     `Delivery: ${delivery}`,

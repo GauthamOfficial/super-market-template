@@ -10,6 +10,8 @@ export interface CheckoutFormData {
   deliveryMethod: "delivery" | "pickup";
   address?: string;
   deliveryAreaId?: string;
+  /** Delivery charge in store currency (when delivery); 0 for pickup. */
+  deliveryFee?: number;
   paymentMethod: "cod" | "bank_transfer";
 }
 
@@ -37,6 +39,10 @@ export async function placeOrder(
 
   const supabase = createAdminClient();
 
+  const deliveryFee = form.deliveryMethod === "delivery" && typeof form.deliveryFee === "number" && form.deliveryFee >= 0
+    ? form.deliveryFee
+    : 0;
+
   const insertPayload: Record<string, unknown> = {
     branch_id: branchId,
     order_number: orderNumber,
@@ -45,6 +51,7 @@ export async function placeOrder(
     customer_email: form.email.trim(),
     customer_phone: form.phone.trim() || null,
     delivery_address: deliveryAddress,
+    delivery_fee: deliveryFee,
     payment_method: form.paymentMethod,
     user_id: null,
   };

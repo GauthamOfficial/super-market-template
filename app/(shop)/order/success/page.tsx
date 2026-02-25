@@ -18,11 +18,14 @@ export const metadata = {
 function OrderSummary({
   order,
   items,
+  deliveryFee = 0,
 }: {
   order: { order_number: string; status: string; customer_name?: string | null; customer_phone?: string | null };
   items: { quantity: number; unit_price: number; variant?: { name?: string } }[];
+  deliveryFee?: number;
 }) {
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.unit_price, 0);
+  const total = subtotal + deliveryFee;
   return (
     <div className="rounded-xl border bg-card shadow-sm overflow-hidden">
       <div className="bg-primary/5 px-4 py-3 border-b">
@@ -52,9 +55,21 @@ function OrderSummary({
               </li>
             ))}
           </ul>
-          <div className="flex justify-between font-semibold pt-3 border-t text-base">
-            <span>Subtotal</span>
-            <span className="tabular-nums">{formatPrice(subtotal)}</span>
+          <div className="space-y-1.5 pt-3 border-t text-base">
+            <div className="flex justify-between font-medium">
+              <span>Subtotal</span>
+              <span className="tabular-nums">{formatPrice(subtotal)}</span>
+            </div>
+            {deliveryFee > 0 && (
+              <div className="flex justify-between font-medium">
+                <span>Delivery</span>
+                <span className="tabular-nums">{formatPrice(deliveryFee)}</span>
+              </div>
+            )}
+            <div className="flex justify-between font-semibold pt-1">
+              <span>Total</span>
+              <span className="tabular-nums">{formatPrice(total)}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -96,7 +111,9 @@ async function SuccessContent({
   }
 
   const { order, items, branch } = result.data;
-  const total = items.reduce((s, i) => s + i.quantity * i.unit_price, 0);
+  const subtotal = items.reduce((s, i) => s + i.quantity * i.unit_price, 0);
+  const deliveryFee = order.delivery_fee ?? 0;
+  const total = subtotal + deliveryFee;
   const message = buildOrderSummaryMessage(order as Order, items as (OrderItem & { variant?: ProductVariant })[], total);
   const whatsappNumber = getShopWhatsAppNumber(branch);
 
@@ -113,6 +130,7 @@ async function SuccessContent({
       <OrderSummary
         order={order}
         items={items}
+        deliveryFee={deliveryFee}
       />
       <div className="space-y-2">
         <p className="text-center text-sm text-muted-foreground">

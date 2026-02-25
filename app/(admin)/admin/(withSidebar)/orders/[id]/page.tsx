@@ -43,6 +43,8 @@ export default async function AdminOrderDetailPage({
   const branches = isOk(branchesResult) ? branchesResult.data : [];
   const branch = branches.find((b) => b.id === order.branch_id);
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.unit_price, 0);
+  const deliveryFee = order.delivery_fee ?? 0;
+  const total = subtotal + deliveryFee;
 
   return (
     <div className="space-y-8">
@@ -58,7 +60,7 @@ export default async function AdminOrderDetailPage({
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <OrderStatusSelect orderId={order.id} currentStatus={order.status} />
-          <CopyWhatsAppButton order={order} items={items} total={subtotal} />
+          <CopyWhatsAppButton order={order} items={items} total={total} />
         </div>
       </div>
 
@@ -94,6 +96,12 @@ export default async function AdminOrderDetailPage({
                 {order.delivery_address ?? "—"}
               </dd>
             </div>
+            {deliveryFee > 0 && (
+              <div>
+                <dt className="text-muted-foreground">Delivery fee</dt>
+                <dd>{formatPrice(deliveryFee)}</dd>
+              </div>
+            )}
             <div>
               <dt className="text-muted-foreground">Branch</dt>
               <dd>{branch?.name ?? order.branch_id}</dd>
@@ -132,9 +140,19 @@ export default async function AdminOrderDetailPage({
             </TableBody>
           </Table>
         </div>
-        <div className="flex justify-end border-t pt-4">
-          <p className="text-lg font-semibold">
-            Total: {formatPrice(subtotal)}
+        <div className="flex flex-col items-end gap-1 border-t pt-4 text-sm">
+          <div className="flex justify-between w-full max-w-xs">
+            <span className="text-muted-foreground">Subtotal</span>
+            <span>{formatPrice(subtotal)}</span>
+          </div>
+          {deliveryFee > 0 && (
+            <div className="flex justify-between w-full max-w-xs">
+              <span className="text-muted-foreground">Delivery</span>
+              <span>{formatPrice(deliveryFee)}</span>
+            </div>
+          )}
+          <p className="text-lg font-semibold pt-1">
+            Total: {formatPrice(total)}
           </p>
         </div>
       </section>

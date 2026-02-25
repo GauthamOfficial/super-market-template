@@ -90,6 +90,8 @@ export interface Order {
   customer_email: string;
   customer_phone: string | null;
   delivery_address: string | null;
+  /** Delivery charge when order is delivery; 0 for pickup. */
+  delivery_fee?: number | null;
   /** e.g. cod, bank_transfer */
   payment_method?: string | null;
   user_id: UUID | null;
