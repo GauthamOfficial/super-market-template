@@ -29,7 +29,7 @@ export default async function HomePage() {
   return (
     <div className="min-w-0">
       {/* Hero — reference style: full-bleed image background, white text, search bar, store carousel */}
-      <section className="full-bleed -mt-8 relative min-h-[80vh] sm:min-h-[90vh] flex flex-col overflow-hidden bg-black">
+      <section className="full-bleed -mt-8 relative min-h-[94vh] sm:min-h-[90vh] flex flex-col overflow-hidden bg-black">
         {/* Black base */}
         <div className="absolute inset-0 bg-black" aria-hidden />
         <div className="hero-overlay" aria-hidden />
@@ -62,8 +62,8 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        {/* Main hero content: headline close to buttons on mobile */}
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-3 pt-14 pb-6 text-center sm:px-4 sm:pt-24 sm:pb-10">
+        {/* Main hero content: headline, tagline, search, branch carousel */}
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-3 pt-14 pb-6 text-center sm:px-4 sm:pt-28 sm:pb-10">
           <h1 className="font-impact text-3xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
