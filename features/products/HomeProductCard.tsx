@@ -47,10 +47,10 @@ export function HomeProductCard({ item, branchId, compact }: HomeProductCardProp
           </Link>
         </h3>
       </CardContent>
-      <CardFooter className={`flex flex-col items-stretch gap-1.5 pt-0 text-left ${compact ? "p-2" : "p-3 sm:p-4"}`}>
-        <span className={`font-semibold text-left ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>{formatPrice(minPrice)}</span>
+      <CardFooter className={`flex flex-col items-stretch gap-1.5 pt-0 text-left sm:flex-row sm:items-center sm:justify-between ${compact ? "p-2" : "p-3 sm:p-4"}`}>
+        <span className={`font-semibold shrink-0 ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>{formatPrice(minPrice)}</span>
         {primaryVariant && inStock ? (
-          <div className="w-full min-w-0 [&>button]:w-full [&>button]:sm:w-auto [&>button]:text-xs [&>button]:sm:text-sm">
+          <div className="w-full min-w-0 shrink-0 sm:w-auto [&>button]:w-full [&>button]:text-xs [&>button]:sm:h-7 [&>button]:sm:w-auto [&>button]:sm:px-2 [&>button]:sm:text-xs">
             <AddToCartButton
               branchId={branchId}
               variantId={primaryVariant.id}
@@ -61,7 +61,7 @@ export function HomeProductCard({ item, branchId, compact }: HomeProductCardProp
             />
           </div>
         ) : (
-          <Button variant="outline" disabled size="sm" className={`w-full min-w-0 ${compact ? "h-7 text-xs sm:w-auto" : "sm:w-auto"}`}>
+          <Button variant="outline" disabled size="sm" className={`w-full min-w-0 shrink-0 ${compact ? "h-7 text-xs sm:w-auto" : "sm:w-auto"}`}>
             Out of stock
           </Button>
         )}

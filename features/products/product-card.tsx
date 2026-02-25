@@ -39,11 +39,11 @@ export function ProductCard({ product, compact }: ProductCardProps) {
           </p>
         )}
       </CardContent>
-      <CardFooter className={compact ? "flex flex-col gap-1.5 items-start text-left sm:flex-row sm:items-center sm:justify-between p-2 pt-0" : "flex flex-col gap-2 items-start text-left sm:flex-row sm:items-center sm:justify-between p-3 pt-0 sm:p-4 sm:pt-0"}>
-        <span className={`font-semibold ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>
+      <CardFooter className={compact ? "flex flex-col gap-1.5 items-start text-left sm:flex-row sm:items-center sm:justify-between sm:gap-2 p-2 pt-0" : "flex flex-col gap-2 items-start text-left sm:flex-row sm:items-center sm:justify-between sm:gap-2 p-3 pt-0 sm:p-4 sm:pt-0"}>
+        <span className={`font-semibold shrink-0 ${compact ? "text-xs sm:text-sm" : "text-base sm:text-lg"}`}>
           {formatPrice(product.base_price)}
         </span>
-        <Button asChild size="sm" className={compact ? "h-7 w-full min-w-0 text-xs px-2 sm:w-auto" : "w-full sm:w-auto"}>
+        <Button asChild variant="default" size="sm" className={compact ? "h-7 w-full min-w-0 shrink-0 rounded-md text-xs px-2 sm:h-6 sm:w-auto sm:min-w-0 sm:px-2 sm:text-xs" : "w-full shrink-0 rounded-md sm:h-7 sm:w-auto sm:min-w-0 sm:px-2 sm:text-xs"}>
           <Link href={`/product/${product.slug}`} className="truncate">Add to cart</Link>
         </Button>
       </CardFooter>

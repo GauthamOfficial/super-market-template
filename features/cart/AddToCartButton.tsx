@@ -27,7 +27,10 @@ export function AddToCartButton({
   return (
     <Button
       type="button"
+      variant="default"
+      size="sm"
       disabled={disabled}
+      className="rounded-md"
       onClick={() =>
         addItem({
           branchId,

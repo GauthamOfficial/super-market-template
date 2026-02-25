@@ -84,13 +84,11 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                       {item.product.name}
                     </Link>
                   </h2>
-                  <p className="mt-0.5 text-left text-sm font-semibold">
-                    {formatPrice(item.minPrice)}
-                  </p>
                 </CardContent>
-                <CardFooter className="flex flex-col items-stretch gap-1.5 p-2 pt-0 text-left">
+                <CardFooter className="flex flex-col items-stretch gap-1.5 p-2 pt-0 text-left sm:flex-row sm:items-center sm:justify-between">
+                  <span className="text-sm font-semibold shrink-0">{formatPrice(item.minPrice)}</span>
                   {item.primaryVariant && item.inStock ? (
-                    <div className="w-full min-w-0 [&>button]:w-full [&>button]:sm:w-auto [&>button]:text-xs [&>button]:sm:text-sm">
+                    <div className="w-full min-w-0 shrink-0 sm:w-auto [&>button]:w-full [&>button]:text-xs [&>button]:sm:h-7 [&>button]:sm:w-auto [&>button]:sm:px-2 [&>button]:sm:text-xs">
                     <AddToCartButton
                       branchId={branchId}
                       variantId={item.primaryVariant.id}
@@ -101,7 +99,7 @@ export function CategoryProductGrid({ branchId, items }: CategoryProductGridProp
                     />
                     </div>
                   ) : (
-                    <Button variant="outline" disabled size="sm" className="h-7 w-full min-w-0 text-xs sm:w-auto">
+                    <Button variant="outline" disabled size="sm" className="h-7 w-full min-w-0 shrink-0 text-xs sm:w-auto">
                       Out of stock
                     </Button>
                   )}
