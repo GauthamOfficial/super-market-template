@@ -32,12 +32,12 @@ export default async function FindStorePage() {
 
   // Always show the branch picker on Find a store (no redirect when branch already selected)
   return (
-    <div className="space-y-8">
-      <section className="text-center space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">
+    <div className="space-y-6 sm:space-y-8">
+      <section className="text-center space-y-2 px-2">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Find a store
         </h1>
-        <p className="text-muted-foreground max-w-xl mx-auto">
+        <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base">
           Choose a branch for delivery or pickup. Your selection is saved for
           your next visit.
         </p>

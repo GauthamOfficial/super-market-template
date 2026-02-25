@@ -23,7 +23,7 @@ function OrderSummary({
 }) {
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.unit_price, 0);
   return (
-    <div className="rounded-lg border bg-card p-6 text-left space-y-4">
+    <div className="rounded-lg border bg-card p-4 text-left space-y-4 sm:p-6">
       <div className="flex justify-between items-center">
         <span className="text-muted-foreground">Order number</span>
         <span className="font-mono font-medium">{order.order_number}</span>
@@ -63,8 +63,8 @@ async function SuccessContent({
 
   if (!orderId) {
     return (
-      <div className="rounded-lg border p-8 text-center space-y-4 max-w-md mx-auto">
-        <h1 className="text-2xl font-bold">Order placed</h1>
+      <div className="rounded-lg border p-6 sm:p-8 text-center space-y-4 max-w-md mx-auto">
+        <h1 className="text-xl font-bold sm:text-2xl">Order placed</h1>
         <p className="text-muted-foreground">No order ID provided.</p>
         <Button asChild>
           <Link href="/home">Back to home</Link>
@@ -76,8 +76,8 @@ async function SuccessContent({
   const result = await getOrderById(orderId);
   if (!result.ok) {
     return (
-      <div className="rounded-lg border p-8 text-center space-y-4 max-w-md mx-auto">
-        <h1 className="text-2xl font-bold">Order not found</h1>
+      <div className="rounded-lg border p-6 sm:p-8 text-center space-y-4 max-w-md mx-auto">
+        <h1 className="text-xl font-bold sm:text-2xl">Order not found</h1>
         <p className="text-muted-foreground">{result.error}</p>
         <Button asChild>
           <Link href="/home">Back to home</Link>
@@ -92,9 +92,9 @@ async function SuccessContent({
   const whatsappNumber = getShopWhatsAppNumber(branch);
 
   return (
-    <div className="max-w-md mx-auto space-y-6">
+    <div className="w-full max-w-md mx-auto space-y-6 px-2 sm:px-0">
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold">Order placed</h1>
+        <h1 className="text-xl font-bold sm:text-2xl">Order placed</h1>
         <p className="text-muted-foreground">
           Thank you. Your order has been received.
         </p>

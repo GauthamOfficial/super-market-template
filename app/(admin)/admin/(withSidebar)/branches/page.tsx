@@ -18,7 +18,7 @@ export default async function AdminBranchesPage() {
   if (!isOk(result)) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold">Branches</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl">Branches</h1>
         <p className="text-destructive">{result.error}</p>
       </div>
     );
@@ -27,9 +27,9 @@ export default async function AdminBranchesPage() {
   const branches = result.data;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold">Branches</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl">Branches</h1>
         <Button asChild>
           <Link href="/admin/branches/new" className="gap-2">
             <PlusCircle className="h-4 w-4" />
@@ -38,8 +38,8 @@ export default async function AdminBranchesPage() {
         </Button>
       </div>
 
-      <div className="admin-table-wrapper">
-        <Table className="admin-table">
+      <div className="admin-table-wrapper overflow-x-auto">
+        <Table className="admin-table min-w-[600px]">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>

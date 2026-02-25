@@ -47,9 +47,9 @@ export default async function AdminOrdersPage({
   const branchMap = new Map(branches.map((b) => [b.id, b.name]));
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold">Orders</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl">Orders</h1>
         <OrderFiltersForm
           statusOptions={STATUS_OPTIONS}
           branches={branches}
@@ -61,8 +61,8 @@ export default async function AdminOrdersPage({
       {!isOk(ordersResult) ? (
         <p className="text-destructive">{ordersResult.error}</p>
       ) : (
-        <div className="admin-table-wrapper">
-          <Table className="admin-table">
+        <div className="admin-table-wrapper overflow-x-auto">
+          <Table className="admin-table min-w-[600px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Order</TableHead>

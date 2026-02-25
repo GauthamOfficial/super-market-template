@@ -8,8 +8,8 @@ export default async function AdminDashboardPage() {
   const productCount = count ?? 0;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
+    <div className="space-y-4 sm:space-y-6">
+      <h1 className="text-xl font-semibold sm:text-2xl">Dashboard</h1>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
           <p className="text-sm text-muted-foreground">Products</p>

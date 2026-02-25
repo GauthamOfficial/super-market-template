@@ -33,7 +33,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <div className="space-y-6">
       <section>
-        <h1 className="text-2xl font-bold">{category.name}</h1>
+        <h1 className="text-xl font-bold sm:text-2xl">{category.name}</h1>
         {category.description && (
           <p className="mt-1 text-muted-foreground">{category.description}</p>
         )}

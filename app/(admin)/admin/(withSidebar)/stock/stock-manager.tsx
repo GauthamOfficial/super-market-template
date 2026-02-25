@@ -235,8 +235,8 @@ export function StockManager({ branches, categories }: { branches: Branch[]; cat
       ) : !branchId ? (
         <p className="text-muted-foreground py-8">Select a branch to view stock.</p>
       ) : (
-        <div className="admin-table-wrapper">
-          <Table className="admin-table">
+        <div className="admin-table-wrapper overflow-x-auto">
+          <Table className="admin-table min-w-[500px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Product</TableHead>

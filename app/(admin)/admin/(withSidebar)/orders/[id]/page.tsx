@@ -100,8 +100,8 @@ export default async function AdminOrderDetailPage({
 
       <section className="space-y-3">
         <h2 className="font-medium">Items</h2>
-        <div className="admin-table-wrapper">
-          <Table className="admin-table">
+        <div className="admin-table-wrapper overflow-x-auto">
+          <Table className="admin-table min-w-[500px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Product</TableHead>

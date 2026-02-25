@@ -33,7 +33,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <div className="space-y-6">
       <section>
-        <h1 className="text-2xl font-bold mb-4">Search</h1>
+        <h1 className="text-xl font-bold mb-4 sm:text-2xl">Search</h1>
         <Suspense
           fallback={
             <div className="h-10 w-full max-w-md rounded-md border bg-muted animate-pulse" />

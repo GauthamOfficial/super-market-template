@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/header";
+import { HeaderWithMobileNav } from "@/components/layout/HeaderWithMobileNav";
 import { Footer } from "@/components/layout/footer";
 import { Container } from "@/components/layout/container";
 import { PageContentTransition } from "@/components/layout/PageContentTransition";
@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.tagline,
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -58,8 +64,8 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Header />
-        <main id="main-content" className="flex-1 py-8" role="main">
+        <HeaderWithMobileNav />
+        <main id="main-content" className="flex-1 py-6 sm:py-8" role="main">
           <PageContentTransition>
             <Container>
               <AnimateOnScroll>{children}</AnimateOnScroll>

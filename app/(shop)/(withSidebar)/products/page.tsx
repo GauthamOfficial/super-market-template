@@ -28,7 +28,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <div className="space-y-6">
       <section>
-        <h1 className="text-3xl font-bold mb-4">Products</h1>
+        <h1 className="text-2xl font-bold mb-4 sm:text-3xl">Products</h1>
         <Suspense
           fallback={
             <div className="h-10 w-full max-w-md rounded-md border bg-muted animate-pulse" />

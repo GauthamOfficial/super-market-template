@@ -29,20 +29,9 @@ export default async function HomePage() {
   return (
     <div className="min-w-0">
       {/* Hero — reference style: full-bleed image background, white text, search bar, store carousel */}
-      <section className="full-bleed -mt-8 relative min-h-[90vh] flex flex-col overflow-hidden bg-black">
+      <section className="full-bleed -mt-8 relative min-h-[80vh] sm:min-h-[90vh] flex flex-col overflow-hidden bg-black">
         {/* Black base */}
         <div className="absolute inset-0 bg-black" aria-hidden />
-        {/* Background image — lowered opacity so black shows through
-        <div className="absolute inset-0 opacity-40" aria-hidden>
-          <Image
-            src="/bg-3.jpg"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        </div> */}
         <div className="hero-overlay" aria-hidden />
         {/* Green gradient from bottom */}
         <div
@@ -50,39 +39,45 @@ export default async function HomePage() {
           aria-hidden
         />
 
-        {/* Top right: nav pills + Explore card */}
-        <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-          <Link href="/products" className="hero-nav-pill">
+        {/* Top: 3 small buttons, same style (black + subtle green glow), moved down from navbar */}
+        <div className="absolute top-10 right-2 left-2 z-20 flex flex-row flex-nowrap items-center justify-center gap-1.5 sm:left-auto sm:top-6 sm:right-6 sm:justify-end sm:gap-3">
+          <Link
+            href="/products"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-black/70 px-2 py-1 text-[11px] font-medium text-white backdrop-blur-md transition-all duration-200 shadow-[0_0_6px_2px_rgba(0,165,79,0.4)] hover:bg-black/90 hover:shadow-[0_0_12px_4px_rgba(0,165,79,0.5)] hover:scale-[1.02] sm:px-4 sm:py-2 sm:text-sm sm:shadow-[0_0_8px_3px_rgba(0,165,79,0.35)] sm:hover:shadow-[0_0_14px_5px_rgba(0,165,79,0.45)]"
+          >
             Products
           </Link>
-          <Link href="/find-store" className="hero-nav-pill">
+          <Link
+            href="/find-store"
+            className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-black/70 px-2 py-1 text-[11px] font-medium text-white backdrop-blur-md transition-all duration-200 shadow-[0_0_6px_2px_rgba(0,165,79,0.4)] hover:bg-black/90 hover:shadow-[0_0_12px_4px_rgba(0,165,79,0.5)] hover:scale-[1.02] sm:px-4 sm:py-2 sm:text-sm sm:shadow-[0_0_8px_3px_rgba(0,165,79,0.35)] sm:hover:shadow-[0_0_14px_5px_rgba(0,165,79,0.45)]"
+          >
             Find a store
           </Link>
           <Link
             href="/products"
-            className="flex items-center gap-1.5 rounded-full bg-black/70 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-md transition hover:bg-black/85 shadow-[0_0_16px_6px_rgba(0,165,79,0.35)]"
+            className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full bg-black/70 px-2 py-1 text-[11px] font-medium text-white backdrop-blur-md transition-all duration-200 shadow-[0_0_6px_2px_rgba(0,165,79,0.4)] hover:bg-black/90 hover:shadow-[0_0_12px_4px_rgba(0,165,79,0.5)] hover:scale-[1.02] sm:gap-1.5 sm:px-4 sm:py-2 sm:text-sm sm:shadow-[0_0_8px_3px_rgba(0,165,79,0.35)] sm:hover:shadow-[0_0_14px_5px_rgba(0,165,79,0.45)]"
           >
             Explore more
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-3 w-3 shrink-0 sm:h-4 sm:w-4" />
           </Link>
         </div>
 
-        {/* Main hero content: headline, subtitle, search bar, store cards */}
-        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 pt-20 pb-10 text-center sm:pt-24">
-          <h1 className="font-impact text-5xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-6xl md:text-7xl lg:text-8xl" style={{ letterSpacing: "0.03em" }}>
+        {/* Main hero content: headline close to buttons on mobile */}
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-3 pt-14 pb-6 text-center sm:px-4 sm:pt-24 sm:pb-10">
+          <h1 className="font-impact text-3xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
           <HeroTagline />
 
-          {/* Search bar — product search with suggestions */}
+          {/* Search bar — full width on mobile */}
           <div
-            className="relative z-20 mt-6 w-full max-w-2xl opacity-0 animate-hero-fade-in-up sm:max-w-xl"
+            className="relative z-20 mt-4 w-full max-w-full opacity-0 animate-hero-fade-in-up sm:mt-6 sm:max-w-xl"
             style={{ animationDelay: "0.2s" }}
           >
             <HeroProductSearch />
           </div>
 
-          {/* Store location cards carousel: always show 4 branches from config with images */}
+          {/* Store location cards carousel */}
           <HeroBranchCarousel branches={displayBranches} />
         </div>
       </section>

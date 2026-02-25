@@ -33,9 +33,9 @@ export function CartPageContent() {
         {items.map((item) => (
           <li
             key={`${item.branchId}:${item.variantId}`}
-            className="flex gap-4 rounded-lg border p-4"
+            className="flex flex-col gap-3 rounded-lg border p-3 sm:flex-row sm:gap-4 sm:p-4"
           >
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-muted">
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-muted sm:h-20 sm:w-20">
               {item.imageUrl ? (
                 <Image
                   src={item.imageUrl}
@@ -55,8 +55,8 @@ export function CartPageContent() {
               <p className="text-sm text-muted-foreground">{item.variantLabel}</p>
               <p className="mt-1 font-semibold">{formatPrice(item.unitPrice)}</p>
             </div>
-            <div className="flex flex-col items-end gap-2">
-              <div className="flex items-center gap-1">
+            <div className="flex flex-col items-stretch gap-2 sm:items-end">
+              <div className="flex items-center justify-between gap-2 sm:justify-end">
                 <Button
                   type="button"
                   variant="outline"
@@ -104,11 +104,11 @@ export function CartPageContent() {
         ))}
       </ul>
 
-      <div className="flex flex-col items-end gap-4 border-t pt-4">
+      <div className="flex flex-col items-stretch gap-4 border-t pt-4 sm:items-end">
         <p className="text-lg font-semibold">
           Subtotal: {formatPrice(subtotal)}
         </p>
-        <Button asChild>
+        <Button asChild className="w-full sm:w-auto">
           <Link href="/checkout">Go to checkout</Link>
         </Button>
       </div>

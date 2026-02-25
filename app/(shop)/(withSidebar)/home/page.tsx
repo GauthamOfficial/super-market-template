@@ -32,7 +32,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-10">
       <section className="space-y-2">
-        <h1 className="text-2xl font-bold tracking-tight flex flex-wrap items-center gap-2">
+        <h1 className="text-xl font-bold tracking-tight flex flex-wrap items-center gap-2 sm:text-2xl">
           {branchName ? (
             <>
               <span>Welcome!</span>

@@ -108,7 +108,7 @@ export function CheckoutForm({ deliveryAreas }: CheckoutFormProps) {
   const itemCount = items.reduce((n, i) => n + i.qty, 0);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-[1fr,300px] sm:gap-5 max-w-4xl mx-auto items-start">
+    <form onSubmit={handleSubmit(onSubmit)} className="grid w-full gap-4 sm:grid-cols-[1fr,300px] sm:gap-5 max-w-4xl mx-auto items-start">
       {/* Left: Single form card */}
       <Card className="max-w-2xl bg-gradient-to-t from-green-100 to-white dark:from-green-950/30 dark:to-card">
         <CardContent className="p-4 sm:p-5 space-y-0">

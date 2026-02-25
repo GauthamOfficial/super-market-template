@@ -26,7 +26,7 @@ export default async function AdminProductsPage({
   if (!isOk(result)) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold">Products</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl">Products</h1>
         <p className="text-destructive">{result.error}</p>
       </div>
     );
@@ -40,7 +40,7 @@ export default async function AdminProductsPage({
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold">Products</h1>
+        <h1 className="text-xl font-semibold sm:text-2xl">Products</h1>
         <div className="flex flex-wrap items-end gap-3">
           <ProductCategoryFilter categories={allCategories} />
           <Button asChild>
@@ -52,8 +52,8 @@ export default async function AdminProductsPage({
         </div>
       </div>
 
-      <div className="admin-table-wrapper">
-        <Table className="admin-table">
+      <div className="admin-table-wrapper overflow-x-auto">
+        <Table className="admin-table min-w-[600px]">
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>

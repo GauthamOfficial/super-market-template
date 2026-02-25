@@ -29,7 +29,7 @@ export default async function AdminDeliveryPage() {
     <div className="space-y-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Delivery areas</h1>
+          <h1 className="text-xl font-semibold sm:text-2xl">Delivery areas</h1>
           <p className="text-muted-foreground text-sm">
             Manage delivery areas and fees. Only enabled areas appear at checkout.
           </p>
@@ -43,8 +43,8 @@ export default async function AdminDeliveryPage() {
       {!isOk(areasResult) ? (
         <p className="text-destructive">{areasResult.error}</p>
       ) : (
-        <div className="admin-table-wrapper">
-          <Table className="admin-table">
+        <div className="admin-table-wrapper overflow-x-auto">
+          <Table className="admin-table min-w-[500px]">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>

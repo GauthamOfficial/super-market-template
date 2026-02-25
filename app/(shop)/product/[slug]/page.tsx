@@ -38,14 +38,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }));
 
   return (
-    <div className="grid gap-8 md:grid-cols-2">
+    <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
       <ProductGallery
         imageUrl={product.image_url}
         name={product.name}
       />
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{product.name}</h1>
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{product.name}</h1>
           {product.description && (
             <p className="mt-2 text-muted-foreground">{product.description}</p>
           )}

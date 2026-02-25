@@ -12,7 +12,7 @@ export default async function AdminStockPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Stock</h1>
+      <h1 className="text-xl font-semibold sm:text-2xl">Stock</h1>
       <p className="text-muted-foreground text-sm">
         Select a branch and update inventory quantities. Changes are saved when you click Save.
       </p>

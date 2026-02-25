@@ -48,7 +48,7 @@ export function OrderFiltersForm({
         value={currentStatus || "all"}
         onValueChange={(v) => setFilters(v === "all" ? "" : v, currentBranchId)}
       >
-        <SelectTrigger className="w-[140px]">
+        <SelectTrigger className="w-full min-w-0 sm:w-[140px]">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
@@ -64,7 +64,7 @@ export function OrderFiltersForm({
         value={currentBranchId || "all"}
         onValueChange={(v) => setFilters(currentStatus, v === "all" ? "" : v)}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-full min-w-0 sm:w-[180px]">
           <SelectValue placeholder="Branch" />
         </SelectTrigger>
         <SelectContent>

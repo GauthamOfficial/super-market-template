@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-sm flex-col justify-center py-16">
+    <div className="mx-auto flex w-full max-w-sm flex-col justify-center px-4 py-8 sm:py-16">
       <Card>
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Admin sign in</CardTitle>

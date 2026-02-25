@@ -56,13 +56,13 @@ export function HeroProductSearch() {
       <form
         action="/search"
         method="get"
-        className="hero-search-glass flex h-12 w-full items-stretch overflow-hidden sm:h-14 focus-within:outline-none focus-within:ring-0"
+        className="hero-search-glass flex h-11 w-full items-stretch overflow-hidden sm:h-14 focus-within:outline-none focus-within:ring-0"
       >
         <label htmlFor="hero-product-search" className="sr-only">
           Search products
         </label>
-        <div className="flex min-w-0 flex-1 items-center gap-3 px-4 sm:px-5">
-          <Search className="h-5 w-5 shrink-0 text-white/80" aria-hidden />
+        <div className="flex min-w-0 flex-1 items-center gap-2 px-3 sm:gap-3 sm:px-5">
+          <Search className="h-4 w-4 shrink-0 text-white/80 sm:h-5 sm:w-5" aria-hidden />
           <input
             id="hero-product-search"
             type="search"
@@ -72,7 +72,7 @@ export function HeroProductSearch() {
             onChange={(e) => setValue(e.target.value)}
             onFocus={() => value.trim() && suggestions.length > 0 && setIsOpen(true)}
             onBlur={handleBlur}
-            className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/70 focus:outline-none sm:text-base"
+            className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-white/70 focus:outline-none sm:text-base min-w-0"
             aria-label="Search products"
             aria-expanded={isOpen}
             aria-autocomplete="list"
@@ -81,7 +81,7 @@ export function HeroProductSearch() {
         </div>
         <Button
           type="submit"
-          className="h-full min-w-0 shrink-0 rounded-none rounded-r-full border-0 bg-primary px-5 font-semibold text-primary-foreground shadow-none hover:bg-primary/90 sm:px-6"
+          className="h-full min-w-0 shrink-0 rounded-none rounded-r-full border-0 bg-primary px-4 font-semibold text-sm text-primary-foreground shadow-none hover:bg-primary/90 sm:px-6 sm:text-base"
         >
           Search
         </Button>
