@@ -22,19 +22,19 @@ export default function AboutPage() {
       <AboutSlider />
 
       {/* Leadership — Chairman & Director */}
-      <section className="full-bleed py-12 sm:py-20 bg-background">
-        <Container className="max-w-5xl">
-          <div className="mb-12 pb-4 border-b-2 border-primary">
-            <h2 className="text-2xl sm:text-3xl font-bold text-center text-foreground">
+      <section className="full-bleed py-10 sm:py-20 bg-background">
+        <Container className="max-w-5xl px-4 sm:px-6">
+          <div className="mb-8 sm:mb-12 pb-3 sm:pb-4 border-b-2 border-primary">
+            <h2 className="text-xl sm:text-3xl font-bold text-center text-foreground">
               Leadership
             </h2>
           </div>
 
           {/* Chairman */}
           <AnimateOnScroll>
-          <div className="mb-16 sm:mb-20">
-            <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-              <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
+          <div className="mb-12 sm:mb-20">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start">
+              <div className="shrink-0 w-full max-w-xs mx-auto md:mx-0 md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
                 <div className="absolute inset-0 rounded-2xl overflow-hidden bg-neutral-200">
                   <Image
                     src="/chairman.jpg"
@@ -45,30 +45,30 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 w-full">
                 <div className="flex items-center gap-2 text-primary mb-2">
-                  <Quote className="h-5 w-5 opacity-70" />
-                  <span className="text-sm font-semibold uppercase tracking-wider">Chairman&apos;s Note</span>
+                  <Quote className="h-4 w-4 sm:h-5 sm:w-5 opacity-70 shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider">Chairman&apos;s Note</span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Dear Valued Customers,
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   It is my great pleasure to welcome you to FN Group (Pvt) Ltd, a company that is dedicated to excellence and committed to delivering the very best in products and services. As the Chairman of the FN Group, I am honored to lead this organization and to work with a team of dedicated professionals who share my passion for excellence.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Our company is built on a foundation of trust, integrity, and innovation. We have established ourselves as a leading provider of high-quality products and services in a number of key industries. From our super market network distribution company, to our housing projects, luxury wedding car rental service, and fashion store, we are committed to meeting the diverse needs of our customers.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Thank you for considering FN Group for your needs. We are honored to have the opportunity to serve you and look forward to building a lasting relationship with you.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-2">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-2 break-words">
                   Sincerely,
                 </p>
-                <p className="font-semibold text-foreground">
+                <p className="font-semibold text-foreground text-sm sm:text-base">
                   Mr. Fazmin Mohomed
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Chairman, FN Group (Pvt) Ltd.
                 </p>
               </div>
@@ -79,8 +79,8 @@ export default function AboutPage() {
           {/* Director — image on right */}
           <AnimateOnScroll delay={100}>
           <div>
-            <div className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-start">
-              <div className="shrink-0 w-full md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
+            <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-12 items-start">
+              <div className="shrink-0 w-full max-w-xs mx-auto md:mx-0 md:w-56 aspect-[3/4] relative rounded-2xl shadow-[0_0_50px_12px_rgba(34,197,94,0.22)] animate-float-subtle">
                 <div className="absolute inset-0 rounded-2xl overflow-hidden bg-neutral-200">
                   <Image
                     src="/director.jpg"
@@ -91,33 +91,33 @@ export default function AboutPage() {
                   />
                 </div>
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 w-full">
                 <div className="flex items-center gap-2 text-primary mb-2">
-                  <Quote className="h-5 w-5 opacity-70" />
-                  <span className="text-sm font-semibold uppercase tracking-wider">Director&apos;s Note</span>
+                  <Quote className="h-4 w-4 sm:h-5 sm:w-5 opacity-70 shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider">Director&apos;s Note</span>
                 </div>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Welcome to FN Group (Pvt) Ltd,
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   As the Director of FN Group, I extend a warm welcome to you. It gives me immense pleasure to introduce you to our diverse range of products and services.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   At FN Group, we are committed to excellence in everything we do. Our dedication to quality, integrity, and innovation is the driving force behind our success. Whether it&apos;s through our supermarket network, distribution channels, housing projects, luxury wedding car rentals, or fashion store, we strive to exceed your expectations.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Our team of professionals shares a common goal: to provide you with the best possible experience. We understand the importance of building lasting relationships with our customers, and we are honored to have the opportunity to serve you.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4 break-words">
                   Thank you for considering FN Group for your needs. We look forward to the opportunity to exceed your expectations and to build a long-lasting partnership with you.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-2">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-2 break-words">
                   Warm regards,
                 </p>
-                <p className="font-semibold text-foreground">
+                <p className="font-semibold text-foreground text-sm sm:text-base">
                   Mrs. Fathima Nuzha
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Director, FN Group (Pvt) Ltd.
                 </p>
               </div>

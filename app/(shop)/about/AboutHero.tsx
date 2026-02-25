@@ -53,7 +53,7 @@ export function AboutHero() {
   return (
     <section
       ref={sectionRef}
-      className="full-bleed relative overflow-hidden bg-black py-16 sm:py-20"
+      className="full-bleed relative overflow-hidden bg-black py-12 sm:py-20 min-h-[200px]"
       style={{ perspective: "1200px" }}
     >
       {/* Black and green gradient — matches landing hero style */}
@@ -98,14 +98,14 @@ export function AboutHero() {
       </div>
 
       {/* Central text */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center">
+      <div className="relative z-10 flex min-w-0 flex-col items-center justify-center px-4 py-8 text-center sm:py-0">
         <h1
-          className="font-impact text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white"
+          className="font-impact text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white break-words"
           style={{ letterSpacing: "0.03em" }}
         >
           About Us
         </h1>
-        <p className="mt-4 text-white/90 max-w-2xl text-lg">
+        <p className="mt-3 sm:mt-4 text-white/90 max-w-2xl text-base sm:text-lg break-words px-1">
           Excellence, integrity, and a commitment to serving you better.
         </p>
       </div>

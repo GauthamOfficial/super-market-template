@@ -18,10 +18,10 @@ export function CategoriesSidebar({ categories }: CategoriesSidebarProps) {
 
   return (
     <>
-      {/* Mobile: horizontal scroll strip */}
+      {/* Mobile: wrap in one view, smaller buttons */}
       <div className="lg:hidden -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
         <nav
-          className="flex gap-2 overflow-x-auto scrollbar-hide py-1 pb-2 sm:gap-3"
+          className="flex flex-wrap gap-1.5 py-1 pb-2 sm:gap-2 sm:gap-3"
           aria-label="Product categories"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
@@ -29,7 +29,7 @@ export function CategoriesSidebar({ categories }: CategoriesSidebarProps) {
             <>
               <Link
                 href="/products"
-                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+                className={`shrink-0 rounded-full border px-2.5 py-1.5 text-xs font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 sm:text-sm ${
                   isProducts
                     ? "border-primary bg-primary/10 text-primary"
                     : "border-border bg-card text-foreground hover:bg-muted"
@@ -41,7 +41,7 @@ export function CategoriesSidebar({ categories }: CategoriesSidebarProps) {
                 <Link
                   key={cat.id}
                   href={`/category/${cat.slug}`}
-                  className={`shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+                  className={`shrink-0 rounded-full border px-2.5 py-1.5 text-xs font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 sm:text-sm ${
                     categorySlug === cat.slug
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border bg-card text-foreground hover:bg-muted"
@@ -52,7 +52,7 @@ export function CategoriesSidebar({ categories }: CategoriesSidebarProps) {
               ))}
             </>
           ) : (
-            <p className="shrink-0 rounded-full border border-dashed px-4 py-2 text-sm text-muted-foreground">
+            <p className="shrink-0 rounded-full border border-dashed px-2.5 py-1.5 text-xs text-muted-foreground sm:px-4 sm:py-2 sm:text-sm">
               No categories
             </p>
           )}
