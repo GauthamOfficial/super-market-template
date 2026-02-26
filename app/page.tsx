@@ -64,14 +64,16 @@ export default async function HomePage() {
 
         {/* Main hero content: headline, tagline, search, branch carousel */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-3 pt-6 pb-6 text-center sm:px-4 sm:pt-28 sm:pb-10">
-          <h1 className="font-brand text-5xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
-            {siteConfig.name}
-          </h1>
-          <HeroTagline />
+          <div className="-mt-4 sm:mt-0">
+            <h1 className="font-brand text-5xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
+              {siteConfig.name}
+            </h1>
+            <HeroTagline />
+          </div>
 
           {/* Search bar — full width on mobile */}
           <div
-            className="relative z-20 mt-4 w-full max-w-full opacity-0 animate-hero-fade-in-up sm:mt-6 sm:max-w-xl"
+            className="relative z-20 mt-8 w-full max-w-full opacity-0 animate-hero-fade-in-up sm:mt-6 sm:max-w-xl"
             style={{ animationDelay: "0.2s" }}
           >
             <HeroProductSearch />
