@@ -51,6 +51,8 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
+        /** Web font for brand name – works on mobile; fallbacks for desktop */
+        brand: ["var(--font-brand)", "Impact", "Haettenschweiler", "Arial Narrow Bold", "sans-serif"],
         impact: ["Impact", "Haettenschweiler", "Arial Narrow Bold", "sans-serif"],
         accent: ["Georgia", "Cambria", "Times New Roman", "serif"],
         playfair: ["var(--font-playfair)", "Georgia", "serif"],

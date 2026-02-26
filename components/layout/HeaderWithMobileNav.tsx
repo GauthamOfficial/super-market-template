@@ -48,7 +48,7 @@ export function HeaderWithMobileNav() {
                 className="h-9 w-9 object-contain sm:h-10 sm:w-10 md:h-11 md:w-11"
                 aria-hidden
               />
-              <span className="font-impact text-sm font-normal tracking-tight text-white sm:text-base md:text-lg" style={{ letterSpacing: "0.03em" }}>
+              <span className="font-brand text-sm font-normal tracking-tight text-white sm:text-base md:text-lg" style={{ letterSpacing: "0.03em" }}>
                 {siteConfig.name}
               </span>
             </>
@@ -60,7 +60,7 @@ export function HeaderWithMobileNav() {
               >
                 Logo
               </span>
-              <span className="font-impact text-sm font-normal tracking-tight text-white sm:text-base md:text-lg" style={{ letterSpacing: "0.03em" }}>
+              <span className="font-brand text-sm font-normal tracking-tight text-white sm:text-base md:text-lg" style={{ letterSpacing: "0.03em" }}>
                 {siteConfig.name}
               </span>
             </>
@@ -110,7 +110,7 @@ export function HeaderWithMobileNav() {
                       N
                     </span>
                   )}
-                  <span className="font-impact text-base font-normal tracking-tight text-white" style={{ letterSpacing: "0.03em" }}>
+                  <span className="font-brand text-base font-normal tracking-tight text-white" style={{ letterSpacing: "0.03em" }}>
                     {siteConfig.name}
                   </span>
                 </SheetHeader>

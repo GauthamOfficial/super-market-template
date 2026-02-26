@@ -23,7 +23,7 @@ export function Header() {
                 className="h-10 w-10 object-contain sm:h-11 sm:w-11"
                 aria-hidden
               />
-              <span className="font-impact text-base font-normal tracking-tight text-white sm:text-lg" style={{ letterSpacing: "0.03em" }}>
+              <span className="font-brand text-base font-normal tracking-tight text-white sm:text-lg" style={{ letterSpacing: "0.03em" }}>
                 {siteConfig.name}
               </span>
             </>
@@ -35,7 +35,7 @@ export function Header() {
               >
                 Logo
               </span>
-              <span className="font-impact text-base font-normal tracking-tight text-white sm:text-lg" style={{ letterSpacing: "0.03em" }}>
+              <span className="font-brand text-base font-normal tracking-tight text-white sm:text-lg" style={{ letterSpacing: "0.03em" }}>
                 {siteConfig.name}
               </span>
             </>

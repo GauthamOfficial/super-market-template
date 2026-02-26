@@ -40,7 +40,7 @@ export default async function HomePage() {
         />
 
         {/* Top: 3 small buttons, same style (black + subtle green glow), moved down from navbar */}
-        <div className="absolute top-10 right-2 left-2 z-20 flex flex-row flex-nowrap items-center justify-center gap-1.5 sm:left-auto sm:top-6 sm:right-6 sm:justify-end sm:gap-3">
+        <div className="absolute top-16 right-2 left-2 z-20 flex flex-row flex-nowrap items-center justify-center gap-1.5 sm:left-auto sm:top-6 sm:right-6 sm:justify-end sm:gap-3">
           <Link
             href="/products"
             className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-black/70 px-2 py-1 text-[11px] font-medium text-white backdrop-blur-md transition-all duration-200 shadow-[0_0_6px_2px_rgba(0,165,79,0.4)] hover:bg-black/90 hover:shadow-[0_0_12px_4px_rgba(0,165,79,0.5)] hover:scale-[1.02] sm:px-4 sm:py-2 sm:text-sm sm:shadow-[0_0_8px_3px_rgba(0,165,79,0.35)] sm:hover:shadow-[0_0_14px_5px_rgba(0,165,79,0.45)]"
@@ -64,7 +64,7 @@ export default async function HomePage() {
 
         {/* Main hero content: headline, tagline, search, branch carousel */}
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-3 pt-14 pb-6 text-center sm:px-4 sm:pt-28 sm:pb-10">
-          <h1 className="font-impact text-3xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
+          <h1 className="font-brand text-3xl font-normal tracking-tight text-white opacity-0 animate-hero-fade-in-up sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ letterSpacing: "0.03em" }}>
             {siteConfig.name}
           </h1>
           <HeroTagline />

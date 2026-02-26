@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { fontBrand } from "@/lib/fonts";
 import "./globals.css";
 import { HeaderWithMobileNav } from "@/components/layout/HeaderWithMobileNav";
 import { Footer } from "@/components/layout/footer";
@@ -57,7 +58,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className={`${inter.className} ${playfair.variable} flex min-h-screen flex-col`}>
+      <body className={`${inter.className} ${playfair.variable} ${fontBrand.variable} flex min-h-screen flex-col`}>
         <a
           href="#main-content"
           className="absolute left-[-9999px] top-4 z-[100] rounded-md bg-primary px-4 py-2 text-primary-foreground focus:left-4 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"

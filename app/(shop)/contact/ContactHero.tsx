@@ -129,7 +129,7 @@ export function ContactHero() {
 
       <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center">
         <h1
-          className="font-impact text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white"
+          className="font-brand text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white"
           style={{ letterSpacing: "0.03em" }}
         >
           Contact Us

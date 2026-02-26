@@ -113,7 +113,7 @@ export function AboutHero() {
       {/* Central text — same vertical padding as ContactHero on mobile for consistent hero height */}
       <div className="relative z-10 flex min-w-0 flex-col items-center justify-center px-4 text-center">
         <h1
-          className="font-impact text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white break-words"
+          className="font-brand text-2xl sm:text-4xl md:text-5xl font-normal tracking-tight text-white break-words"
           style={{ letterSpacing: "0.03em" }}
         >
           About Us
